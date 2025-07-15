@@ -34,6 +34,6 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$SharedPreferencesModule extends _i545.SharedPreferencesModule {}
+class _$SharedPreferencesModule extends _i585.SharedPreferencesModule {}
 
-class _$DioModule extends _i585.DioModule {}
+class _$DioModule extends _i545.DioModule {}

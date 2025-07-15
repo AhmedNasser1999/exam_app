@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
+import 'package:exam_app/core/constant/api_contants.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-@module  
-abstract class SharedPreferencesModule {  
-  Future<SharedPreferences> get pref => SharedPreferences.getInstance();  
-}  
+@module
+abstract class DioModule {
+  @lazySingleton
+  Dio dio() => Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
+}
