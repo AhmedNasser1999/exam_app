@@ -9,7 +9,7 @@ abstract class OnGenerateRoute {
   static Route onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
       case RouteName.splashView:
-        return MaterialPageRoute(builder: (context) => const SplashView());
+        return MaterialPageRoute(builder: (context) => SplashView());
       case RouteName.homeView:
         return MaterialPageRoute(builder: (context) => const HomeView());
       case RouteName.sigInName:
