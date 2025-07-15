@@ -2,7 +2,7 @@ import 'app_colors.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppTheme {
-  static ThemeData getTheme({
+  static ThemeData _getTheme({
     required ColorScheme colorScheme,
     required Color textFieldBorderColor,
   }) {
@@ -47,7 +47,7 @@ abstract class AppTheme {
     );
   }
 
-  static ThemeData lightTheme = getTheme(
+  static ThemeData lightTheme = _getTheme(
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
       primary: AppColors.blue,
