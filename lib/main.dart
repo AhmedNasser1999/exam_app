@@ -4,8 +4,9 @@ import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  configureDependencies();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   runApp(const MyApp());
 }
 
