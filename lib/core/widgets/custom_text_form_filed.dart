@@ -27,6 +27,7 @@ class CustomTextFormField extends StatelessWidget {
     return SizedBox(
       width: width,
       child: TextFormField(
+        
         controller: controller,
         keyboardType: keyboardType,
         obscureText: obscureText,

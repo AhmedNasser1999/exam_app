@@ -1,3 +1,1 @@
-class TextFieldModel {
-
-}
+class TextFieldModel {}

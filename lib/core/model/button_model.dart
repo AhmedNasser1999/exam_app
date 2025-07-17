@@ -1,3 +1,1 @@
-class ButtonModel {
-
-}
+class ButtonModel {}

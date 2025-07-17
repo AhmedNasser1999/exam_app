@@ -41,8 +41,6 @@ class ServerFailure extends Failure {
       504: 'Gateway Timeout',
     };
 
-    return ServerFailure(
-      errorMessage: statusMessages[statusCode] ?? 'Error: $statusCode',
-    );
+    return ServerFailure(errorMessage: statusMessages[statusCode] ?? 'Error: $statusCode');
   }
 }

@@ -13,7 +13,7 @@ abstract class OnGenerateRoute {
       case RouteName.homeView:
         return MaterialPageRoute(builder: (context) => const HomeView());
       case RouteName.sigInName:
-        return MaterialPageRoute(builder: (context) => const SignInView());
+        return MaterialPageRoute(builder: (context) => SignInView());
       case RouteName.sigUpName:
         return MaterialPageRoute(builder: (context) => const SignUpView());
       default:
