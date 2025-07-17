@@ -6,10 +6,19 @@ class SplashBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [Center(child: Image.asset(AppAssets.imagesLogo))],
+      children: [
+        Center(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Image.asset(AppAssets.imagesLogo, width: screenWidth * 0.4),
+          ),
+        ),
+      ],
     );
   }
 }

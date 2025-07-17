@@ -1,43 +1,30 @@
+import 'package:exam_app/core/helper_function/validation.dart';
+import 'package:exam_app/core/custom_widgets_model/text_field_model.dart';
+import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final TextEditingController controller;
-  final String label;
-  final String hintText;
-  final TextInputType keyboardType;
-  final bool obscureText;
-  final double? width;
-  final String? Function(String?)? validator;
-  final void Function(String)? onChanged;
-
-  const CustomTextFormField({
-    super.key,
-    required this.controller,
-    required this.label,
-    required this.hintText,
-    this.keyboardType = TextInputType.text,
-    this.obscureText = false,
-    this.width,
-    this.validator,
-    this.onChanged,
-  });
-
+  const CustomTextFormField({super.key, required this.textFieldModel});
+  final TextFieldModel textFieldModel;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      child: TextFormField(
-        controller: controller,
-        keyboardType: keyboardType,
-        obscureText: obscureText,
-        decoration: InputDecoration(
-          labelText: label,
-          hintText: hintText,
-          border: OutlineInputBorder(),
+    final theme = Theme.of(context);
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: textFieldModel.controller,
+      keyboardType: textFieldModel.keyboardType ?? TextInputType.name,
+      obscureText: textFieldModel.obscureText,
+      decoration: InputDecoration(
+        labelText: textFieldModel.label,
+        hintText: textFieldModel.hintText,
+        hintStyle: theme.textTheme.bodyMedium!.copyWith(
+          color: AppColors.placeHolder,
         ),
-        validator: validator,
-        onChanged: onChanged,
+        labelStyle: theme.textTheme.bodyMedium!.copyWith(color: AppColors.gray),
+        border: const OutlineInputBorder(),
       ),
+      validator: textFieldModel.validator ?? Validation.validateText,
+      onChanged: textFieldModel.onChanged,
     );
   }
 }

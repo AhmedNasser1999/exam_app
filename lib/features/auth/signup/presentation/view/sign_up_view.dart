@@ -1,4 +1,5 @@
 import 'package:exam_app/core/route/route_name.dart';
+import 'package:exam_app/features/auth/signup/presentation/view/widgets/sign_up_body.dart';
 import 'package:flutter/material.dart';
 
 class SignUpView extends StatelessWidget {
@@ -7,9 +8,6 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('')),
-      body: Container(),
-    );
+    return const Scaffold(body: SafeArea(child: SignUpBody()));
   }
 }

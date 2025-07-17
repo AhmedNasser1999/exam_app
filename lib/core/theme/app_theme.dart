@@ -11,6 +11,8 @@ abstract class AppTheme {
       appBarTheme: AppBarTheme(
         foregroundColor: colorScheme.secondary,
         centerTitle: false,
+        elevation: 0,
+        titleSpacing: 0,
       ),
 
       textTheme: TextTheme(
