@@ -14,7 +14,7 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       // when finish sign if user have email must navigate to HomeView() otherwise navigate to SigninView()
       Navigator.pushReplacementNamed(context, SignUpView.routeName);
     });
@@ -23,6 +23,6 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SplashBody());
+    return const Scaffold(body: SplashBody());
   }
 }

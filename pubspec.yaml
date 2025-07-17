@@ -22,6 +22,8 @@ dependencies:
   dio: ^5.8.0+1
   flutter_bloc: ^9.1.1
   dartz: ^0.10.1
+  awesome_snackbar_content: ^0.1.6
+  adaptive_dialog: ^2.4.2
 
 dev_dependencies:
   flutter_test:

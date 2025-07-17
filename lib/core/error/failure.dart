@@ -32,7 +32,8 @@ class ServerFailure extends Failure {
   factory ServerFailure.fromResponse(int statusCode) {
     const statusMessages = {
       400: 'Bad Request',
-      401: 'email or password invalid',
+      401: 'Email or password invalid',
+      409: 'Email already exist',
       403: 'Forbidden',
       404: 'Not Found',
       500: 'Internal Server Error',

@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/error/failure.dart';
@@ -21,8 +22,12 @@ class SignupRepoImpl extends SignupRepo {
       var request = await signupRemote.signup(signupReq: signupReq);
       await signupLocal.saveToken(token: request.tokenEntities);
       return left(request);
-    } on DioException catch (e) {
-      return right(ServerFailure.fromDio(e));
+    } catch (e) {
+      if (e is DioException) {
+        return right(ServerFailure.fromDio(e));
+      } else {
+        return right(ServerFailure(errorMessage: e.toString()));
+      }
     }
   }
 }

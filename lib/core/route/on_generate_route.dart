@@ -1,7 +1,6 @@
 import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/route/route_name.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
-import 'package:exam_app/features/auth/signup/domain/use_case/use_case_signup.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
@@ -13,7 +12,7 @@ abstract class OnGenerateRoute {
   static Route onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
       case RouteName.splashView:
-        return MaterialPageRoute(builder: (context) => SplashView());
+        return MaterialPageRoute(builder: (context) => const SplashView());
       case RouteName.homeView:
         return MaterialPageRoute(builder: (context) => const HomeView());
       case RouteName.sigInName:
@@ -21,8 +20,7 @@ abstract class OnGenerateRoute {
       case RouteName.sigUpName:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                SignupCubit(useCaseSignup: getIt.get<UseCaseSignup>()),
+            create: (context) => getIt.get<SignupCubit>(),
             child: const SignUpView(),
           ),
         );
