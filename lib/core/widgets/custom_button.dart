@@ -1,49 +1,33 @@
+import 'package:exam_app/core/custom_widgets_model/button_model.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-  final double? width;
-  final double? height;
-  final Color? backgroundColor;
-  final Color? textColor;
-  final double borderRadius;
-  final TextStyle? textStyle;
-  final Widget? icon;
+  final ButtonModel buttonModel;
 
-  const CustomButton({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    this.width,
-    this.height = 50,
-    this.backgroundColor,
-    this.textColor,
-    this.borderRadius = 12.0,
-    this.textStyle,
-    this.icon,
-  });
+  const CustomButton({super.key, required this.buttonModel});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SizedBox(
-      width: width ?? double.infinity,
-      height: height,
+      width: buttonModel.width ?? double.infinity,
+      height: buttonModel.height ?? 55,
       child: MaterialButton(
-        onPressed: onPressed,
+        onPressed: buttonModel.onPressed,
         elevation: 0,
-        color: backgroundColor ?? Colors.white,
+        color: buttonModel.backgroundColor ?? theme.colorScheme.primary,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          side: BorderSide(color: backgroundColor ?? const Color(0xff022D82)),
+          borderRadius: BorderRadius.circular(buttonModel.borderRadius),
+          side: BorderSide(
+            color: buttonModel.backgroundColor ?? const Color(0xff022D82),
+          ),
         ),
         child: Text(
-          text,
+          buttonModel.text,
           style:
-              textStyle ??
-              TextStyle(
-                color: backgroundColor == null ? Color(0xff022D82) : Colors.white,
-                fontSize: 16,
+              buttonModel.textStyle ??
+              theme.textTheme.titleSmall!.copyWith(
+                color: buttonModel.textColor ?? theme.colorScheme.onPrimary,
                 fontWeight: FontWeight.w600,
               ),
         ),

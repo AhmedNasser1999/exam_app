@@ -8,7 +8,12 @@ abstract class AppTheme {
   }) {
     return ThemeData(
       colorScheme: colorScheme,
-      appBarTheme: AppBarTheme(foregroundColor: colorScheme.secondary, centerTitle: false),
+      appBarTheme: AppBarTheme(
+        foregroundColor: colorScheme.secondary,
+        centerTitle: false,
+        elevation: 0,
+        titleSpacing: 0,
+      ),
 
       textTheme: TextTheme(
         bodyLarge: TextStyle(fontSize: 16, color: colorScheme.secondary),

@@ -1,1 +1,3 @@
-abstract class Constant {}
+abstract class Constant {
+  static const String token = "token";
+}
