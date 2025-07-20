@@ -14,6 +14,23 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../features/auth/forget_password/api/forget_password_api_client.dart'
+    as _i1066;
+import '../../features/auth/forget_password/data/repository/forget_password_repo_ipml.dart'
+    as _i550;
+import '../../features/auth/forget_password/domain/use_cases/forget_password_use_case.dart'
+    as _i913;
+import '../../features/auth/forget_password/domain/use_cases/reset_password_use_case.dart'
+    as _i22;
+import '../../features/auth/forget_password/domain/use_cases/verify_reset_code_use_case.dart'
+    as _i295;
+import '../../features/auth/signin/api/api_client.dart' as _i729;
+import '../../features/auth/signin/data/repository/signin_repository_impl.dart'
+    as _i163;
+import '../../features/auth/signin/domain/use_cases/signin_usecase.dart'
+    as _i556;
+import '../../features/auth/signin/presentation/cubit/sign_in_cubit.dart'
+    as _i1007;
 import '../../features/auth/signup/api/client/signup_api_client.dart' as _i175;
 import '../../features/auth/signup/api/data_source_impl/signup_local_impl.dart'
     as _i991;
@@ -47,24 +64,53 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio());
     gh.factory<_i79.SignupLocal>(() => _i991.SignupLocalImpl());
+    gh.lazySingleton<_i729.ApiClient>(() => _i729.ApiClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i175.SignupApiClient>(
       () => _i175.SignupApiClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i1066.ForgetPasswordApiClient>(
+      () => _i1066.ForgetPasswordApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i602.SignupRemote>(
       () =>
           _i236.SignupRemoteImpl(signupApiClient: gh<_i175.SignupApiClient>()),
     );
-    gh.factory<_i371.SignupRepo>(
+    gh.lazySingleton<_i550.ForgetPasswordRepoIpml>(
+      () => _i550.ForgetPasswordRepoIpml(gh<_i1066.ForgetPasswordApiClient>()),
+    );
+    gh.lazySingleton<_i371.SignupRepo>(
       () => _i698.SignupRepoImpl(
         signupRemote: gh<_i602.SignupRemote>(),
         signupLocal: gh<_i79.SignupLocal>(),
       ),
     );
-    gh.lazySingleton<_i774.UseCaseSignup>(
+    gh.factory<_i295.VerifyResetCodeUseCase>(
+      () => _i295.VerifyResetCodeUseCase(
+        verifyResetCodeRepoImpl: gh<_i550.ForgetPasswordRepoIpml>(),
+      ),
+    );
+    gh.factory<_i913.ForgetPasswordUseCase>(
+      () => _i913.ForgetPasswordUseCase(gh<_i550.ForgetPasswordRepoIpml>()),
+    );
+    gh.factory<_i22.ResetPasswordUseCase>(
+      () => _i22.ResetPasswordUseCase(
+        forgetPasswordRepoIpml: gh<_i550.ForgetPasswordRepoIpml>(),
+      ),
+    );
+    gh.lazySingleton<_i163.SigninRepositoryImpl>(
+      () => _i163.SigninRepositoryImpl(gh<_i729.ApiClient>()),
+    );
+    gh.factory<_i774.UseCaseSignup>(
       () => _i774.UseCaseSignup(signupRepo: gh<_i371.SignupRepo>()),
     );
     gh.factory<_i507.SignupCubit>(
-      () => _i507.SignupCubit(useCaseSignup: gh<_i774.UseCaseSignup>()),
+      () => _i507.SignupCubit(gh<_i774.UseCaseSignup>()),
+    );
+    gh.factory<_i556.SigninUsecase>(
+      () => _i556.SigninUsecase(gh<_i163.SigninRepositoryImpl>()),
+    );
+    gh.factory<_i1007.SignInCubit>(
+      () => _i1007.SignInCubit(gh<_i556.SigninUsecase>()),
     );
     return this;
   }

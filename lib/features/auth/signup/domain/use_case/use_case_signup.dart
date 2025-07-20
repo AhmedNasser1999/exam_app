@@ -6,7 +6,7 @@ import 'package:exam_app/features/auth/signup/domain/entities/signup_entities.da
 import 'package:exam_app/features/auth/signup/domain/repo/signup_repo.dart';
 import 'package:injectable/injectable.dart';
 
-@lazySingleton
+@injectable
 class UseCaseSignup extends UseCasePram<SignupEntities, SignupRequestModel> {
   final SignupRepo signupRepo;
 

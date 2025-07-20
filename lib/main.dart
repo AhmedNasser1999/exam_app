@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Exam App',
+      debugShowCheckedModeBanner: false,
       initialRoute: SplashView.routeName,
       theme: AppTheme.lightTheme,
       onGenerateRoute: OnGenerateRoute.onGenerateRoute,

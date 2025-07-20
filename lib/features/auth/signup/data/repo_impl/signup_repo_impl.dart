@@ -9,7 +9,7 @@ import 'package:exam_app/features/auth/signup/domain/entities/signup_entities.da
 import 'package:exam_app/features/auth/signup/domain/repo/signup_repo.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: SignupRepo)
+@LazySingleton(as: SignupRepo)
 class SignupRepoImpl extends SignupRepo {
   final SignupRemote signupRemote;
   final SignupLocal signupLocal;

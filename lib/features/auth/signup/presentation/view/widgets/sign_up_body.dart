@@ -1,5 +1,4 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/constant/text_constant.dart';
 import 'package:exam_app/core/custom_widgets_model/button_model.dart';
 import 'package:exam_app/core/widgets/custom_button.dart';
@@ -61,10 +60,11 @@ class _SignUpBodyState extends State<SignUpBody> {
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const CustomHeader(
                 title: TextConstant.signUpTitle,
-                routeName: SignInView.routeName,
+                backRouteName: SignInView.routeName,
               ),
               const SizedBox(height: 24),
               SectionTextField(formKey: formKey),
@@ -80,10 +80,15 @@ class _SignUpBodyState extends State<SignUpBody> {
                 ),
               ),
               const SizedBox(height: 16),
-              const CustomTextButton(
-                label: TextConstant.alreadyHaveAccount,
-                textButton: TextConstant.loginButton,
-                routeName: SignInView.routeName,
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(TextConstant.alreadyHaveAccount),
+                  CustomTextButton(
+                    textButton: TextConstant.loginButton,
+                    routeName: SignInView.routeName,
+                  ),
+                ],
               ),
             ],
           ),

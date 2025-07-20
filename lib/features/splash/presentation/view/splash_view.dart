@@ -1,5 +1,5 @@
 import 'package:exam_app/core/route/route_name.dart';
-import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
+import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
 import 'package:exam_app/features/splash/presentation/view/widget/splash_body.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     Future.delayed(const Duration(seconds: 3), () {
       // when finish sign if user have email must navigate to HomeView() otherwise navigate to SigninView()
-      Navigator.pushReplacementNamed(context, SignUpView.routeName);
+      Navigator.pushReplacementNamed(context, SignInView.routeName);
     });
     super.initState();
   }

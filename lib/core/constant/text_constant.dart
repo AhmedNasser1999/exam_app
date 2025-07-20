@@ -19,4 +19,5 @@ abstract class TextConstant {
   static const String loginButton = 'Login';
   static const String failureTitle = 'Failure';
   static const String successTitle = 'Success';
+  static const String forgetPassword = 'Forget password ?';
 }
