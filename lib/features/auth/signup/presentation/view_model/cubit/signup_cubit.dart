@@ -8,7 +8,7 @@ part 'signup_state.dart';
 
 @injectable
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit({required this.useCaseSignup}) : super(SignupInitial());
+  SignupCubit(this.useCaseSignup) : super(SignupInitial());
   final UseCaseSignup useCaseSignup;
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();

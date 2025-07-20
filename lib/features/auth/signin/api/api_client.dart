@@ -1,7 +1,5 @@
-import 'package:dart_either/dart_either.dart';
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/constant/api_contants.dart';
-import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/features/auth/signin/data/models/signin_request.dart';
 import 'package:exam_app/features/auth/signin/data/models/signin_response.dart';
 import 'package:injectable/injectable.dart';
