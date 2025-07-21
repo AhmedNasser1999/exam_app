@@ -8,7 +8,7 @@ import 'sign_in_state.dart';
 class SignInCubit extends Cubit<SignInState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final SigninUsecase signInUseCase;
+  final SigninUseCase signInUseCase;
 
   SignInCubit(this.signInUseCase) : super(SignInInitial());
 

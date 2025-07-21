@@ -1,15 +1,20 @@
 import 'package:dartz/dartz.dart';
 import 'package:exam_app/core/error/failure.dart';
-import 'package:exam_app/features/auth/forget_password/data/repository/forget_password_repo_ipml.dart';
+import 'package:exam_app/core/use_case/use_case_pram.dart';
+import 'package:exam_app/features/auth/forget_password/data/models/verify_reset_code_request.dart';
 import 'package:exam_app/features/auth/forget_password/domain/entities/verify_reset_code.dart';
+import 'package:exam_app/features/auth/forget_password/domain/repository/forget_password_repo.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class VerifyResetCodeUseCase {
-  ForgetPasswordRepoIpml verifyResetCodeRepoImpl;
+class VerifyResetCodeUseCase
+    extends UseCasePram<VerifyResetCode, VerifyResetCodeRequest> {
+  final ForgetPasswordRepo forgetPasswordRepo;
 
-  VerifyResetCodeUseCase({required this.verifyResetCodeRepoImpl});
-  Future<Either<Failure, VerifyResetCode>> execute(resetCode) async {
-    return await verifyResetCodeRepoImpl.verifyResetCode(resetCode);
+  VerifyResetCodeUseCase({required this.forgetPasswordRepo});
+
+  @override
+  Future<Either<VerifyResetCode, Failure>> call(pram) async {
+    return await forgetPasswordRepo.verifyResetCode(request: pram);
   }
 }

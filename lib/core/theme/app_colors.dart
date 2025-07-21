@@ -11,6 +11,7 @@ abstract class AppColors {
   static const Color placeHolder = Color(0xFFA6A6A6);
 
   static const MaterialColor blue = MaterialColor(0xFF02369C, <int, Color>{
+    5: Color(0xFFDFE7F7),
     10: Color(0xFFccd7eb),
     20: Color(0xFFABBCDE),
     30: Color(0xFF809ACD),

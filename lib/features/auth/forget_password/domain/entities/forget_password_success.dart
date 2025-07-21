@@ -1,4 +1,4 @@
-class ForgetPasswordSuccess {
+abstract class ForgetPasswordSuccess {
   final String info;
 
   ForgetPasswordSuccess({required this.info});
