@@ -1,5 +1,4 @@
 import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_state.dart';
-import 'package:exam_app/features/auth/signin/presentation/view/hello_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignInListener {
@@ -14,7 +13,7 @@ class SignInListener {
       Navigator.of(context, rootNavigator: true).pop(); // dismiss loading
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const HelloScreen()),
+        MaterialPageRoute(builder: (_) => const Scaffold()),
       );
     } else if (state is SignInFailure) {
       Navigator.of(context, rootNavigator: true).pop(); // dismiss loading

@@ -31,7 +31,7 @@ class ServerFailure extends Failure {
   }
   factory ServerFailure.fromResponse(int statusCode) {
     const statusMessages = {
-      400: 'Bad Request',
+      400: 'Invalid Code',
       401: 'Email or password invalid',
       409: 'Email already exist',
       403: 'Forbidden',
@@ -42,6 +42,8 @@ class ServerFailure extends Failure {
       504: 'Gateway Timeout',
     };
 
-    return ServerFailure(errorMessage: statusMessages[statusCode] ?? 'Error: $statusCode');
+    return ServerFailure(
+      errorMessage: statusMessages[statusCode] ?? 'Error: $statusCode',
+    );
   }
 }

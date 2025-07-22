@@ -5,7 +5,9 @@ import 'package:exam_app/core/route/route_name.dart';
 import 'package:exam_app/core/widgets/custom_button.dart';
 import 'package:exam_app/core/widgets/custom_text_button.dart';
 import 'package:exam_app/core/widgets/custom_text_form_filed.dart';
+import 'package:exam_app/features/auth/forget_password/presentation/views/forget_password_view.dart';
 import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_cubit.dart';
+import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,9 +61,14 @@ class SignInBuilder extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                const CustomTextButton(
+                CustomTextButton(
                   textButton: TextConstant.forgetPassword,
-                  routeName: RouteName.frogetPassword,
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      ForgetPasswordView.routeName,
+                    );
+                  },
                 ),
               ],
             ),
@@ -80,13 +87,18 @@ class SignInBuilder extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
 
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Don\'t have an account? '),
+                const Text('Don\'t have an account?'),
                 CustomTextButton(
                   textButton: TextConstant.signUpTitle,
-                  routeName: RouteName.sigUpName,
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      SignUpView.routeName,
+                    );
+                  },
                 ),
               ],
             ),

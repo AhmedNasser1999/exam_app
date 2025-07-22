@@ -20,4 +20,16 @@ abstract class TextConstant {
   static const String failureTitle = 'Failure';
   static const String successTitle = 'Success';
   static const String forgetPassword = 'Forget password ?';
+  static const String forgetPasswordTitle = 'Forget password';
+  static const String instructionLineForgetPasswordEmailSender =
+      'Please enter your email associated to your account';
+  static const String continueButton = 'Continue ';
+  static const String resetPassword = "Reset password";
+  static const String instructionPasswordRequirements =
+      "Password must not be empty and must contain 6 characters with upper case letter and one number at least ";
+  static const String emailVerification = "Email Verification";
+  static const String instructionEmailVerification =
+      "Please enter the code sent to your email address";
+  static const String notReceived = "Didn't receive the code?";
+  static const String resend = "Resend";
 }
