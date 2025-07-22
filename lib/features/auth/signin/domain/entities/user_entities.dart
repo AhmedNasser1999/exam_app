@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
 
 @injectable
-class User {
+class UserEntities {
   final String token;
 
-  User({required this.token});
+  UserEntities({required this.token});
 }

@@ -32,23 +32,29 @@ import '../../features/auth/forget_password/domain/use_cases/verify_reset_code_u
     as _i295;
 import '../../features/auth/forget_password/presentation/view_model/forget_password_cubit.dart'
     as _i795;
-import '../../features/auth/signin/api/api_client.dart' as _i729;
-import '../../features/auth/signin/api/store_user_token.dart' as _i1032;
-import '../../features/auth/signin/data/repository/Signin_repository_impl.dart'
-    as _i852;
-import '../../features/auth/signin/domain/entities/user.dart' as _i185;
+import '../../features/auth/signin/api/client/api_client.dart' as _i13;
+import '../../features/auth/signin/api/data_source/signin_remote_impl.dart'
+    as _i609;
+import '../../features/auth/signin/api/data_source/store_user_token_impl.dart'
+    as _i1065;
+import '../../features/auth/signin/data/data_source/signin_remote.dart'
+    as _i645;
+import '../../features/auth/signin/data/data_source/store_user_token.dart'
+    as _i718;
+import '../../features/auth/signin/data/repository/signin_repository_impl.dart'
+    as _i163;
+import '../../features/auth/signin/domain/entities/user_entities.dart' as _i378;
 import '../../features/auth/signin/domain/repository/signin_repository.dart'
     as _i828;
+import '../../features/auth/signin/domain/use_cases/remember_me_use_case.dart'
+    as _i1063;
 import '../../features/auth/signin/domain/use_cases/signin_usecase.dart'
     as _i556;
 import '../../features/auth/signin/presentation/cubit/sign_in_cubit.dart'
     as _i1007;
 import '../../features/auth/signup/api/client/signup_api_client.dart' as _i175;
-import '../../features/auth/signup/api/data_source_impl/signup_local_impl.dart'
-    as _i991;
 import '../../features/auth/signup/api/data_source_impl/signup_remote_impl.dart'
     as _i236;
-import '../../features/auth/signup/data/data_source/signup_local.dart' as _i79;
 import '../../features/auth/signup/data/data_source/signup_remote.dart'
     as _i602;
 import '../../features/auth/signup/data/repo_impl/signup_repo_impl.dart'
@@ -58,6 +64,7 @@ import '../../features/auth/signup/domain/use_case/use_case_signup.dart'
     as _i774;
 import '../../features/auth/signup/presentation/view_model/cubit/signup_cubit.dart'
     as _i507;
+import '../local_data/user_cash_token.dart' as _i732;
 import '../module/dio_module.dart' as _i545;
 import '../module/shared_preferences_module.dart' as _i585;
 
@@ -74,45 +81,59 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPreferencesModule.pref,
       preResolve: true,
     );
+    gh.factory<_i732.UserCashToken>(() => _i732.UserCashToken());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio());
-    gh.factory<_i79.SignupLocal>(() => _i991.SignupLocalImpl());
-    gh.lazySingleton<_i597.ForgetPasswordApiClient>(
-      () => _i597.ForgetPasswordApiClient(gh<_i361.Dio>()),
-    );
-    gh.lazySingleton<_i729.ApiClient>(() => _i729.ApiClient(gh<_i361.Dio>()));
+    gh.lazySingleton<_i718.StoreUserToken>(() => _i1065.StoreUserTokenImpl());
     gh.lazySingleton<_i175.SignupApiClient>(
       () => _i175.SignupApiClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i1032.StoreUserToken>(
-      () => _i1032.StoreUserToken(gh<_i460.SharedPreferences>()),
+    gh.lazySingleton<_i597.ForgetPasswordApiClient>(
+      () => _i597.ForgetPasswordApiClient(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i13.ApiClient>(() => _i13.ApiClient(gh<_i361.Dio>()));
     gh.factory<_i602.SignupRemote>(
       () =>
           _i236.SignupRemoteImpl(signupApiClient: gh<_i175.SignupApiClient>()),
     );
+    gh.lazySingleton<_i645.SigninRemote>(
+      () => _i609.SigninRemoteImpl(apiClient: gh<_i13.ApiClient>()),
+    );
     gh.lazySingleton<_i371.SignupRepo>(
-      () => _i698.SignupRepoImpl(
-        signupRemote: gh<_i602.SignupRemote>(),
-        signupLocal: gh<_i79.SignupLocal>(),
+      () => _i698.SignupRepoImpl(signupRemote: gh<_i602.SignupRemote>()),
+    );
+    gh.factory<_i378.UserEntities>(
+      () => _i378.UserEntities(token: gh<String>()),
+    );
+    gh.lazySingleton<_i828.SigninRepository>(
+      () => _i163.SigninRepositoryImpl(
+        signinRemote: gh<_i645.SigninRemote>(),
+        storeUserToken: gh<_i718.StoreUserToken>(),
       ),
     );
-    gh.factory<_i185.User>(() => _i185.User(token: gh<String>()));
     gh.lazySingleton<_i936.ForgetPasswordRemote>(
       () => _i868.ForgetPasswordRemoteImpl(
         forgetPasswordApiClient: gh<_i597.ForgetPasswordApiClient>(),
       ),
     );
-    gh.lazySingleton<_i828.SigninRepository>(
-      () => _i852.SigninRepositoryImpl(gh<_i729.ApiClient>()),
-    );
-    gh.lazySingleton<_i556.SigninUseCase>(
-      () => _i556.SigninUseCase(gh<_i828.SigninRepository>()),
+    gh.lazySingleton<_i1063.RememberMeUseCase>(
+      () => _i1063.RememberMeUseCase(
+        signinRepository: gh<_i828.SigninRepository>(),
+      ),
     );
     gh.factory<_i774.UseCaseSignup>(
       () => _i774.UseCaseSignup(signupRepo: gh<_i371.SignupRepo>()),
     );
+    gh.lazySingleton<_i556.SigninUseCase>(
+      () => _i556.SigninUseCase(repository: gh<_i828.SigninRepository>()),
+    );
     gh.factory<_i507.SignupCubit>(
       () => _i507.SignupCubit(gh<_i774.UseCaseSignup>()),
+    );
+    gh.factory<_i1007.SignInCubit>(
+      () => _i1007.SignInCubit(
+        signInUseCase: gh<_i556.SigninUseCase>(),
+        rememberMeUseCase: gh<_i1063.RememberMeUseCase>(),
+      ),
     );
     gh.lazySingleton<_i604.ForgetPasswordRepo>(
       () => _i550.ForgetPasswordRepoImpl(gh<_i936.ForgetPasswordRemote>()),
@@ -130,12 +151,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i295.VerifyResetCodeUseCase>(
       () => _i295.VerifyResetCodeUseCase(
         forgetPasswordRepo: gh<_i604.ForgetPasswordRepo>(),
-      ),
-    );
-    gh.factory<_i1007.SignInCubit>(
-      () => _i1007.SignInCubit(
-        gh<_i556.SigninUseCase>(),
-        gh<_i1032.StoreUserToken>(),
       ),
     );
     gh.factory<_i795.ForgetPasswordCubit>(

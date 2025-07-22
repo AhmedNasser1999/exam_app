@@ -1,6 +1,5 @@
-import 'package:exam_app/core/config/di.dart';
+import 'package:exam_app/core/local_data/user_cash_token.dart';
 import 'package:exam_app/core/route/route_name.dart';
-import 'package:exam_app/features/auth/signin/api/store_user_token.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
 import 'package:exam_app/features/splash/presentation/view/widget/splash_body.dart';
@@ -16,26 +15,19 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  String? isTokenExist;
-
   @override
   void initState() {
-    super.initState();
     checkToken();
+    super.initState();
   }
 
   Future<void> checkToken() async {
-    final storeUserToken = getIt<StoreUserToken>();
-    await Future.delayed(const Duration(seconds: 1));
-
-    isTokenExist = await storeUserToken.getToken();
-
-    if (!mounted) return; // Prevent navigation if widget is disposed
-
-    if (isTokenExist == null) {
-      Navigator.pushReplacementNamed(context, SignInView.routeName);
-    } else {
+    final hasToken = await UserCashToken.hasToken();
+    await Future.delayed(const Duration(seconds: 3));
+    if (hasToken) {
       Navigator.pushReplacementNamed(context, HomeView.routeName);
+    } else {
+      Navigator.pushReplacementNamed(context, SignInView.routeName);
     }
   }
 

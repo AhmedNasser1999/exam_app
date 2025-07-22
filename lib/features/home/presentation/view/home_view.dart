@@ -1,4 +1,5 @@
 import 'package:exam_app/core/route/route_name.dart';
+import 'package:exam_app/features/home/presentation/view/widgets/home_view_body.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -9,7 +10,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('home')),
-      body: Container(),
+      body: const HomeViewBody(),
     );
   }
 }

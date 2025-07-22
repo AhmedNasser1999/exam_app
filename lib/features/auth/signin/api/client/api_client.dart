@@ -13,5 +13,5 @@ abstract class ApiClient {
   factory ApiClient(Dio dio) = _ApiClient;
 
   @POST(ApiConstants.signInEndPoint)
-  Future<SigninResponse> login(@Body() SigninRequest request);
+  Future<SigninResponse> signIn(@Body() SigninRequest request);
 }

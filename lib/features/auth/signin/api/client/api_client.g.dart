@@ -18,7 +18,7 @@ class _ApiClient implements ApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<SigninResponse> login(SigninRequest request) async {
+  Future<SigninResponse> signIn(SigninRequest request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
