@@ -19,7 +19,7 @@ class SignInView extends StatelessWidget {
             SignInListener.signInListener(context, state),
 
         builder: (context, state) {
-          final cubit = context.read<SignInCubit>(); 
+          final cubit = context.read<SignInCubit>();
           return SignInBuilder(
             emailController: cubit.emailController,
             passwordController: cubit.passwordController,

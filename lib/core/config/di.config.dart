@@ -33,8 +33,10 @@ import '../../features/auth/forget_password/domain/use_cases/verify_reset_code_u
 import '../../features/auth/forget_password/presentation/view_model/forget_password_cubit.dart'
     as _i795;
 import '../../features/auth/signin/api/api_client.dart' as _i729;
+import '../../features/auth/signin/api/store_user_token.dart' as _i1032;
 import '../../features/auth/signin/data/repository/Signin_repository_impl.dart'
     as _i852;
+import '../../features/auth/signin/domain/entities/user.dart' as _i185;
 import '../../features/auth/signin/domain/repository/signin_repository.dart'
     as _i828;
 import '../../features/auth/signin/domain/use_cases/signin_usecase.dart'
@@ -74,12 +76,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio());
     gh.factory<_i79.SignupLocal>(() => _i991.SignupLocalImpl());
+    gh.lazySingleton<_i597.ForgetPasswordApiClient>(
+      () => _i597.ForgetPasswordApiClient(gh<_i361.Dio>()),
+    );
     gh.lazySingleton<_i729.ApiClient>(() => _i729.ApiClient(gh<_i361.Dio>()));
     gh.lazySingleton<_i175.SignupApiClient>(
       () => _i175.SignupApiClient(gh<_i361.Dio>()),
     );
-    gh.lazySingleton<_i597.ForgetPasswordApiClient>(
-      () => _i597.ForgetPasswordApiClient(gh<_i361.Dio>()),
+    gh.factory<_i1032.StoreUserToken>(
+      () => _i1032.StoreUserToken(gh<_i460.SharedPreferences>()),
     );
     gh.factory<_i602.SignupRemote>(
       () =>
@@ -91,6 +96,7 @@ extension GetItInjectableX on _i174.GetIt {
         signupLocal: gh<_i79.SignupLocal>(),
       ),
     );
+    gh.factory<_i185.User>(() => _i185.User(token: gh<String>()));
     gh.lazySingleton<_i936.ForgetPasswordRemote>(
       () => _i868.ForgetPasswordRemoteImpl(
         forgetPasswordApiClient: gh<_i597.ForgetPasswordApiClient>(),
@@ -108,9 +114,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i507.SignupCubit>(
       () => _i507.SignupCubit(gh<_i774.UseCaseSignup>()),
     );
-    gh.factory<_i1007.SignInCubit>(
-      () => _i1007.SignInCubit(gh<_i556.SigninUseCase>()),
-    );
     gh.lazySingleton<_i604.ForgetPasswordRepo>(
       () => _i550.ForgetPasswordRepoImpl(gh<_i936.ForgetPasswordRemote>()),
     );
@@ -127,6 +130,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i295.VerifyResetCodeUseCase>(
       () => _i295.VerifyResetCodeUseCase(
         forgetPasswordRepo: gh<_i604.ForgetPasswordRepo>(),
+      ),
+    );
+    gh.factory<_i1007.SignInCubit>(
+      () => _i1007.SignInCubit(
+        gh<_i556.SigninUseCase>(),
+        gh<_i1032.StoreUserToken>(),
       ),
     );
     gh.factory<_i795.ForgetPasswordCubit>(
