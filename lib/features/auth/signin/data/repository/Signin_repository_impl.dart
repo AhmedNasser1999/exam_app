@@ -4,7 +4,7 @@ import 'package:exam_app/features/auth/signin/domain/entities/user.dart';
 import 'package:exam_app/features/auth/signin/domain/repository/signin_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@lazySingleton
+@LazySingleton(as: SigninRepository)
 class SigninRepositoryImpl extends SigninRepository {
   final ApiClient apiClient;
   SigninRepositoryImpl(this.apiClient);
