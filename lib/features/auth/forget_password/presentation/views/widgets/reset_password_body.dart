@@ -40,7 +40,7 @@ class ResetPasswordBody extends StatelessWidget {
               controller: controller,
               label: TextConstant.passwordLabel,
               hintText: TextConstant.passwordHint,
-              validator: Validation.validateText,
+              validator: Validation.validatePassword,
             ),
           ),
           const SizedBox(height: 24),
