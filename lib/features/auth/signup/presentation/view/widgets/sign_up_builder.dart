@@ -19,45 +19,47 @@ class SignUpBuilder extends StatelessWidget {
     final signupCubit = context.read<SignupCubit>();
 
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const CustomHeader(
-                title: TextConstant.signUpTitle,
-                backRouteName: SignInView.routeName,
-              ),
-              const SizedBox(height: 24),
-              SectionTextField(formKey: formKey),
-              const SizedBox(height: 62),
-              CustomButton(
-                buttonModel: ButtonModel(
-                  text: TextConstant.signUpButton,
-                  borderRadius: 25,
-                  onPressed: () async {
-                    await signupCubit.validate(formKey: formKey);
-                  },
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const CustomHeader(
+                  title: TextConstant.signUpTitle,
+                  backRouteName: SignInView.routeName,
                 ),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(TextConstant.alreadyHaveAccount),
-                  CustomTextButton(
-                    textButton: TextConstant.loginButton,
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        SignInView.routeName,
-                      );
+                const SizedBox(height: 24),
+                SectionTextField(formKey: formKey),
+                const SizedBox(height: 62),
+                CustomButton(
+                  buttonModel: ButtonModel(
+                    text: TextConstant.signUpButton,
+                    borderRadius: 25,
+                    onPressed: () async {
+                      await signupCubit.validate(formKey: formKey);
                     },
                   ),
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(TextConstant.alreadyHaveAccount),
+                    CustomTextButton(
+                      textButton: TextConstant.loginText,
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                          context,
+                          SignInView.routeName,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

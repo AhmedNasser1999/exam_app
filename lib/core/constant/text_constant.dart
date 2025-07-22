@@ -16,7 +16,7 @@ abstract class TextConstant {
   static const String signUpTitle = 'Sign Up';
   static const String signUpButton = 'Sign Up';
   static const String alreadyHaveAccount = 'Already have an account';
-  static const String loginButton = 'Login';
+  static const String loginText = 'Login';
   static const String failureTitle = 'Failure';
   static const String successTitle = 'Success';
   static const String forgetPassword = 'Forget password ?';
@@ -32,4 +32,6 @@ abstract class TextConstant {
       "Please enter the code sent to your email address";
   static const String notReceived = "Didn't receive the code?";
   static const String resend = "Resend";
+  static const String rememberMe = 'Remember me';
+  static const String dontHaveAccount = 'Don\'t have an account?';
 }

@@ -6,6 +6,8 @@ class SignInLoading extends SignInState {}
 
 class SignInSuccess extends SignInState {}
 
+class SignInRememberMe extends SignInState {}
+
 class SignInFailure extends SignInState {
   final String error;
 

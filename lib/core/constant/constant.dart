@@ -1,3 +1,3 @@
 abstract class Constant {
-  static const String token = "token";
+  static const String userToken = "token";
 }

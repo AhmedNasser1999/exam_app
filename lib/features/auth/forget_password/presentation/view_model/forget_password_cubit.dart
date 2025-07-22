@@ -32,7 +32,6 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
 
     response.fold(
       (l) {
-        log(l.info.toString());
         emit(ForgetPasswordVerifiedCode());
       },
       (r) {
@@ -49,7 +48,6 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     );
     response.fold(
       (l) {
-        log(l.status.toString());
         emit(ForgetPasswordResetPassword());
       },
       (r) {
@@ -80,9 +78,6 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   }) {
     if (value == null || value.isEmpty) {
       return 'Invalid data';
-    }
-    if (value.length <= 6) {
-      return 'Password must be contain 6 characters';
     }
     if (confirmPasswordController.text != passwordController.text) {
       return 'Password no match';
