@@ -14,7 +14,11 @@ abstract class AppTheme {
         elevation: 0,
         titleSpacing: 0,
       ),
-
+      navigationBarTheme: NavigationBarThemeData(
+        height: 60,
+        indicatorColor: AppColors.blue[10],
+        backgroundColor: AppColors.lightBlue,
+      ),
       textTheme: TextTheme(
         bodyLarge: TextStyle(fontSize: 16, color: colorScheme.secondary),
         bodyMedium: TextStyle(fontSize: 14, color: colorScheme.secondary),

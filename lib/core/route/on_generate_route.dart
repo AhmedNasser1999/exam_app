@@ -7,6 +7,7 @@ import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dar
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
+import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
 import 'package:exam_app/features/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,12 @@ abstract class OnGenerateRoute {
           ),
         );
       case RouteName.homeView:
-        return MaterialPageRoute(builder: (context) => const HomeView());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<HomeCubit>(),
+            child: const HomeView(),
+          ),
+        );
       case RouteName.forgetPassword:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -38,7 +44,7 @@ abstract class OnGenerateRoute {
             child: const SignInView(),
           ),
         );
-      case RouteName.sigUpName:
+      case RouteName.signUpName:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => getIt.get<SignupCubit>(),

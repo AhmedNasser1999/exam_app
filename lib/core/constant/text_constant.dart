@@ -34,4 +34,7 @@ abstract class TextConstant {
   static const String resend = "Resend";
   static const String rememberMe = 'Remember me';
   static const String dontHaveAccount = 'Don\'t have an account?';
+  static const String homeLabel = 'Home';
+  static const String resultsLabel = 'Results';
+  static const String profileLabel = 'Profile';
 }

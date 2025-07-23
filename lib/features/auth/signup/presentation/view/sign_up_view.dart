@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
-  static const String routeName = RouteName.sigUpName;
+  static const String routeName = RouteName.signUpName;
 
   @override
   Widget build(BuildContext context) {
