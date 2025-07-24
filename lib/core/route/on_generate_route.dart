@@ -6,8 +6,8 @@ import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_cubit.d
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
-import 'package:exam_app/features/home/presentation/view/home_view.dart';
-import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
+import 'package:exam_app/features/subjects/presentation/view/home_view.dart';
+import 'package:exam_app/features/subjects/presentation/view_model/home_screen/home_cubit.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
