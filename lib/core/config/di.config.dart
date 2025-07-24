@@ -41,8 +41,8 @@ import '../../features/auth/signin/data/data_source/signin_remote.dart'
     as _i645;
 import '../../features/auth/signin/data/data_source/store_user_token.dart'
     as _i718;
-import '../../features/auth/signin/data/repository/signin_repository_impl.dart'
-    as _i163;
+import '../../features/auth/signin/data/repository/Signin_repository_impl.dart'
+    as _i852;
 import '../../features/auth/signin/domain/entities/user_entities.dart' as _i378;
 import '../../features/auth/signin/domain/repository/signin_repository.dart'
     as _i828;
@@ -77,20 +77,20 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final sharedPreferencesModule = _$SharedPreferencesModule();
     final dioModule = _$DioModule();
+    gh.factory<_i732.UserCashToken>(() => _i732.UserCashToken());
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => sharedPreferencesModule.pref,
       preResolve: true,
     );
-    gh.factory<_i732.UserCashToken>(() => _i732.UserCashToken());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio());
     gh.lazySingleton<_i718.StoreUserToken>(() => _i1065.StoreUserTokenImpl());
-    gh.lazySingleton<_i175.SignupApiClient>(
-      () => _i175.SignupApiClient(gh<_i361.Dio>()),
-    );
     gh.lazySingleton<_i597.ForgetPasswordApiClient>(
       () => _i597.ForgetPasswordApiClient(gh<_i361.Dio>()),
     );
     gh.lazySingleton<_i13.ApiClient>(() => _i13.ApiClient(gh<_i361.Dio>()));
+    gh.lazySingleton<_i175.SignupApiClient>(
+      () => _i175.SignupApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i602.SignupRemote>(
       () =>
           _i236.SignupRemoteImpl(signupApiClient: gh<_i175.SignupApiClient>()),
@@ -104,15 +104,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i378.UserEntities>(
       () => _i378.UserEntities(token: gh<String>()),
     );
-    gh.lazySingleton<_i828.SigninRepository>(
-      () => _i163.SigninRepositoryImpl(
-        signinRemote: gh<_i645.SigninRemote>(),
-        storeUserToken: gh<_i718.StoreUserToken>(),
-      ),
-    );
     gh.lazySingleton<_i936.ForgetPasswordRemote>(
       () => _i868.ForgetPasswordRemoteImpl(
         forgetPasswordApiClient: gh<_i597.ForgetPasswordApiClient>(),
+      ),
+    );
+    gh.lazySingleton<_i828.SigninRepository>(
+      () => _i852.SigninRepositoryImpl(
+        signinRemote: gh<_i645.SigninRemote>(),
+        storeUserToken: gh<_i718.StoreUserToken>(),
       ),
     );
     gh.lazySingleton<_i1063.RememberMeUseCase>(
