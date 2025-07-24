@@ -16,14 +16,17 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   @override
-  void initState() {
+  void initState() {  
     checkToken();
     super.initState();
   }
 
   Future<void> checkToken() async {
-    final hasToken = await UserCashToken.hasToken();
-    await Future.delayed(const Duration(seconds: 3));
+    final hasToken = UserCashToken.hasToken();
+    await Future.delayed(const Duration(seconds: 1));
+
+    if (!mounted) return;
+
     if (hasToken) {
       Navigator.pushReplacementNamed(context, HomeView.routeName);
     } else {
