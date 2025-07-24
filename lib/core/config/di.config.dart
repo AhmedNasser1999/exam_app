@@ -66,6 +66,11 @@ import '../../features/auth/signup/presentation/view_model/cubit/signup_cubit.da
     as _i507;
 import '../../features/home/presentation/view_model/home_screen/home_cubit.dart'
     as _i880;
+import '../../features/subjects/api/client/subject_api_client.dart' as _i405;
+import '../../features/subjects/api/data_source/subject_data_source_impl.dart'
+    as _i728;
+import '../../features/subjects/data/data_source/subject_data_source.dart'
+    as _i962;
 import '../local_data/user_cash_token.dart' as _i732;
 import '../module/dio_module.dart' as _i545;
 import '../module/shared_preferences_module.dart' as _i585;
@@ -94,6 +99,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i175.SignupApiClient>(
       () => _i175.SignupApiClient(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i405.SubjectApiClient>(
+      () => _i405.SubjectApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i602.SignupRemote>(
       () =>
           _i236.SignupRemoteImpl(signupApiClient: gh<_i175.SignupApiClient>()),
@@ -116,6 +124,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i936.ForgetPasswordRemote>(
       () => _i868.ForgetPasswordRemoteImpl(
         forgetPasswordApiClient: gh<_i597.ForgetPasswordApiClient>(),
+      ),
+    );
+    gh.lazySingleton<_i962.SubjectDataSource>(
+      () => _i728.SubjectDataSourceImpl(
+        subjectApiClient: gh<_i405.SubjectApiClient>(),
       ),
     );
     gh.lazySingleton<_i1063.RememberMeUseCase>(
