@@ -1,9 +1,11 @@
-import 'package:exam_app/core/local_data/user_cash_token.dart';
+import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/route/route_name.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
 import 'package:exam_app/features/splash/presentation/view/widget/splash_body.dart';
+import 'package:exam_app/features/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -15,24 +17,26 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  final cubit = getIt<SplashCubit>();
   @override
   void initState() {
-    checkToken();
+    cubit.userToken();
     super.initState();
-  }
-
-  Future<void> checkToken() async {
-    final hasToken = await UserCashToken.hasToken();
-    await Future.delayed(const Duration(seconds: 3));
-    if (hasToken) {
-      Navigator.pushReplacementNamed(context, HomeView.routeName);
-    } else {
-      Navigator.pushReplacementNamed(context, SignInView.routeName);
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: SplashBody());
+    return Scaffold(
+      body: BlocListener<SplashCubit, SplashState>(
+        listener: (context, state) async {
+          if (state is SplashHasToken) {
+            Navigator.pushReplacementNamed(context, HomeView.routeName);
+          } else if (state is SplashNotHaveToken) {
+            Navigator.pushReplacementNamed(context, SignInView.routeName);
+          }
+        },
+        child: const SplashBody(),
+      ),
+    );
   }
 }
