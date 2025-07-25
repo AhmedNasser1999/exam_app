@@ -11,6 +11,6 @@ abstract class SubjectApiClient {
   @factoryMethod
   factory SubjectApiClient(Dio dio) = _SubjectApiClient;
 
-  @POST(ApiConstants.subjects)
+  @GET(ApiConstants.subjects)
   Future<SubjectResponse> fetchSubjects();
 }

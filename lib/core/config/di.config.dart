@@ -64,13 +64,19 @@ import '../../features/auth/signup/domain/use_case/use_case_signup.dart'
     as _i774;
 import '../../features/auth/signup/presentation/view_model/cubit/signup_cubit.dart'
     as _i507;
-import '../../features/subjects/presentation/view_model/home_screen/home_cubit.dart'
-    as _i880;
 import '../../features/subjects/api/client/subject_api_client.dart' as _i405;
 import '../../features/subjects/api/data_source/subject_data_source_impl.dart'
     as _i728;
 import '../../features/subjects/data/data_source/subject_data_source.dart'
     as _i962;
+import '../../features/subjects/data/repository/subject_repo_impl.dart'
+    as _i804;
+import '../../features/subjects/domain/repository/subject_repository.dart'
+    as _i815;
+import '../../features/subjects/domain/use-cases/get_subjects_use_case.dart'
+    as _i315;
+import '../../features/subjects/presentation/view_model/home_screen/home_cubit.dart'
+    as _i667;
 import '../local_data/user_cash_token.dart' as _i732;
 import '../module/dio_module.dart' as _i545;
 import '../module/shared_preferences_module.dart' as _i585;
@@ -89,7 +95,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPreferencesModule.pref,
       preResolve: true,
     );
-    gh.factory<_i880.HomeCubit>(() => _i880.HomeCubit());
+    gh.factory<_i667.HomeCubit>(() => _i667.HomeCubit());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio());
     gh.lazySingleton<_i718.StoreUserToken>(() => _i1065.StoreUserTokenImpl());
     gh.lazySingleton<_i597.ForgetPasswordApiClient>(
@@ -105,6 +111,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i602.SignupRemote>(
       () =>
           _i236.SignupRemoteImpl(signupApiClient: gh<_i175.SignupApiClient>()),
+    );
+    gh.lazySingleton<_i815.SubjectRepository>(
+      () => _i804.SubjectRepoImpl(
+        subjectDataSourceImpl: gh<_i728.SubjectDataSourceImpl>(),
+      ),
+    );
+    gh.factory<_i315.GetSubjectsUseCase>(
+      () => _i315.GetSubjectsUseCase(
+        subjectRepoImpl: gh<_i804.SubjectRepoImpl>(),
+      ),
     );
     gh.lazySingleton<_i645.SigninRemote>(
       () => _i609.SigninRemoteImpl(apiClient: gh<_i13.ApiClient>()),
