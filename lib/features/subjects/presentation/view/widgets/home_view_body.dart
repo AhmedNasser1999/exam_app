@@ -1,7 +1,7 @@
-import 'package:exam_app/features/home/presentation/view/widgets/profile_exam_body.dart';
-import 'package:exam_app/features/home/presentation/view/widgets/results_exam_body.dart';
-import 'package:exam_app/features/home/presentation/view/widgets/subject_exam_body.dart';
-import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
+import 'package:exam_app/features/subjects/presentation/view/widgets/profile_exam_body.dart';
+import 'package:exam_app/features/subjects/presentation/view/widgets/results_exam_body.dart';
+import 'package:exam_app/features/subjects/presentation/view/widgets/subject_exam_body.dart';
+import 'package:exam_app/features/subjects/presentation/view_model/home_screen/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +22,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           child: PageView(
             controller: cubit.pageController,
             onPageChanged: cubit.onPageChanged,
-            children: const [
+            children:  [
               SubjectExamBody(),
               ResultsExamBody(),
               ProfileBody(),

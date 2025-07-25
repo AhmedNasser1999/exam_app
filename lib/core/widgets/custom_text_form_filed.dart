@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({super.key, required this.textFieldModel});
   final TextFieldModel textFieldModel;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -15,13 +16,22 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: textFieldModel.keyboardType ?? TextInputType.name,
       obscureText: textFieldModel.obscureText,
       decoration: InputDecoration(
+        prefixIcon: Icon(textFieldModel.iconData, color: Colors.grey),
         labelText: textFieldModel.label,
         hintText: textFieldModel.hintText,
         hintStyle: theme.textTheme.bodyMedium!.copyWith(
           color: AppColors.placeHolder,
         ),
-        labelStyle: theme.textTheme.bodyMedium!.copyWith(color: AppColors.gray),
-        border: const OutlineInputBorder(),
+        labelStyle: theme.textTheme.bodyMedium!.copyWith(color: AppColors.grey),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFieldModel.borderRadius),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFieldModel.borderRadius),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(textFieldModel.borderRadius),
+        ),
       ),
       validator: textFieldModel.validator ?? Validation.validateText,
       onChanged: textFieldModel.onChanged,
