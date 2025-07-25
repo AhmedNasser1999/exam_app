@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/error/failure.dart';
@@ -24,6 +22,7 @@ class SigninRepositoryImpl extends SigninRepository {
   }) async {
     try {
       final response = await signinRemote.signIn(request: request);
+      _handleRememberMe(request: request, response: response);
       return left(response);
     } catch (e) {
       if (e is DioException) {
@@ -34,12 +33,12 @@ class SigninRepositoryImpl extends SigninRepository {
     }
   }
 
-  @override
-  Future<void> rememberMe({required String token}) async {
-    try {
-      await storeUserToken.saveToken(token: token);
-    } on Exception catch (e) {
-      log(e.toString());
+  void _handleRememberMe({
+    required SigninRequest request,
+    required UserEntities response,
+  }) async {
+    if (request.isRememberMe) {
+      await storeUserToken.saveToken(token: response.token);
     }
   }
 }

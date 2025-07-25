@@ -7,5 +7,4 @@ abstract class SigninRepository {
   Future<Either<UserEntities, Failure>> signin({
     required SigninRequest request,
   });
-  Future<void> rememberMe({required String token});
 }
