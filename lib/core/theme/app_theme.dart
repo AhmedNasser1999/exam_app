@@ -69,6 +69,6 @@ abstract class AppTheme {
       surface: AppColors.white,
       onSurface: AppColors.blue,
     ),
-    textFieldBorderColor: AppColors.gray,
+    textFieldBorderColor: AppColors.grey,
   );
 }
