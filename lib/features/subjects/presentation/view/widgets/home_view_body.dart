@@ -22,7 +22,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           child: PageView(
             controller: cubit.pageController,
             onPageChanged: cubit.onPageChanged,
-            children:  [
+            children: const [
               SubjectExamBody(),
               ResultsExamBody(),
               ProfileBody(),

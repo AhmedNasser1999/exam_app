@@ -23,4 +23,10 @@ class UserTokenStorageImpl implements UserTokenStorage {
   Future<void> removeToken() async {
     await secureStorage.delete(key: Constant.userToken);
   }
+
+  @override
+  Future<String?> getToken({required String tokenKey}) async {
+    final String? token = await secureStorage.read(key: Constant.userToken);
+    return token;
+  }
 }

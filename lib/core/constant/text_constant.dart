@@ -37,4 +37,14 @@ abstract class TextConstant {
   static const String homeLabel = 'Home';
   static const String resultsLabel = 'Results';
   static const String profileLabel = 'Profile';
+  static const String survey = 'Survey';
+  static const String search = 'Search';
+  static const String start = 'Start';
+  static const String browseBySubject = 'Browse by subject';
+  static const String examScoreTitle = "Exam score";
+  static const String yourScore = "Your Score";
+  static const String correct = "Correct";
+  static const String incorrect = "Incorrect";
+  static const String showResult = "Show Result";
+  static const String startAgain = "Start Again";
 }

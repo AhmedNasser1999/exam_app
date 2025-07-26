@@ -2,15 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/constant/api_contants.dart';
 import 'package:exam_app/core/constant/constant.dart';
+import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @module
 abstract class DioModule {
   @lazySingleton
   Dio dio() {
-    final SharedPreferences pref = getIt<SharedPreferences>();
-    final String? token = pref.getString(Constant.userToken);
+    final FlutterSecureStorage secureStorage = getIt<FlutterSecureStorage>();
+    final Future<String?> token = secureStorage.read(key: Constant.userToken);
 
     return Dio(
       BaseOptions(

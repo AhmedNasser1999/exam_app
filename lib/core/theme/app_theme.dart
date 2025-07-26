@@ -23,7 +23,7 @@ abstract class AppTheme {
         bodyLarge: TextStyle(fontSize: 16, color: colorScheme.secondary),
         bodyMedium: TextStyle(fontSize: 14, color: colorScheme.secondary),
         bodySmall: TextStyle(fontSize: 12, color: colorScheme.secondary),
-        titleLarge: TextStyle(fontSize: 20, color: colorScheme.secondary),
+        titleLarge: TextStyle(fontSize: 20, color: colorScheme.secondary , fontWeight: FontWeight.w600),
         titleMedium: TextStyle(fontSize: 18, color: colorScheme.secondary),
         titleSmall: TextStyle(
           fontSize: 16,
