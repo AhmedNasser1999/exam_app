@@ -1,6 +1,6 @@
 import 'package:exam_app/core/custom_widgets_model/exam_item_model.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/exam_view.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/widgets/custom_exam_item.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/exam_view.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/widgets/custom_exam_item.dart';
 import 'package:flutter/material.dart';
 
 class ListExamItems extends StatelessWidget {

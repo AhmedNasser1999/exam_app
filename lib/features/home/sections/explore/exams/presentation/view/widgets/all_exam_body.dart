@@ -1,6 +1,6 @@
 import 'package:exam_app/features/auth/signup/presentation/view/widgets/custom_header.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/widgets/list_exam_items.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/widgets/list_exam_items.dart';
 
 import 'package:flutter/material.dart';
 

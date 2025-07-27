@@ -1,4 +1,4 @@
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/widgets/custom_questions_items.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/custom_questions_items.dart';
 import 'package:flutter/material.dart';
 
 class SectionQuestionsItems extends StatelessWidget {

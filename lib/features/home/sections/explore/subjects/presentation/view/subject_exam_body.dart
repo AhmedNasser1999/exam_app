@@ -3,7 +3,7 @@ import 'package:exam_app/core/custom_widgets_model/subject_item_model.dart';
 import 'package:exam_app/core/custom_widgets_model/text_field_model.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/widgets/custom_text_form_filed.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/all_exam_view.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/widgets/subject_item.dart';
 import 'package:flutter/material.dart';
 

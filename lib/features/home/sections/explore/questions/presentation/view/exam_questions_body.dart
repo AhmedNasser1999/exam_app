@@ -3,8 +3,8 @@ import 'package:exam_app/core/custom_widgets_model/button_model.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/widgets/custom_button.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/widgets/custom_header.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/all_exam_view.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/widgets/section_questions_items.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/section_questions_items.dart';
 
 import 'package:flutter/material.dart';
 

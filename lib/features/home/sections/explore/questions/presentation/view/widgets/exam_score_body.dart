@@ -3,9 +3,9 @@ import 'package:exam_app/core/custom_widgets_model/button_model.dart';
 import 'package:exam_app/core/custom_widgets_model/result_score_item_model.dart';
 import 'package:exam_app/core/widgets/custom_button.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/widgets/custom_header.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/all_exam_view.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/widgets/custom_result_chart.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/widgets/custom_result_score.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/custom_result_chart.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/custom_result_score.dart';
 
 import 'package:flutter/material.dart';
 
