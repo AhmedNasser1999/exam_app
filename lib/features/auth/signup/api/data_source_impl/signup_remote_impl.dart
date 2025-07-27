@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:exam_app/features/auth/signup/api/client/signup_api_client.dart';
 import 'package:exam_app/features/auth/signup/api/model/signup_request/signup_request_model.dart';
 import 'package:exam_app/features/auth/signup/data/data_source/signup_remote.dart';

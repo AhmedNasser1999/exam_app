@@ -41,8 +41,8 @@ import '../../features/auth/signin/data/data_source/signin_remote.dart'
     as _i645;
 import '../../features/auth/signin/data/data_source/store_user_token.dart'
     as _i718;
-import '../../features/auth/signin/data/repository/signin_repository_impl.dart'
-    as _i163;
+import '../../features/auth/signin/data/repository/Signin_repository_impl.dart'
+    as _i852;
 import '../../features/auth/signin/domain/entities/user_entities.dart' as _i378;
 import '../../features/auth/signin/domain/repository/signin_repository.dart'
     as _i828;
@@ -64,6 +64,18 @@ import '../../features/auth/signup/domain/use_case/use_case_signup.dart'
     as _i774;
 import '../../features/auth/signup/presentation/view_model/cubit/signup_cubit.dart'
     as _i507;
+import '../../features/exams/api/client/exam_api_client.dart' as _i569;
+import '../../features/exams/api/data_source/exam_data_source_impl.dart'
+    as _i884;
+import '../../features/exams/data/repository/exams_repo_impl.dart' as _i47;
+import '../../features/exams/domain/use_case/exams_use_case.dart' as _i550;
+import '../../features/questions/api/client/questions_api_client.dart' as _i691;
+import '../../features/questions/api/data_source/questions_data_source_impl.dart'
+    as _i405;
+import '../../features/questions/data/repository/questions_repo_impl.dart'
+    as _i904;
+import '../../features/questions/domain/use_cases/get_all_questions_use_case.dart'
+    as _i849;
 import '../../features/subjects/api/client/subject_api_client.dart' as _i405;
 import '../../features/subjects/api/data_source/subject_data_source_impl.dart'
     as _i728;
@@ -105,6 +117,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i175.SignupApiClient>(
       () => _i175.SignupApiClient(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i569.ExamApiClient>(
+      () => _i569.ExamApiClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i691.QuestionsApiClient>(
+      () => _i691.QuestionsApiClient(gh<_i361.Dio>()),
+    );
     gh.lazySingleton<_i405.SubjectApiClient>(
       () => _i405.SubjectApiClient(gh<_i361.Dio>()),
     );
@@ -122,6 +140,14 @@ extension GetItInjectableX on _i174.GetIt {
         subjectRepoImpl: gh<_i804.SubjectRepoImpl>(),
       ),
     );
+    gh.lazySingleton<_i405.QuestionsDataSourceImpl>(
+      () => _i405.QuestionsDataSourceImpl(
+        questionsApiClient: gh<_i691.QuestionsApiClient>(),
+      ),
+    );
+    gh.lazySingleton<_i884.ExamDataSourceImpl>(
+      () => _i884.ExamDataSourceImpl(examApiClient: gh<_i569.ExamApiClient>()),
+    );
     gh.lazySingleton<_i645.SigninRemote>(
       () => _i609.SigninRemoteImpl(apiClient: gh<_i13.ApiClient>()),
     );
@@ -131,15 +157,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i378.UserEntities>(
       () => _i378.UserEntities(token: gh<String>()),
     );
-    gh.lazySingleton<_i828.SigninRepository>(
-      () => _i163.SigninRepositoryImpl(
-        signinRemote: gh<_i645.SigninRemote>(),
-        storeUserToken: gh<_i718.StoreUserToken>(),
-      ),
-    );
     gh.lazySingleton<_i936.ForgetPasswordRemote>(
       () => _i868.ForgetPasswordRemoteImpl(
         forgetPasswordApiClient: gh<_i597.ForgetPasswordApiClient>(),
+      ),
+    );
+    gh.lazySingleton<_i828.SigninRepository>(
+      () => _i852.SigninRepositoryImpl(
+        signinRemote: gh<_i645.SigninRemote>(),
+        storeUserToken: gh<_i718.StoreUserToken>(),
       ),
     );
     gh.lazySingleton<_i962.SubjectDataSource>(
@@ -154,6 +180,16 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i774.UseCaseSignup>(
       () => _i774.UseCaseSignup(signupRepo: gh<_i371.SignupRepo>()),
+    );
+    gh.lazySingleton<_i904.QuestionsRepoImpl>(
+      () => _i904.QuestionsRepoImpl(
+        questionsDataSourceImpl: gh<_i405.QuestionsDataSourceImpl>(),
+      ),
+    );
+    gh.lazySingleton<_i47.ExamsRepoImpl>(
+      () => _i47.ExamsRepoImpl(
+        examDataSourceImpl: gh<_i884.ExamDataSourceImpl>(),
+      ),
     );
     gh.lazySingleton<_i556.SigninUseCase>(
       () => _i556.SigninUseCase(repository: gh<_i828.SigninRepository>()),
@@ -185,12 +221,20 @@ extension GetItInjectableX on _i174.GetIt {
         forgetPasswordRepo: gh<_i604.ForgetPasswordRepo>(),
       ),
     );
+    gh.factory<_i849.GetAllQuestionsUseCase>(
+      () => _i849.GetAllQuestionsUseCase(
+        questionsRepoImpl: gh<_i904.QuestionsRepoImpl>(),
+      ),
+    );
     gh.factory<_i795.ForgetPasswordCubit>(
       () => _i795.ForgetPasswordCubit(
         gh<_i913.ForgetPasswordUseCase>(),
         gh<_i22.ResetPasswordUseCase>(),
         gh<_i295.VerifyResetCodeUseCase>(),
       ),
+    );
+    gh.factory<_i550.ExamsUseCase>(
+      () => _i550.ExamsUseCase(examsRepoImpl: gh<_i47.ExamsRepoImpl>()),
     );
     return this;
   }
