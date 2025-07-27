@@ -6,10 +6,10 @@ import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_cubit.d
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
-import 'package:exam_app/features/home/explore/subjects/presentation/view/all_exam_view.dart';
-import 'package:exam_app/features/home/explore/subjects/presentation/view/exam_view.dart';
-import 'package:exam_app/features/home/explore/subjects/presentation/view/home_view.dart';
-import 'package:exam_app/features/home/explore/subjects/presentation/view_model/home_screen/home_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/all_exam_view.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/exam_view.dart';
+import 'package:exam_app/features/home/presentation/view/home_view.dart';
+import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
 import 'package:exam_app/features/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';

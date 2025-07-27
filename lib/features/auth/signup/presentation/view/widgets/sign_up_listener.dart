@@ -2,7 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:exam_app/core/constant/text_constant.dart';
 import 'package:exam_app/core/widgets/custom_snackbar.dart';
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
-import 'package:exam_app/features/home/explore/subjects/presentation/view/home_view.dart';
+import 'package:exam_app/features/home/presentation/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
