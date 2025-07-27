@@ -6,9 +6,12 @@ import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_cubit.d
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/exam_view.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
 import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
+import 'package:exam_app/features/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +19,12 @@ abstract class OnGenerateRoute {
   static Route onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
       case RouteName.splashView:
-        return MaterialPageRoute(builder: (context) => const SplashView());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<SplashCubit>(),
+            child: const SplashView(),
+          ),
+        );
       case RouteName.homeView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -45,6 +53,10 @@ abstract class OnGenerateRoute {
             child: const SignUpView(),
           ),
         );
+      case RouteName.allExamView:
+        return MaterialPageRoute(builder: (context) => const AllExamView());
+      case RouteName.examView:
+        return MaterialPageRoute(builder: (context) => const ExamView());
       default:
         return MaterialPageRoute(
           builder: (_) =>

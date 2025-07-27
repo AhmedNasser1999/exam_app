@@ -18,12 +18,13 @@ dependencies:
   retrofit: ^4.6.0
   logger: ^2.6.0
   json_annotation: ^4.9.0
-  shared_preferences: ^2.5.3
   dio: ^5.8.0+1
   flutter_bloc: ^9.1.1
   dartz: ^0.10.1
   awesome_snackbar_content: ^0.1.6
   pinput: ^5.0.1
+  flutter_secure_storage: ^9.2.3
+  fl_chart: ^1.0.0
  
 
 dev_dependencies:
