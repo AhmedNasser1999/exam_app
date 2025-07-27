@@ -1,7 +1,7 @@
 import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/route/route_name.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
-import 'package:exam_app/features/subjects/presentation/view/home_view.dart';
+import 'package:exam_app/features/home/explore/subjects/presentation/view/home_view.dart';
 import 'package:exam_app/features/splash/presentation/view/widget/splash_body.dart';
 import 'package:exam_app/features/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
