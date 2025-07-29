@@ -19,7 +19,7 @@ class SubjectsState {
     return SubjectsState(
       isLoading: isLoading ?? this.isLoading,
       subjects: subjects ?? this.subjects,
-      errorMessage: errorMessage,
+      errorMessage: errorMessage ?? '',
     );
   }
 
