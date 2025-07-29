@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/features/auth/signin/data/data_source/signin_remote.dart';
 import 'package:exam_app/features/auth/signin/data/data_source/store_user_token.dart';
@@ -17,18 +18,20 @@ class SigninRepositoryImpl extends SigninRepository {
     required this.storeUserToken,
   });
   @override
-  Future<Either<UserEntities, Failure>> signin({
+  Future<ApiResult<UserEntities>> signin({
     required SigninRequest request,
   }) async {
     try {
       final response = await signinRemote.signIn(request: request);
       _handleRememberMe(request: request, response: response);
-      return left(response);
+      return ApiSuccess<UserEntities>(data: response);
     } catch (e) {
       if (e is DioException) {
-        return right(ServerFailure.fromDio(e));
+        return ApiFailure<UserEntities>(failure: ServerFailure.fromDio(e));
       } else {
-        return right(ServerFailure(errorMessage: e.toString()));
+        return ApiFailure<UserEntities>(
+          failure: ServerFailure(errorMessage: e.toString()),
+        );
       }
     }
   }
