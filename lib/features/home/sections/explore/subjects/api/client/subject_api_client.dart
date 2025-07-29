@@ -1,8 +1,11 @@
+
+
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/constant/api_contants.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/data/models/subject_model.dart';
 import 'package:injectable/injectable.dart';
-import 'package:retrofit/retrofit.dart';
+import 'package:retrofit/http.dart';
+
 part 'subject_api_client.g.dart';
 
 @lazySingleton

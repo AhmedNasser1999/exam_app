@@ -6,4 +6,5 @@ abstract class RouteName {
   static const String forgetPassword = "ForgetPassword";
   static const String allExamView = "AllExamView";
   static const String examView = "examView";
+  static const String subjectExamBody = "subjectExamBody";
 }

@@ -1,6 +1,6 @@
 class SubjectEntity {
-  String name;
-  String icon;
-  String id;
-  SubjectEntity({required this.icon, required this.name,required this.id});
+  final String? name;
+  final String? icon;
+  final String? id;
+  SubjectEntity({this.icon, this.name, this.id});
 }

@@ -17,7 +17,7 @@ class CustomNavigationBar extends StatelessWidget {
         destinations: [
           NavigationDestination(
             icon: Icon(Icons.home_outlined, color: theme.colorScheme.primary),
-            label: TextConstant.homeLabel,
+            label: TextConstant.exploreLabel,
           ),
           NavigationDestination(
             icon: Icon(Icons.edit_document, color: theme.colorScheme.primary),
