@@ -10,7 +10,7 @@ class GetSubjectsUseCase {
 
   GetSubjectsUseCase({required this.subjectRepoImpl});
 
-  Future<Either<Failure, SubjectEntity>> execute() async {
+  Future<Either<Failure, List<SubjectEntity>>> execute() async {
     return await subjectRepoImpl.fetchSubjects();
   }
 }

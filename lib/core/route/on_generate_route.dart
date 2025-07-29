@@ -7,6 +7,7 @@ import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dar
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
 import 'package:exam_app/features/home/explore/subjects/presentation/view/home_view.dart';
+import 'package:exam_app/features/home/explore/subjects/presentation/view/widgets/subject_exam_body.dart';
 import 'package:exam_app/features/home/explore/subjects/presentation/view_model/home_screen/home_cubit.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ abstract class OnGenerateRoute {
     switch (setting.name) {
       case RouteName.splashView:
         return MaterialPageRoute(builder: (context) => const SplashView());
+
       case RouteName.homeView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -24,6 +26,7 @@ abstract class OnGenerateRoute {
             child: const HomeView(),
           ),
         );
+
       case RouteName.forgetPassword:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -31,6 +34,7 @@ abstract class OnGenerateRoute {
             child: ForgetPasswordView(),
           ),
         );
+
       case RouteName.sigInName:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -38,6 +42,7 @@ abstract class OnGenerateRoute {
             child: const SignInView(),
           ),
         );
+
       case RouteName.signUpName:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -45,6 +50,10 @@ abstract class OnGenerateRoute {
             child: const SignUpView(),
           ),
         );
+
+      case RouteName.subjectExamBody:
+        return MaterialPageRoute(builder: (context) => SubjectExamBody());
+
       default:
         return MaterialPageRoute(
           builder: (_) =>

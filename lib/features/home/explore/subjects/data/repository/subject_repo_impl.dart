@@ -5,21 +5,30 @@ import 'package:exam_app/features/home/explore/subjects/domain/entities/subject_
 import 'package:exam_app/features/home/explore/subjects/domain/repository/subject_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: SubjectRepository)
+@LazySingleton()
 class SubjectRepoImpl implements SubjectRepository {
-  SubjectDataSourceImpl subjectDataSourceImpl;
+  final SubjectDataSourceImpl subjectDataSourceImpl;
 
   SubjectRepoImpl({required this.subjectDataSourceImpl});
 
+
   @override
-  Future<Either<Failure, SubjectEntity>> fetchSubjects() async {
-    try {
-      final subject = await subjectDataSourceImpl.fetchSubjects();
-      return Right(
-        SubjectEntity(icon: subject.icon, name: subject.name, id: subject.id),
+Future<Either<Failure, List<SubjectEntity>>> fetchSubjects() async {
+  try {
+    final response = await subjectDataSourceImpl.fetchSubjects();
+
+    final subjectEntities = response.subjects?.map((subject) {
+      return SubjectEntity(
+        icon: subject.icon,
+        name: subject.name,
+        id: subject.id,
       );
-    } catch (e) {
-      return Left(ServerFailure(errorMessage: e.toString()));
-    }
+    }).toList();
+
+    return Right(subjectEntities ?? []);
+  } catch (e) {
+    return Left(ServerFailure(errorMessage: e.toString()));
   }
+}
+
 }

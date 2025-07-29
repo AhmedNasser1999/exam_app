@@ -4,4 +4,5 @@ abstract class RouteName {
   static const String sigInName = "SignInView";
   static const String signUpName = "SignUpView";
   static const String forgetPassword = "ForgetPassword";
+  static const String subjectExamBody = "subjectExamBody";
 }
