@@ -6,8 +6,8 @@ import 'package:exam_app/core/widgets/custom_button.dart';
 import 'package:exam_app/core/widgets/custom_text_button.dart';
 import 'package:exam_app/core/widgets/custom_text_form_filed.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/views/forget_password_view.dart';
-import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_cubit.dart';
-import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_state.dart';
+import 'package:exam_app/features/auth/signin/presentation/bloc/sign_in_view_model.dart';
+import 'package:exam_app/features/auth/signin/presentation/bloc/sign_in_event.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/widgets/custom_remember_me_widget.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +22,12 @@ class SignInBuilder extends StatefulWidget {
 
 class _SignInBuilderState extends State<SignInBuilder> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<SignInCubit>();
+    final bloc = context.read<SignInViewModel>();
     var theme = Theme.of(context);
     return Form(
       key: formKey,
@@ -39,7 +42,7 @@ class _SignInBuilderState extends State<SignInBuilder> {
 
               CustomTextFormField(
                 textFieldModel: TextFieldModel(
-                  controller: cubit.emailController,
+                  controller: emailController,
                   label: TextConstant.emailLabel,
                   hintText: TextConstant.emailHint,
                   validator: Validation.validateEmail,
@@ -49,7 +52,7 @@ class _SignInBuilderState extends State<SignInBuilder> {
 
               CustomTextFormField(
                 textFieldModel: TextFieldModel(
-                  controller: cubit.passwordController,
+                  controller: passwordController,
                   label: TextConstant.passwordLabel,
                   hintText: TextConstant.passwordHint,
                   obscureText: true,
@@ -77,7 +80,13 @@ class _SignInBuilderState extends State<SignInBuilder> {
                 buttonModel: ButtonModel(
                   text: TextConstant.loginText,
                   onPressed: () {
-                    cubit.formValidateSignIn(formKey: formKey);
+                    bloc.add(
+                      SignInFormValidateEvent(
+                        formKey: formKey,
+                        emailController: emailController,
+                        passwordController: passwordController,
+                      ),
+                    );
                   },
                   borderRadius: 100,
                 ),

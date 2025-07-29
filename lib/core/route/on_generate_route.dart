@@ -2,7 +2,7 @@ import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/route/route_name.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/forget_password_cubit.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/views/forget_password_view.dart';
-import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_cubit.dart';
+import 'package:exam_app/features/auth/signin/presentation/bloc/sign_in_view_model.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
@@ -34,7 +34,7 @@ abstract class OnGenerateRoute {
       case RouteName.sigInName:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt.get<SignInCubit>(),
+            create: (context) => getIt.get<SignInViewModel>(),
             child: const SignInView(),
           ),
         );
