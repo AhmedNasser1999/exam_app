@@ -1,6 +1,11 @@
 
-import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
+
+
+import 'package:exam_app/features/home/sections/explore/questions/data/models/questions_response_model.dart';
 
 abstract class QuestionsDataSource {
-  Future<QuestionsEntity> getAllQuestionsOnExam(String examId);
+  Future<QuestionResponse> getAllQuestionsOnExam({
+    required String examId,
+    required String token,
+  });
 }

@@ -3,5 +3,6 @@ import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
 
 abstract class QuestionsRepo {
-  Future<Either<Failure, QuestionsEntity>> getAllQuestionsOnExam(String examId);
+  Future<Either<List<QuestionsEntity>, Failure >> getAllQuestionsOnExam({required  String examId});
+  Future<String> getToken({required String tokenKey});
 }

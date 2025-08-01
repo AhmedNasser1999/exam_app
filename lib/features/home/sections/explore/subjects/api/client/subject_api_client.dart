@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/constant/api_contants.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/data/models/subject_model.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/data/models/subject_response.dart';
+
 import 'package:injectable/injectable.dart';
-import 'package:retrofit/retrofit.dart';
+import 'package:retrofit/error_logger.dart';
+import 'package:retrofit/http.dart';
+
 part 'subject_api_client.g.dart';
 
 @lazySingleton
@@ -12,5 +15,5 @@ abstract class SubjectApiClient {
   factory SubjectApiClient(Dio dio) = _SubjectApiClient;
 
   @GET(ApiConstants.subjects)
-  Future<SubjectResponse> fetchSubjects();
+  Future<SubjectResponse> fetchSubjects(@Header("token") String token);
 }

@@ -1,5 +1,5 @@
-import 'package:exam_app/features/home/sections/result/presentation/view/profile_body.dart';
-import 'package:exam_app/features/home/sections/profile/presentation/view/results_exam_body.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view/profile_body.dart';
+import 'package:exam_app/features/home/sections/result/presentation/view/results_exam_body.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/subject_exam_body.dart';
 import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
 import 'package:flutter/material.dart';

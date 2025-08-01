@@ -1,5 +1,6 @@
-import 'package:exam_app/features/home/sections/explore/subjects/domain/entities/subject_entity.dart';
+
+import 'package:exam_app/features/home/sections/explore/subjects/data/models/subject_response.dart';
 
 abstract class SubjectDataSource {
-  Future<SubjectEntity> fetchSubjects();
+  Future<SubjectResponse> fetchSubjects({required String token});
 }
