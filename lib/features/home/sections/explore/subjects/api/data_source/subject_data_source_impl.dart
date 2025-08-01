@@ -13,7 +13,6 @@ class SubjectDataSourceImpl implements SubjectDataSource {
 
   @override
   Future<SubjectResponse> fetchSubjects({required String token}) async {
-    log(token);
     return await subjectApiClient.fetchSubjects(token);
   }
 }

@@ -1,0 +1,44 @@
+import 'package:exam_app/core/custom_widgets_model/button_model.dart';
+import 'package:exam_app/core/widgets/custom_button.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/cubit/exam_question_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class QuizExamButton extends StatelessWidget {
+  const QuizExamButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final cubit = context.read<ExamQuestionCubit>();
+    return BlocBuilder<ExamQuestionCubit, ExamQuestionState>(
+      builder: (context, state) {
+        return Row(
+          spacing: 16,
+          children: [
+            Expanded(
+              child: CustomButton(
+                buttonModel: ButtonModel(
+                  text: "Back",
+                  onPressed: () => cubit.backQuestion(),
+                  backgroundColor: theme.colorScheme.onSecondary,
+                  textColor: theme.colorScheme.primary,
+                ),
+              ),
+            ),
+            Expanded(
+              child: CustomButton(
+                buttonModel: ButtonModel(
+                  text: cubit.currentPage == cubit.allQuestion.length
+                      ? "Finish"
+                      : "Next",
+                  onPressed: () => cubit.nextQuestion(),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

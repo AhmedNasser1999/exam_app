@@ -1,8 +1,9 @@
 import 'package:exam_app/core/custom_widgets_model/exam_item_model.dart';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
-import 'package:exam_app/features/home/sections/explore/exams/presentation/view/exam_view.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view_model/cubit/fetch_exam_all_by_id_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/exams/presentation/view/widgets/custom_exam_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListExamItems extends StatelessWidget {
   const ListExamItems({super.key, required this.listOfAllExam});
@@ -10,7 +11,7 @@ class ListExamItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
+    final cubit = context.read<FetchExamAllByIdCubit>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 24,
@@ -29,11 +30,7 @@ class ListExamItems extends StatelessWidget {
               time: listOfAllExam[index].duration.toString(),
               numQuestion: listOfAllExam[index].numberOfQuestions.toString(),
               onTap: () {
-                Navigator.pushReplacementNamed(
-                  context,
-                  ExamView.routeName,
-                  arguments: listOfAllExam[index].id,
-                );
+                cubit.startExam(examEntity: listOfAllExam[index]);
               },
             ),
           ),

@@ -3,11 +3,12 @@ import 'package:exam_app/core/custom_widgets_model/button_model.dart';
 import 'package:exam_app/core/custom_widgets_model/result_score_item_model.dart';
 import 'package:exam_app/core/widgets/custom_button.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/widgets/custom_header.dart';
-import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/custom_result_chart.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/custom_result_score.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/cubit/exam_question_cubit.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExamScoreBody extends StatelessWidget {
   const ExamScoreBody({super.key});
@@ -15,12 +16,13 @@ class ExamScoreBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final cubit = context.read<ExamQuestionCubit>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomHeader(
+        CustomHeader(
           title: TextConstant.examScoreTitle,
-          backRouteName: AllExamView.routeName,
+          onTap: () => Navigator.pop(context),
         ),
         const SizedBox(height: 40),
         Text(TextConstant.yourScore, style: theme.textTheme.titleMedium),
@@ -66,7 +68,9 @@ class ExamScoreBody extends StatelessWidget {
         CustomButton(
           buttonModel: ButtonModel(
             text: TextConstant.startAgain,
-            onPressed: () {},
+            onPressed: () {
+              cubit.startExamAgain();
+            },
             backgroundColor: theme.colorScheme.onSecondary,
             borderRadius: 25,
             textColor: theme.colorScheme.primary,

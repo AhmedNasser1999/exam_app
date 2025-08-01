@@ -1,9 +1,9 @@
-import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'exams_dto.g.dart';
+
+part 'question_exam.g.dart';
 
 @JsonSerializable()
-class ExamDto extends ExamEntity {
+class QuestionExam  {
   @JsonKey(name: '_id')
   final String id;
   final String title;
@@ -12,8 +12,7 @@ class ExamDto extends ExamEntity {
   final int numberOfQuestions;
   final bool active;
   final String createdAt;
-
-  ExamDto({
+  QuestionExam({
     required this.id,
     required this.title,
     required this.duration,
@@ -21,13 +20,10 @@ class ExamDto extends ExamEntity {
     required this.numberOfQuestions,
     required this.active,
     required this.createdAt,
-  }) : super(
-         duration: duration,
-         id: id,
-         numberOfQuestions: numberOfQuestions,
-         title: title,
-       );
+  });
 
-  factory ExamDto.fromJson(Map<String, dynamic> json) => _$ExamDtoFromJson(json);
-  Map<String, dynamic> toJson() => _$ExamDtoToJson(this);
+  factory QuestionExam.fromJson(Map<String, dynamic> json) =>
+      _$QuestionExamFromJson(json);
+
+  Map<String, dynamic> toJson() => _$QuestionExamToJson(this);
 }

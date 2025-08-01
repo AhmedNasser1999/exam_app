@@ -7,7 +7,7 @@ part 'exams_response_model.g.dart';
 class ExamResponse {
   final String message;
   final Metadata metadata;
-  final List<Exam> exams;
+  final List<ExamDto> exams;
 
   ExamResponse({
     required this.message,

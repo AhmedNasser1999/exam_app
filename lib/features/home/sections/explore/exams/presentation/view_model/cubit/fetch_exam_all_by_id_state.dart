@@ -1,24 +1,37 @@
 part of 'fetch_exam_all_by_id_cubit.dart';
 
 class FetchExamAllByIdBaseState {
-  final BaseState<List<ExamEntity>>? baseState;
+  final AllExamBaseState? baseState;
 
   FetchExamAllByIdBaseState({this.baseState});
-  FetchExamAllByIdBaseState copyWith({BaseState<List<ExamEntity>>? baseState}) {
+  FetchExamAllByIdBaseState copyWith({AllExamBaseState? baseState}) {
     return FetchExamAllByIdBaseState(
-      baseState: BaseState(
-        errorMessage: baseState?.errorMessage ?? "",
-        data: baseState?.data ?? const [],
+      baseState: AllExamBaseState(
+        error: baseState?.errorMessage ?? "",
+        allExams: baseState?.data ?? const [],
         isLoading: baseState?.isLoading ?? false,
+        startExam: baseState?.startExam ?? false,
+        selectExam: baseState?.selectExam,
       ),
     );
   }
 }
 
-class BaseState<T> {
-  final String? errorMessage;
-  final T? data;
+class AllExamBaseState extends BaseState<List<ExamEntity>> {
+  final bool? startExam;
+  final ExamEntity? selectExam;
   final bool? isLoading;
-
-  BaseState({this.errorMessage, this.data, this.isLoading});
+  List<ExamEntity>? allExams;
+  String? error;
+  AllExamBaseState({
+    this.error,
+    this.isLoading,
+    this.allExams,
+    this.startExam,
+    this.selectExam,
+  }) : super(
+         data: allExams ?? const [],
+         errorMessage: error ?? "",
+         isLoading: isLoading ?? false,
+       );
 }

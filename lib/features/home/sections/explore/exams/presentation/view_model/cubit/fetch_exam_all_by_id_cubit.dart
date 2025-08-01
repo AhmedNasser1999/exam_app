@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
+import 'package:exam_app/core/base_state/base_state.dart';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/exams/domain/use_case/exams_use_case.dart';
 import 'package:injectable/injectable.dart';
@@ -13,15 +12,21 @@ class FetchExamAllByIdCubit extends Cubit<FetchExamAllByIdBaseState> {
     : super(FetchExamAllByIdBaseState());
   final AllExamsByIdUseCase allExamsByIdUseCase;
   getAllExamsOnSubject({required String subjectId}) async {
-    log(subjectId);
-    emit(state.copyWith(baseState: BaseState(isLoading: true)));
+    emit(state.copyWith(baseState: AllExamBaseState(isLoading: true)));
     final response = await allExamsByIdUseCase.execute(subjectId);
-    log(subjectId);
     response.fold(
       (r) => emit(
-        state.copyWith(baseState: BaseState(errorMessage: r.errorMessage)),
+        state.copyWith(baseState: AllExamBaseState(error: r.errorMessage)),
       ),
-      (l) => emit(state.copyWith(baseState: BaseState(data: l))),
+      (l) => emit(state.copyWith(baseState: AllExamBaseState(allExams: l))),
+    );
+  }
+
+  startExam({required examEntity}) {
+    emit(
+      state.copyWith(
+        baseState: AllExamBaseState(startExam: true, selectExam: examEntity),
+      ),
     );
   }
 }

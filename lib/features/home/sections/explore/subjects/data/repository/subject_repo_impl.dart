@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:exam_app/core/constant/constant.dart';
 import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
@@ -28,7 +29,9 @@ class SubjectRepoImpl implements SubjectRepository {
 
       return Right(response.subjects);
     } catch (e) {
-      log(e.toString());
+      if (e is DioException) {
+        return Left(ServerFailure.fromDio(e));
+      }
       return Left(ServerFailure(errorMessage: e.toString()));
     }
   }
