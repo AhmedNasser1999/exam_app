@@ -15,7 +15,6 @@ class CustomQuestionsItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cubit = context.read<ExamQuestionCubit>();
     return BlocBuilder<ExamQuestionCubit, ExamQuestionState>(
       builder: (context, state) {
         return GestureDetector(

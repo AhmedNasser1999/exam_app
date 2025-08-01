@@ -3,14 +3,14 @@ import 'package:json_annotation/json_annotation.dart';
 part 'question_exam.g.dart';
 
 @JsonSerializable()
-class QuestionExam  {
+class QuestionExam {
   @JsonKey(name: '_id')
   final String id;
   final String title;
   final int duration;
   final String subject;
   final int numberOfQuestions;
-  final bool active;
+  final bool? active;
   final String createdAt;
   QuestionExam({
     required this.id,

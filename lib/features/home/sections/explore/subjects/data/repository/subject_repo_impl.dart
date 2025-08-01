@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/constant/constant.dart';
@@ -25,7 +23,7 @@ class SubjectRepoImpl implements SubjectRepository {
       final token = await userTokenStorage.getToken(
         tokenKey: Constant.userToken,
       );
-      final response = await subjectDataSourceImpl.fetchSubjects(token: token!);
+      final response = await subjectDataSourceImpl.fetchSubjects(token: token);
 
       return Right(response.subjects);
     } catch (e) {

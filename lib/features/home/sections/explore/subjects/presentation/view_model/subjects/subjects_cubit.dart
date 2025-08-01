@@ -1,4 +1,4 @@
-import 'package:exam_app/features/home/sections/explore/subjects/domain/use-cases/get_subjects_use_case.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/domain/use_cases/get_subjects_use_case.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
