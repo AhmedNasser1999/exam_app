@@ -6,14 +6,16 @@ import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 part 'questions_api_client.g.dart';
 
-@lazySingleton
+@injectable
 @RestApi()
 abstract class QuestionsApiClient {
   @factoryMethod
   factory QuestionsApiClient(Dio dio) = _QuestionsApiClient;
 
   @GET(ApiConstants.questions)
-  Future<QuestionsResponseModel> getAllQuestinsOnExam(
-    @Query("exam") String examId,
-  );
+  Future<QuestionResponse> getAllQuestionsOnExam({
+    @Header("token") required String token,
+    @Query("exam") required String examId,
+  });
+
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class AllExamView extends StatelessWidget {
   const AllExamView({super.key});
   static const String routeName = RouteName.allExamView;
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(body: AllExamBody());

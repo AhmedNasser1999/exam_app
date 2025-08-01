@@ -1,14 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'metadata_dto.g.dart';
+
 @JsonSerializable()
-class MetadataDto {
-  int? currentPage;
-  int? numberOfPages;
-  int? limit;
+class Metadata {
+  final int currentPage;
+  final int numberOfPages;
+  final int limit;
 
-  MetadataDto({this.currentPage, this.numberOfPages, this.limit});
+  Metadata({
+    required this.currentPage,
+    required this.numberOfPages,
+    required this.limit,
+  });
 
-  factory MetadataDto.fromJson(json) => _$MetadataDtoFromJson(json);
+  factory Metadata.fromJson(Map<String, dynamic> json) =>
+      _$MetadataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MetadataDtoToJson(this);
+  Map<String, dynamic> toJson() => _$MetadataToJson(this);
 }

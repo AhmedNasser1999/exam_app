@@ -5,7 +5,6 @@ class TextFieldModel {
   final String label;
   final String hintText;
   final TextInputType? keyboardType;
-  final IconData? iconData; // <- Use IconData
   bool obscureText;
   double borderRadius;
   final String? Function(String?)? validator;
@@ -16,7 +15,7 @@ class TextFieldModel {
     required this.controller,
     required this.label,
     required this.hintText,
-    this.iconData,
+
     this.keyboardType,
     this.obscureText = false,
     this.validator,

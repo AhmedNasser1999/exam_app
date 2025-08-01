@@ -28,6 +28,7 @@ class CustomExamItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             examItemModel.title,
@@ -35,6 +36,7 @@ class CustomExamItem extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
+
                           Text(
                             "${examItemModel.time} Minutes",
                             style: theme.textTheme.bodySmall!.copyWith(

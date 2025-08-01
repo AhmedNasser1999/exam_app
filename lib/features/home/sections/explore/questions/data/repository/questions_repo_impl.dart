@@ -1,37 +1,50 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:exam_app/core/constant/constant.dart';
 import 'package:exam_app/core/error/failure.dart';
-import 'package:exam_app/features/home/sections/explore/questions/api/data_source/questions_data_source_impl.dart';
+import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/data_source/questions_data_source.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/repository/questions_repo.dart';
 import 'package:injectable/injectable.dart';
 
-@lazySingleton
+@LazySingleton(as: QuestionsRepo)
 class QuestionsRepoImpl implements QuestionsRepo {
-  QuestionsDataSourceImpl questionsDataSourceImpl;
-  QuestionsRepoImpl({required this.questionsDataSourceImpl});
+  QuestionsDataSource questionsDataSource;
+  final UserTokenStorage userTokenStorage;
+  QuestionsRepoImpl({
+    required this.questionsDataSource,
+    required this.userTokenStorage,
+  });
+
   @override
-  Future<Either<Failure, QuestionsEntity>> getAllQuestionsOnExam(examId) async {
+  Future<Either<List<QuestionsEntity>, Failure>> getAllQuestionsOnExam({
+    required String examId,
+  }) async {
     try {
-      final question = await questionsDataSourceImpl.getAllQuestionsOnExam(
-        examId,
+      final String token = await userTokenStorage.getToken(
+        tokenKey: Constant.userToken,
       );
-      return Right(
-        QuestionsEntity(
-          id: question.id,
-          question: question.question,
-          type: question.type,
-          correctAnswerKey: question.correctAnswerKey,
-          answer: question.answer,
-          key: question.key,
-          title: question.title,
-          duration: question.duration,
-          subject: question.subject,
-          numberOfQuestions: question.numberOfQuestions,
-          active: question.active,
-        ),
+      final response = await questionsDataSource.getAllQuestionsOnExam(
+        examId: examId,
+        token: token,
       );
+      log(response.questions.length.toString());
+      return left(response.questions);
     } catch (e) {
-      return Left(ServerFailure(errorMessage: e.toString()));
+      if (e is DioException) {
+        return right(ServerFailure.fromDio(e));
+      }
+      log(e.toString());
+      return right(ServerFailure(errorMessage: e.toString()));
     }
+  }
+
+  @override
+  Future<String> getToken({required String tokenKey}) {
+    final userToken = userTokenStorage.getToken(tokenKey: tokenKey);
+    return userToken;
   }
 }

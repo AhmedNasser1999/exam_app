@@ -1,11 +1,12 @@
 import 'package:exam_app/core/constant/text_constant.dart';
-import 'package:exam_app/core/custom_widgets_model/subject_item_model.dart';
 import 'package:exam_app/core/custom_widgets_model/text_field_model.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/widgets/custom_text_form_filed.dart';
-import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
-import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/widgets/subject_item.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/presentation/view/widgets/list_subject_items.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SubjectExamBody extends StatelessWidget {
   const SubjectExamBody({super.key});
@@ -30,7 +31,6 @@ class SubjectExamBody extends StatelessWidget {
               controller: TextEditingController(),
               label: 'Search',
               hintText: 'Search',
-              iconData: Icons.search,
               borderRadius: 20.0,
             ),
           ),
@@ -42,24 +42,19 @@ class SubjectExamBody extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24.0),
-          Expanded(
-            child: ListView.separated(
-              itemCount: 20,
-              itemBuilder: (context, index) => SubjectItem(
-                subjectItemModel: SubjectItemModel(
-                  onTap: () {
-                    Navigator.pushReplacementNamed(
-                      context,
-                      AllExamView.routeName,
-                    );
-                  },
-                  title: 'Language',
-                  imageUrl:
-                      'https://www.collinsdictionary.com/images/thumb/apple_158989157_250.jpg?version=6.0.84',
-                ),
-              ),
-              separatorBuilder: (context, index) => const SizedBox(height: 16),
-            ),
+          BlocBuilder<SubjectsCubit, SubjectsState>(
+            builder: (context, state) {
+              if (state.isLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state.errorMessage!.isNotEmpty) {
+                return Center(child: Text(state.errorMessage!));
+              } else if (state.subjects.isEmpty) {
+                return const Center(child: Text("No Data"));
+              }
+              return Expanded(
+                child: ListSubjectItems(listItems: state.subjects),
+              );
+            },
           ),
         ],
       ),

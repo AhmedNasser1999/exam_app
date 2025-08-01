@@ -25,8 +25,12 @@ class UserTokenStorageImpl implements UserTokenStorage {
   }
 
   @override
-  Future<String?> getToken({required String tokenKey}) async {
+  Future<String> getToken({required String tokenKey}) async {
     final String? token = await secureStorage.read(key: Constant.userToken);
-    return token;
+    if (token == null) {
+      return "user no have token";
+    } else {
+      return token;
+    }
   }
 }
