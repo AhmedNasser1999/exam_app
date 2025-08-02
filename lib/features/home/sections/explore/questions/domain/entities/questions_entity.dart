@@ -3,6 +3,7 @@ import 'package:exam_app/features/home/sections/explore/questions/domain/entitie
 
 class QuestionsEntity {
   final String question;
+  final String questionId;
   final String type;
   final String correctAnswerKey;
   final List<AnswerEntity> answer;
@@ -10,6 +11,7 @@ class QuestionsEntity {
   QuestionsEntity({
     required this.question,
     required this.type,
+    required this.questionId,
     required this.correctAnswerKey,
     required this.answer,
   });

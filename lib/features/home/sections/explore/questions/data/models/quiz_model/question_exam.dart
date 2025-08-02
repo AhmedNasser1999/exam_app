@@ -10,7 +10,7 @@ class QuestionExam {
   final int duration;
   final String subject;
   final int numberOfQuestions;
-  final bool? active;
+  final bool active;
   final String createdAt;
   QuestionExam({
     required this.id,

@@ -8,10 +8,14 @@ class AnswerModel extends AnswerEntity {
   final String answer;
   final String key;
 
-  AnswerModel({required this.answer, required this.key})
-    : super(answer: answer, key: key);
+
+  AnswerModel({
+    required this.answer,
+    required this.key,
+  }) : super(answer: answer, key: key);
 
   factory AnswerModel.fromJson(Map<String, dynamic> json) =>
       _$AnswerModelFromJson(json);
+
   Map<String, dynamic> toJson() => _$AnswerModelToJson(this);
 }

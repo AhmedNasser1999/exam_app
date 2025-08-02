@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/constant/api_contants.dart';
-import 'package:exam_app/features/home/sections/explore/questions/data/models/questions_response_model.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/models/quiz_model/questions_response_model.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/exam_result_response_model.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/exam_submit_request_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -17,5 +19,9 @@ abstract class QuestionsApiClient {
     @Header("token") required String token,
     @Query("exam") required String examId,
   });
-
+  @POST(ApiConstants.checkQuestion)
+  Future<ExamResultResponseModel> checkQuestionsOnExam({
+    @Header("token") required String token,
+    @Body() required ExamSubmitRequestModel question,
+  });
 }

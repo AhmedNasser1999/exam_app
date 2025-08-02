@@ -1,6 +1,7 @@
 import 'package:exam_app/core/theme/app_colors.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/answer_submit_request_model.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/answer_entity.dart';
-import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/cubit/exam_question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,12 +10,15 @@ class CustomQuestionsItems extends StatelessWidget {
     super.key,
     required this.answerModel,
     this.onTap,
+    required this.id,
   });
   final AnswerEntity answerModel;
+  final String id;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final cubit = context.read<ExamQuestionCubit>();
     return BlocBuilder<ExamQuestionCubit, ExamQuestionState>(
       builder: (context, state) {
         return GestureDetector(
@@ -29,7 +33,21 @@ class CustomQuestionsItems extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Checkbox(value: answerModel.isSelected, onChanged: (value) {}),
+                Checkbox(
+                  value: answerModel.isSelected,
+                  onChanged: (value) {
+                    answerModel.isSelected = answerModel.isSelected == false
+                        ? true
+                        : false;
+                    cubit.addNewAnswer(
+                      answer: AnswerSubmitRequestModel(
+                        questionId: id,
+                        correct: answerModel.key,
+                      ),
+                      isSelected: answerModel.isSelected,
+                    );
+                  },
+                ),
                 Text(answerModel.answer, style: theme.textTheme.bodyMedium),
               ],
             ),

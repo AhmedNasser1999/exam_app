@@ -1,6 +1,6 @@
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/section_questions_items.dart';
-import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/cubit/exam_question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

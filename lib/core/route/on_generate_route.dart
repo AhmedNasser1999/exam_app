@@ -12,7 +12,7 @@ import 'package:exam_app/features/home/sections/explore/questions/presentation/v
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
 import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/exams/presentation/view_model/cubit/fetch_exam_all_by_id_cubit.dart';
-import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/cubit/exam_question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/domain/entities/subject_entity.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_cubit.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
@@ -82,8 +82,7 @@ abstract class OnGenerateRoute {
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) =>
-                getIt<ExamQuestionCubit>()
-                  ..getAllQuestions(examId: examInfo.id),
+                getIt<ExamQuestionCubit>()..getAllQuestions(exam: examInfo),
             child: QuizExamView(examInfoEntity: examInfo),
           ),
         );

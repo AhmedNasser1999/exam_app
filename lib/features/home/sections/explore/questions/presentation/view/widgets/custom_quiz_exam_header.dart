@@ -1,8 +1,9 @@
 import 'package:exam_app/core/constant/app_assets.dart';
+import 'package:exam_app/core/constant/text_constant.dart';
 import 'package:exam_app/core/helper_function/format_time.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/widgets/custom_header.dart';
-import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/cubit/exam_question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,7 @@ class CustomQuizExamHeader extends StatelessWidget {
     return Row(
       children: [
         CustomHeader(
-          title: "Exam",
+          title: TextConstant.exam,
           onTap: () {
             Navigator.pop(context);
           },
@@ -29,7 +30,7 @@ class CustomQuizExamHeader extends StatelessWidget {
             return Text(
               FormatTime.formatDuration(cubit.timeLeft),
               style: theme.textTheme.bodyLarge!.copyWith(
-                color: cubit.timeLeft > Duration(minutes: 2)
+                color: cubit.timeLeft > cubit.timeLeft ~/ 2
                     ? AppColors.green
                     : AppColors.red,
               ),

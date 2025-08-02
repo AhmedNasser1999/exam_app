@@ -1,4 +1,4 @@
-import 'package:exam_app/features/home/sections/explore/questions/data/models/questions.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/models/quiz_model/questions.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'questions_response_model.g.dart';
 

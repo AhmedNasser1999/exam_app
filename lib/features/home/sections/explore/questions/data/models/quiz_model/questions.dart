@@ -1,6 +1,6 @@
-import 'package:exam_app/features/home/sections/explore/questions/data/models/answer_model.dart';
-import 'package:exam_app/features/home/sections/explore/questions/data/models/question_exam.dart';
-import 'package:exam_app/features/home/sections/explore/questions/data/models/subject.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/models/quiz_model/answer_model.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/models/quiz_model/question_exam.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/models/quiz_model/subject.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
 
 import 'package:json_annotation/json_annotation.dart';
@@ -34,6 +34,7 @@ class Question extends QuestionsEntity {
          correctAnswerKey: correct,
          question: question,
          type: type,
+         questionId: id,
        );
 
   factory Question.fromJson(Map<String, dynamic> json) =>

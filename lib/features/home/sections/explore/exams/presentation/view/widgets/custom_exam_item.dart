@@ -36,7 +36,6 @@ class CustomExamItem extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-
                           Text(
                             "${examItemModel.time} Minutes",
                             style: theme.textTheme.bodySmall!.copyWith(

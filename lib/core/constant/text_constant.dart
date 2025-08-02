@@ -47,4 +47,6 @@ abstract class TextConstant {
   static const String incorrect = "Incorrect";
   static const String showResult = "Show Result";
   static const String startAgain = "Start Again";
+  static const String exam = "Exam";
+  static const String exams = "Exams";
 }

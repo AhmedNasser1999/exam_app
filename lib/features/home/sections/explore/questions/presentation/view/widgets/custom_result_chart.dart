@@ -39,7 +39,7 @@ class CustomResultChart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "$number%",
+                "${number.floorToDouble()}%",
                 style: theme.textTheme.titleLarge!.copyWith(
                   fontWeight: FontWeight.w500,
                 ),

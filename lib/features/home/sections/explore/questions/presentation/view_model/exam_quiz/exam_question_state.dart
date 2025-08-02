@@ -6,10 +6,9 @@ class ExamQuestionInitial extends ExamQuestionState {}
 
 class ExamQuestionLoading extends ExamQuestionState {}
 
-class ExamQuestionSuccess extends ExamQuestionState {
-}
-class ExamQuestionScore extends ExamQuestionState {
-}
+class ExamQuestionSuccess extends ExamQuestionState {}
+
+class ExamQuestionShowResult extends ExamQuestionState {}
 
 class ExamQuestionFailure extends ExamQuestionState {
   final String errorMessage;
