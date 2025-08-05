@@ -20,6 +20,7 @@ class FetchExamAllByIdBaseState {
 class AllExamBaseState extends BaseState<List<ExamEntity>> {
   final bool? startExam;
   final ExamEntity? selectExam;
+  @override
   final bool? isLoading;
   List<ExamEntity>? allExams;
   String? error;

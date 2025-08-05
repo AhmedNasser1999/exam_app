@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/api/data_source/profile_data_source_impl.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/entities/profile_entity.dart';
@@ -15,14 +16,17 @@ class ProfileRepoImpl implements ProfileRepo {
       final profile = await profileDataSourceImpl.editProfile(request);
       return Right(
         ProfileEntity(
-          username: profile.username,
-          firstName: profile.firstName,
-          lastName: profile.lastName,
-          email: profile.email,
-          phone: profile.phone,
+          username: profile.user!.username ?? '',
+          firstName: profile.user!.firstName ?? '',
+          lastName: profile.user!.lastName ?? '',
+          email: profile.user!.email ?? '',
+          phone: profile.user!.phone ?? '',
         ),
       );
     } catch (e) {
+      if (e is DioException) {
+        print('DioError: ${e.response?.data}');
+      }
       return Left(ServerFailure(errorMessage: e.toString()));
     }
   }

@@ -4,11 +4,15 @@ part 'exams_dto.g.dart';
 
 @JsonSerializable()
 class ExamDto extends ExamEntity {
+  @override
   @JsonKey(name: '_id')
   final String id;
+  @override
   final String title;
+  @override
   final int duration;
   final String subject;
+  @override
   final int numberOfQuestions;
   final bool active;
   final String createdAt;
