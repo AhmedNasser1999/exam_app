@@ -9,20 +9,17 @@ class CustomExamItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return AspectRatio(
-      aspectRatio: 343 / 103,
-      child: GestureDetector(
-        onTap: examItemModel.onTap,
-        child: Card(
+    return SizedBox(
+      width: double.infinity,
+      child: Card(
+        child: GestureDetector(
+          onTap: examItemModel.onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: Row(
               spacing: 8,
               children: [
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: Image.asset(AppAssets.imagesExamIcon),
-                ),
+                Image.asset(AppAssets.imagesExamIcon),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,10 +27,13 @@ class CustomExamItem extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            examItemModel.title,
-                            style: theme.textTheme.bodyLarge!.copyWith(
-                              fontWeight: FontWeight.w500,
+                          Expanded(
+                            child: Text(
+                              examItemModel.title,
+                              style: theme.textTheme.bodyLarge!.copyWith(
+                                fontWeight: FontWeight.w500,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           Text(
@@ -49,6 +49,10 @@ class CustomExamItem extends StatelessWidget {
                         style: theme.textTheme.bodySmall!.copyWith(
                           color: AppColors.grey,
                         ),
+                      ),
+                      Text(
+                        examItemModel.examInfo,
+                        style: theme.textTheme.bodySmall,
                       ),
                     ],
                   ),

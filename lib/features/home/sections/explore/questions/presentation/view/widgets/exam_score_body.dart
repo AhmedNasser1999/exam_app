@@ -7,6 +7,7 @@ import 'package:exam_app/features/home/sections/explore/exams/domain/entities/ex
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/custom_result_chart.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/custom_result_score.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
+import 'package:exam_app/features/home/sections/result/presentation/view/result_exam_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,7 +74,13 @@ class ExamScoreBody extends StatelessWidget {
         CustomButton(
           buttonModel: ButtonModel(
             text: TextConstant.showResult,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                ResultExamView.routeName,
+                arguments: cubit.allQuestion,
+              );
+            },
             borderRadius: 25,
           ),
         ),

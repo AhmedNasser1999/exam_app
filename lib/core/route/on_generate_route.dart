@@ -8,6 +8,7 @@ import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dar
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
+import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/quiz_exam_view.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
 import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
@@ -15,6 +16,7 @@ import 'package:exam_app/features/home/sections/explore/exams/presentation/view_
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/domain/entities/subject_entity.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_cubit.dart';
+import 'package:exam_app/features/home/sections/result/presentation/view/result_exam_view.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
 import 'package:exam_app/features/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +87,11 @@ abstract class OnGenerateRoute {
                 getIt<ExamQuestionCubit>()..getAllQuestions(exam: examInfo),
             child: QuizExamView(examInfoEntity: examInfo),
           ),
+        );
+      case RouteName.resultView:
+        final allQuestion = setting.arguments as List<QuestionsEntity>;
+        return MaterialPageRoute(
+          builder: (context) => ResultExamView(allQuestion: allQuestion),
         );
 
       default:

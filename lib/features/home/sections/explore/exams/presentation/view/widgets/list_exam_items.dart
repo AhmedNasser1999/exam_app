@@ -29,6 +29,7 @@ class ListExamItems extends StatelessWidget {
               title: listOfAllExam[index].title,
               time: listOfAllExam[index].duration.toString(),
               numQuestion: listOfAllExam[index].numberOfQuestions.toString(),
+              examInfo: "",
               onTap: () {
                 cubit.startExam(examEntity: listOfAllExam[index]);
               },
