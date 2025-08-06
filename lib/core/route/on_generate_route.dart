@@ -8,7 +8,6 @@ import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dar
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
-import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/quiz_exam_view.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
 import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
@@ -20,6 +19,8 @@ import 'package:exam_app/features/home/sections/explore/subjects/domain/entities
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_cubit.dart';
 import 'package:exam_app/features/home/sections/profile/change_password/presentation/view_model/change_password_cubit.dart';
 import 'package:exam_app/features/home/sections/profile/change_password/presentation/views/change_password_screen.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view_model/profile_cubit.dart';
+import 'package:exam_app/features/home/sections/result/presentation/view_model/cubit/all_result_cubit.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
 import 'package:exam_app/features/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,8 @@ abstract class OnGenerateRoute {
             providers: [
               BlocProvider(create: (context) => getIt<HomeCubit>()),
               BlocProvider(create: (context) => getIt<AllResultCubit>()),
+              BlocProvider(create: (context) => getIt<AllResultCubit>()),
+              // BlocProvider(create: (context) => getIt<ProfileCubit>()),
               BlocProvider(
                 create: (context) => getIt<SubjectsCubit>()..fetchSubjects(),
               ),

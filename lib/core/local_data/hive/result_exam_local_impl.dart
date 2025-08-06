@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:exam_app/core/constant/constant.dart';
 import 'package:exam_app/core/local_data/hive/result_exam_local.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
+import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
 

@@ -15,7 +15,7 @@ class AllExamBody extends StatelessWidget {
         child: Column(
           children: [
             CustomHeader(
-              title: TextConstant.exams,
+              title: TextConstant.examScoreTitle,
               backRouteName: HomeView.routeName,
             ),
             SizedBox(height: 40),

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:exam_app/core/constant/text_constant.dart';
 import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view_model/profile_cubit.dart';
 import 'package:exam_app/features/home/sections/result/presentation/view_model/cubit/all_result_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,7 @@ class CustomNavigationBar extends StatelessWidget {
     final theme = Theme.of(context);
     final cubit = context.read<HomeCubit>();
     final resultCubit = context.read<AllResultCubit>();
+    // final profileCubit = context.read<ProfileCubit>();
 
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) => NavigationBar(
@@ -21,6 +23,9 @@ class CustomNavigationBar extends StatelessWidget {
         onDestinationSelected: (value) {
           if (value == 1) {
             resultCubit.getAllResult();
+          }
+          if (value == 2) {
+            // profileCubit.getProfileLocalData();
           }
           cubit.onDestinationSelected(value);
         },

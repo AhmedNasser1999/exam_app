@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
@@ -79,6 +81,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     final email = profile.email ?? '';
     final phone = profile.phone ?? '';
 
+    // log(username);
+    // log(firstName);
+    // log(email);
     userNameController.text = username;
     firstNameController.text = firstName;
     lastNameController.text = lastName;

@@ -8,4 +8,5 @@ abstract class RouteName {
   static const String quizExamView = "quizExamView";
   static const String subjectExamBody = "subjectExamBody";
   static const String changePassword = "changePassword";
+  static const String resultView = "ResultView";
 }

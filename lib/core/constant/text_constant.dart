@@ -47,7 +47,7 @@ abstract class TextConstant {
   static const String survey = 'Survey';
   static const String search = 'Search';
   static const String start = 'Start';
-  static const String startAgein = 'Start Agein';
+  static const String startAgain = 'Start Again';
   static const String browseBySubject = 'Browse by subject';
 
   static const String examScoreTitle = "Exam Score";

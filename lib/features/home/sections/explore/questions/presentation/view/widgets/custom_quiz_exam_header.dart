@@ -19,7 +19,7 @@ class CustomQuizExamHeader extends StatelessWidget {
     return Row(
       children: [
         CustomHeader(
-          title: TextConstant.exam,
+          title: TextConstant.examScoreTitle,
           onTap: () {
             Navigator.pop(context);
           },

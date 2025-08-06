@@ -11,4 +11,5 @@ class ApiConstants {
   static const String questions = "questions";
   static const String editProfile = "auth/editProfile";
   static const String changePassword = "auth/changePassword";
+  static const String checkQuestion = "questions/check";
 }

@@ -14,7 +14,7 @@ class SectionAllExamsResults extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(TextConstant.exams, style: theme.textTheme.titleMedium),
+        Text(TextConstant.examScoreTitle, style: theme.textTheme.titleMedium),
         const SizedBox(height: 24),
         Expanded(child: ListAllExamItems(examInfoModel: examInfoModel)),
       ],
