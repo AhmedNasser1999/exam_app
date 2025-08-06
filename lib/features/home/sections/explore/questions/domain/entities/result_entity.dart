@@ -1,5 +1,6 @@
 class ResultEntity {
-  final int correctAnswer, inCorrectAnswer;
+  final int correctAnswer;
+  final int inCorrectAnswer;
   final String total;
 
   ResultEntity({

@@ -1,5 +1,5 @@
-import 'package:exam_app/features/home/sections/result/data/model/exam_info_model.dart';
+import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
 
 abstract class ResultDataSourceLocal {
-  Future<List<ExamInfoModel>> getAllResultExam();
+  Future<List<ExamInfoEntity>> getAllResultExam();
 }

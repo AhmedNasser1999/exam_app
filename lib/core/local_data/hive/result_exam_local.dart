@@ -1,7 +1,7 @@
-import 'package:exam_app/features/home/sections/result/data/model/exam_info_model.dart';
+import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
 
 abstract class ResultExamLocal {
-  saveExamResult({required ExamInfoModel examInfo});
-  List<ExamInfoModel> getExamResult();
+  saveExamResult({required ExamInfoEntity examInfo});
+  List<ExamInfoEntity> getExamResult();
   void deleteAllResult();
 }

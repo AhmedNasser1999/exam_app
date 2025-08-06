@@ -1,11 +1,18 @@
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/answer_entity.dart';
-import 'package:exam_app/features/home/sections/result/data/model/question_info_model.dart';
+import 'package:hive/hive.dart';
+part 'questions_entity.g.dart';
 
-class QuestionsEntity extends QuestionInfoModel {
-  final String question;
+@HiveType(typeId: 1)
+class QuestionsEntity extends HiveObject {
+  @HiveField(0)
   final String questionId;
+  @HiveField(1)
+  final String question;
+  @HiveField(2)
   final String type;
+  @HiveField(3)
   final String correctAnswerKey;
+  @HiveField(4)
   final List<AnswerEntity> answer;
 
   QuestionsEntity({
@@ -14,9 +21,5 @@ class QuestionsEntity extends QuestionInfoModel {
     required this.questionId,
     required this.correctAnswerKey,
     required this.answer,
-  }) : super(
-         correct: correctAnswerKey,
-         question: question,
-         questionAnswer: answer,
-       );
+  });
 }

@@ -1,9 +1,13 @@
-import 'package:exam_app/features/home/sections/result/data/model/answer_info_model.dart';
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-class AnswerEntity extends AnswerInfoModel {
+part 'answer_entity.g.dart';
+@HiveType(typeId: 2)
+class AnswerEntity extends HiveObject {
+  @HiveField(0)
   final String answer;
+  @HiveField(1)
   final String key;
+  @HiveField(2)
   @JsonKey(includeFromJson: false, includeToJson: false)
   bool isSelected;
 
@@ -11,5 +15,5 @@ class AnswerEntity extends AnswerInfoModel {
     required this.answer,
     required this.key,
     this.isSelected = false,
-  }) : super(answer: answer, isSelected: isSelected, key: key);
+  });
 }

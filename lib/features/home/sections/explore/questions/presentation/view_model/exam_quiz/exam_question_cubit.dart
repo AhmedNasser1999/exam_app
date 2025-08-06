@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/answer_submit_request_model.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/exam_submit_request_model.dart';
+import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/result_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/use_cases/check_questions_on_exam_use_case.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/use_cases/get_all_questions_use_case.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/use_cases/save_exam_result_use_case.dart';
-import 'package:exam_app/features/home/sections/result/data/model/exam_info_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -60,11 +60,12 @@ class ExamQuestionCubit extends Cubit<ExamQuestionState> {
 
   saveQuestionsResult() async {
     final dataSaved = await _saveExamResultUseCase.call(
-      ExamInfoModel(
+      ExamInfoEntity(
         examName: examEntity.title,
         time: examEntity.duration,
         numberOfQuestion: examEntity.numberOfQuestions,
-        allQuestionInfo: allQuestion,
+        correct: result.correctAnswer,
+        listQuestion: allQuestion,
       ),
     );
     dataSaved.fold(

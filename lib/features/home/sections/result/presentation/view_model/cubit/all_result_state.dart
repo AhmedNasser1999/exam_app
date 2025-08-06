@@ -7,7 +7,7 @@ final class AllResultInitial extends AllResultState {}
 final class AllResultLoading extends AllResultState {}
 
 final class AllResultSuccess extends AllResultState {
-  final List<ExamInfoModel> examsResult;
+  final List<ExamInfoEntity> examsResult;
 
   AllResultSuccess({required this.examsResult});
 }
