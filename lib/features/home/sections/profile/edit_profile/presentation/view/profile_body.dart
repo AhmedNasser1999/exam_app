@@ -19,7 +19,7 @@ class ProfileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return BlocProvider(
-      create: (context) => getIt<ProfileCubit>(),
+      create: (context) => getIt<ProfileCubit>()..getProfileLocalData(),
       child: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state.successMessage != null &&
@@ -29,7 +29,7 @@ class ProfileBody extends StatelessWidget {
               ..showSnackBar(
                 customSnackBar(
                   contentType: ContentType.success,
-                  message: 'Your profile has been updated successfully.',
+                  message: TextConstant.profileUpdateSuccess,
                   title: TextConstant.successTitle,
                 ),
               );
@@ -40,7 +40,7 @@ class ProfileBody extends StatelessWidget {
               ..showSnackBar(
                 customSnackBar(
                   contentType: ContentType.success,
-                  message: 'error occurred while edit profile',
+                  message: TextConstant.profileUpdateError,
                   title: TextConstant.successTitle,
                 ),
               );
@@ -58,7 +58,7 @@ class ProfileBody extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Edit Profile', style: theme.textTheme.titleLarge),
+                      Text(TextConstant.editProfile, style: theme.textTheme.titleLarge),
                       IconButton(
                         onPressed: () async {
                           await cubit.logout(context);
@@ -80,8 +80,8 @@ class ProfileBody extends StatelessWidget {
                   CustomTextFormField(
                     textFieldModel: TextFieldModel(
                       controller: cubit.userNameController,
-                      label: 'User Name',
-                      hintText: 'User Name',
+                      label: TextConstant.userNameLabel,
+                      hintText: TextConstant.userNameHint,
                     ),
                   ),
                   const SizedBox(height: 25.0),
@@ -93,8 +93,8 @@ class ProfileBody extends StatelessWidget {
                           child: CustomTextFormField(
                             textFieldModel: TextFieldModel(
                               controller: cubit.firstNameController,
-                              label: 'Frist Name',
-                              hintText: 'Frist Name',
+                              label:TextConstant.firstNameLabel,
+                              hintText: TextConstant.firstNameHint,
                             ),
                           ),
                         ),
@@ -104,8 +104,8 @@ class ProfileBody extends StatelessWidget {
                           child: CustomTextFormField(
                             textFieldModel: TextFieldModel(
                               controller: cubit.lastNameController,
-                              label: 'Last Name',
-                              hintText: 'Last Name',
+                              label: TextConstant.lastNameLabel,
+                              hintText: TextConstant.lastNameHint,
                             ),
                           ),
                         ),
@@ -116,8 +116,8 @@ class ProfileBody extends StatelessWidget {
                   CustomTextFormField(
                     textFieldModel: TextFieldModel(
                       controller: cubit.emailController,
-                      label: 'Email',
-                      hintText: 'Email',
+                      label: TextConstant.emailLabel,
+                      hintText: TextConstant.emailHint,
                     ),
                   ),
                   const SizedBox(height: 25.0),
@@ -131,12 +131,12 @@ class ProfileBody extends StatelessWidget {
                           );
                         },
                         child: const Text(
-                          'Change',
+                         TextConstant.change,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      label: 'Password',
-                      hintText: 'Password',
+                      label: TextConstant.passwordLabel,
+                      hintText: TextConstant.passwordHint,
                     ),
                   ),
                   const SizedBox(height: 25.0),
@@ -144,14 +144,14 @@ class ProfileBody extends StatelessWidget {
                     textFieldModel: TextFieldModel(
                       keyboardType: TextInputType.phone,
                       controller: cubit.phoneController,
-                      label: 'Phone Number',
-                      hintText: 'Phone Number',
+                      label: TextConstant.phoneNumberLabel,
+                      hintText: TextConstant.phoneNumberHint,
                     ),
                   ),
                   const SizedBox(height: 25.0),
                   CustomButton(
                     buttonModel: ButtonModel(
-                      text: 'Ubdate',
+                      text: TextConstant.update,
                       onPressed: () {
                         cubit.formValidateOnEditProfile();
                       },

@@ -1,6 +1,7 @@
 import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/data/data_source/profile_local_data_source.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/data/models/profile_request_model.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/edit_profile_use_case.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view_model/profile_state.dart';
@@ -16,6 +17,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final localDataSource = ProfileLocalDataSource();
 
   final UserTokenStorage userTokenStorage = getIt<UserTokenStorage>();
 
@@ -66,6 +68,32 @@ class ProfileCubit extends Cubit<ProfileState> {
     if (formKey.currentState!.validate()) {
       editProfile();
     }
+  }
+
+  Future<void> getProfileLocalData() async {
+    final profile = await ProfileLocalDataSource.loadProfileFromPrefs();
+
+    final username = profile.username ?? '';
+    final firstName = profile.firstName ?? '';
+    final lastName = profile.lastName ?? '';
+    final email = profile.email ?? '';
+    final phone = profile.phone ?? '';
+
+    userNameController.text = username;
+    firstNameController.text = firstName;
+    lastNameController.text = lastName;
+    emailController.text = email;
+    phoneController.text = phone;
+
+    emit(
+      state.copyWith(
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+      ),
+    );
   }
 
   logout(context) async {

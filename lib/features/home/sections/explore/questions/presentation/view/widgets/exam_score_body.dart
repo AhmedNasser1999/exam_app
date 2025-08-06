@@ -67,7 +67,7 @@ class ExamScoreBody extends StatelessWidget {
         const SizedBox(height: 24),
         CustomButton(
           buttonModel: ButtonModel(
-            text: TextConstant.startAgain,
+            text: TextConstant.startAgein,
             onPressed: () {
               cubit.startExamAgain();
             },

@@ -28,7 +28,7 @@ class ChangePasswordScreen extends StatelessWidget {
             ..showSnackBar(
               customSnackBar(
                 contentType: ContentType.success,
-                message: 'Your password has been changed successfully.',
+                message: TextConstant.passwordChangeSuccess,
                 title: TextConstant.successTitle,
               ),
             );
@@ -39,7 +39,7 @@ class ChangePasswordScreen extends StatelessWidget {
             ..showSnackBar(
               customSnackBar(
                 contentType: ContentType.failure,
-                message: 'An error occurred while changing the password',
+                message: TextConstant.passwordChangeError,
                 title: TextConstant.successTitle,
               ),
             );
@@ -64,18 +64,21 @@ class ChangePasswordScreen extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                      Text('Reset password', style: theme.textTheme.titleLarge),
+                      Text(
+                        TextConstant.resetPassword,
+                        style: theme.textTheme.titleLarge,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 35.0),
                   CustomTextFormField(
                     textFieldModel: TextFieldModel(
                       controller: cubit.oldPassword,
-                      label: 'Current password',
-                      hintText: 'Current password',
+                      label: TextConstant.currentPasswordLabel,
+                      hintText: TextConstant.currentPasswordHint,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your current password';
+                          return TextConstant.askForNewPassword;
                         }
                         return null;
                       },
@@ -85,14 +88,14 @@ class ChangePasswordScreen extends StatelessWidget {
                   CustomTextFormField(
                     textFieldModel: TextFieldModel(
                       controller: cubit.newPassword,
-                      label: 'New password',
-                      hintText: 'New password',
+                      label: TextConstant.newPasswordLabel,
+                      hintText: TextConstant.newPasswordHint,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a new password';
+                          return TextConstant.askForNewPassword;
                         }
                         if (value.length < 8) {
-                          return 'Password must be at least 8 characters long';
+                          return TextConstant.validateNewPassword;
                         }
                         return null;
                       },
@@ -102,14 +105,14 @@ class ChangePasswordScreen extends StatelessWidget {
                   CustomTextFormField(
                     textFieldModel: TextFieldModel(
                       controller: cubit.rePassword,
-                      label: 'Confirm password',
-                      hintText: 'Confirm password',
+                      label: TextConstant.confirmPasswordLabel,
+                      hintText: TextConstant.confirmPasswordHint,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please confirm your password';
+                          return TextConstant.pleaseConfermPassword;
                         }
                         if (value != cubit.newPassword.text) {
-                          return 'Passwords do not match';
+                          return TextConstant.passwordNotMatch;
                         }
                         return null;
                       },
@@ -120,7 +123,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       ? const Center(child: CircularProgressIndicator())
                       : CustomButton(
                           buttonModel: ButtonModel(
-                            text: 'Update',
+                            text: TextConstant.update,
                             onPressed: () {
                               cubit.formValidateOnChangePassword();
                             },
