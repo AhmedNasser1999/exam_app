@@ -16,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: textFieldModel.keyboardType ?? TextInputType.name,
       obscureText: textFieldModel.obscureText,
       decoration: InputDecoration(
+        suffixIcon: textFieldModel.suffixIcon,
         labelText: textFieldModel.label,
         hintText: textFieldModel.hintText,
         hintStyle: theme.textTheme.bodyMedium!.copyWith(

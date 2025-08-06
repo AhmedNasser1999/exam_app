@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:exam_app/features/auth/signup/api/model/signup_request/signup_request_model.dart';
 import 'package:exam_app/features/auth/signup/domain/use_case/use_case_signup.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 part 'signup_state.dart';

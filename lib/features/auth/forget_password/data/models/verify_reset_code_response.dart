@@ -4,6 +4,7 @@ part 'verify_reset_code_response.g.dart';
 
 @JsonSerializable()
 class VerifyResetCodeResponse extends VerifyResetCode {
+  @override
   final String status;
   VerifyResetCodeResponse({required this.status}) : super(status: status);
 

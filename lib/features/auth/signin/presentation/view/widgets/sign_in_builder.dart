@@ -35,7 +35,6 @@ class _SignInBuilderState extends State<SignInBuilder> {
             children: [
               Text(TextConstant.loginText, style: theme.textTheme.titleLarge),
               const SizedBox(height: 24.0),
-
               CustomTextFormField(
                 textFieldModel: TextFieldModel(
                   controller: cubit.emailController,

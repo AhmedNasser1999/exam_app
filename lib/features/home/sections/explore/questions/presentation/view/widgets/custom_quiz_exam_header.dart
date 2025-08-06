@@ -29,7 +29,7 @@ class CustomQuizExamHeader extends StatelessWidget {
             return Text(
               FormatTime.formatDuration(cubit.timeLeft),
               style: theme.textTheme.bodyLarge!.copyWith(
-                color: cubit.timeLeft > Duration(minutes: 2)
+                color: cubit.timeLeft > const Duration(minutes: 2)
                     ? AppColors.green
                     : AppColors.red,
               ),

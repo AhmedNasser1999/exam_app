@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 class TextFieldModel {
-  final TextEditingController controller;
+  final TextEditingController? controller;
+  final Widget? suffixIcon;
   final String label;
   final String hintText;
   final TextInputType? keyboardType;
@@ -11,11 +12,11 @@ class TextFieldModel {
   final void Function(String)? onChanged;
 
   TextFieldModel({
+    this.suffixIcon,
     this.borderRadius = 5.0,
-    required this.controller,
+    this.controller,
     required this.label,
     required this.hintText,
-
     this.keyboardType,
     this.obscureText = false,
     this.validator,
