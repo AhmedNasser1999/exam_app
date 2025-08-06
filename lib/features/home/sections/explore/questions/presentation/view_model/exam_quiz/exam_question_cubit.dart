@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/answer_submit_request_model.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/exam_submit_request_model.dart';
@@ -6,6 +7,8 @@ import 'package:exam_app/features/home/sections/explore/questions/domain/entitie
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/result_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/use_cases/check_questions_on_exam_use_case.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/use_cases/get_all_questions_use_case.dart';
+import 'package:exam_app/features/home/sections/explore/questions/domain/use_cases/save_exam_result_use_case.dart';
+import 'package:exam_app/features/home/sections/result/data/model/exam_info_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -17,9 +20,11 @@ class ExamQuestionCubit extends Cubit<ExamQuestionState> {
   ExamQuestionCubit(
     this._getAllQuestionsUseCase,
     this._checkQuestionsOnExamUseCase,
+    this._saveExamResultUseCase,
   ) : super(ExamQuestionInitial());
   final GetAllQuestionsUseCase _getAllQuestionsUseCase;
   final CheckQuestionsOnExamUseCase _checkQuestionsOnExamUseCase;
+  final SaveExamResultUseCase _saveExamResultUseCase;
   final PageController pageController = PageController();
   int currentPage = 0;
   late Timer _timer;
@@ -31,17 +36,43 @@ class ExamQuestionCubit extends Cubit<ExamQuestionState> {
     inCorrectAnswer: 0,
     total: "",
   );
+  ExamEntity examEntity = ExamEntity(
+    id: "",
+    title: "",
+    duration: 0,
+    numberOfQuestions: 0,
+  );
   getAllQuestions({required ExamEntity exam}) async {
     emit(ExamQuestionLoading());
     final response = await _getAllQuestionsUseCase.call(exam.id);
     response.fold(
       (l) {
+        examEntity = exam;
         startTimer(time: exam.duration);
         allQuestion = l;
         emit(ExamQuestionSuccess());
       },
       (r) {
         emit(ExamQuestionFailure(errorMessage: r.errorMessage));
+      },
+    );
+  }
+
+  saveQuestionsResult() async {
+    final dataSaved = await _saveExamResultUseCase.call(
+      ExamInfoModel(
+        examName: examEntity.title,
+        time: examEntity.duration,
+        numberOfQuestion: examEntity.numberOfQuestions,
+        allQuestionInfo: allQuestion,
+      ),
+    );
+    dataSaved.fold(
+      (l) {
+        log("success");
+      },
+      (r) {
+        log(r.errorMessage);
       },
     );
   }
@@ -60,10 +91,12 @@ class ExamQuestionCubit extends Cubit<ExamQuestionState> {
     final response = await _checkQuestionsOnExamUseCase.call(
       examSubmitRequestModel,
     );
+
     response.fold(
       (l) {
         result = l;
         emit(ExamQuestionShowResult());
+        saveQuestionsResult();
       },
       (r) {
         emit(ExamQuestionFailure(errorMessage: r.errorMessage));
