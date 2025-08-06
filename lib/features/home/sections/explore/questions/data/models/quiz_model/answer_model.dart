@@ -5,7 +5,9 @@ part 'answer_model.g.dart';
 
 @JsonSerializable()
 class AnswerModel extends AnswerEntity {
+  @override
   final String answer;
+  @override
   final String key;
 
 

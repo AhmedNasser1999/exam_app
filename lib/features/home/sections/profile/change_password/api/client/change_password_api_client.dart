@@ -13,5 +13,7 @@ abstract class ChangePasswordApiClient {
   factory ChangePasswordApiClient(Dio dio) = _ChangePasswordApiClient;
 
   @PATCH(ApiConstants.changePassword)
-  Future<ChangePasswordResponse> changePassword(ChangePasswordRequest request);
+  Future<ChangePasswordResponse> changePassword(
+    @Body() ChangePasswordRequest request,
+  );
 }

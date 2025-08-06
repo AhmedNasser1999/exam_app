@@ -92,9 +92,9 @@ class SectionTextField extends StatelessWidget {
           CustomTextFormField(
             textFieldModel: TextFieldModel(
               controller: signupCubit.phoneController,
-              label: TextConstant.phoneLabel,
+              label: TextConstant.phoneNumberLabel,
               keyboardType: TextInputType.phone,
-              hintText: TextConstant.phoneHint,
+              hintText: TextConstant.phoneNumberHint,
               obscureText: false,
             ),
           ),

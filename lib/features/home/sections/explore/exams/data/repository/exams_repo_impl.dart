@@ -30,9 +30,9 @@ class ExamsRepoImpl implements ExamRepository {
   }
 
   Future<String> getToken() async {
-    final String? token = await userTokenStorage.getToken(
+    final String token = await userTokenStorage.getToken(
       tokenKey: Constant.userToken,
     );
-    return token ?? "";
+    return token;
   }
 }

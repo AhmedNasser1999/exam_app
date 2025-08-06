@@ -7,5 +7,5 @@ abstract class RouteName {
   static const String allExamView = "AllExamView";
   static const String quizExamView = "quizExamView";
   static const String subjectExamBody = "subjectExamBody";
-  static const String resultView = "ResultView";
+  static const String changePassword = "changePassword";
 }

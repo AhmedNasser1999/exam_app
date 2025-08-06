@@ -26,6 +26,7 @@ dependencies:
   flutter_secure_storage: ^9.2.3
   fl_chart: ^1.0.0
   cached_network_image: ^3.4.1
+  hared_preferences: ^2.5.3
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.1.1
