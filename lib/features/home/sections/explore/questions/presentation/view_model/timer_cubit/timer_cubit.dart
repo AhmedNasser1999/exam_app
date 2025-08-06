@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 part 'timer_state.dart';
 
+@injectable
 class TimerCubit extends Cubit<TimerState> {
   TimerCubit() : super(TimerInitial());
   late Timer _timer;
@@ -13,12 +15,21 @@ class TimerCubit extends Cubit<TimerState> {
     timeLeft = Duration(minutes: time);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (timeLeft.inSeconds == 0) {
-        emit(TimerFinish());
-        timer.cancel();
+        timerFinish();
       } else {
         timeLeft -= const Duration(seconds: 1);
         emit(TimerInitial());
       }
     });
+  }
+
+  timerFinish() {
+    emit(TimerFinish());
+  }
+
+  @override
+  Future<void> close() {
+    _timer.cancel();
+    return super.close();
   }
 }

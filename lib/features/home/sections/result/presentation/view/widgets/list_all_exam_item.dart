@@ -18,7 +18,11 @@ class ListAllExamItems extends StatelessWidget {
           examInfo:
               "${examInfoModel[index].correct} corrected answers in ${examInfoModel[index].numberOfQuestion} min.",
           onTap: () {
-            Navigator.pushNamed(context, ResultExamView.routeName);
+            Navigator.pushNamed(
+              context,
+              ResultExamView.routeName,
+              arguments: examInfoModel[index],
+            );
           },
         ),
       ),

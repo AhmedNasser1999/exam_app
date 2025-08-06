@@ -8,12 +8,14 @@ import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dar
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
-import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
+import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/quiz_exam_view.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
 import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/exams/presentation/view_model/cubit/fetch_exam_all_by_id_cubit.dart';
-import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/question_cubit/question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/result_cubit/result_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/timer_cubit/timer_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/domain/entities/subject_entity.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_cubit.dart';
 import 'package:exam_app/features/home/sections/result/presentation/view/result_exam_view.dart';
@@ -84,16 +86,23 @@ abstract class OnGenerateRoute {
       case RouteName.quizExamView:
         final ExamEntity examInfo = setting.arguments as ExamEntity;
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) =>
-                getIt<ExamQuestionCubit>()..getAllQuestions(exam: examInfo),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    getIt<QuestionCubit>()..getAllQuestions(exam: examInfo),
+              ),
+              BlocProvider(create: (context) => getIt<TimerCubit>()),
+              BlocProvider(create: (context) => getIt<ResultCubit>()),
+            ],
             child: QuizExamView(examInfoEntity: examInfo),
           ),
         );
       case RouteName.resultView:
-        final allQuestion = setting.arguments as List<QuestionsEntity>;
+        final allQuestion = setting.arguments as ExamInfoEntity;
         return MaterialPageRoute(
-          builder: (context) => ResultExamView(allQuestion: allQuestion),
+          builder: (context) =>
+              ResultExamView(allQuestion: allQuestion.listQuestion),
         );
 
       default:

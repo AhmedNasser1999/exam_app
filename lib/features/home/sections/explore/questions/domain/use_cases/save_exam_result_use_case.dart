@@ -6,7 +6,7 @@ import 'package:exam_app/features/home/sections/explore/questions/domain/reposit
 import 'package:injectable/injectable.dart';
 
 @injectable
-class SaveExamResultUseCase extends UseCasePram<void, List<ExamInfoEntity>> {
+class SaveExamResultUseCase extends UseCasePram<void, ExamInfoEntity> {
   final QuestionsRepo questionsRepo;
 
   SaveExamResultUseCase({required this.questionsRepo});

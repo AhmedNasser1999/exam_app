@@ -1,6 +1,6 @@
 import 'package:exam_app/core/custom_widgets_model/button_model.dart';
 import 'package:exam_app/core/widgets/custom_button.dart';
-import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/question_cubit/question_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,8 +10,8 @@ class QuizExamButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cubit = context.read<ExamQuestionCubit>();
-    return BlocBuilder<ExamQuestionCubit, ExamQuestionState>(
+    final cubit = context.read<QuestionCubit>();
+    return BlocBuilder<QuestionCubit, QuestionState>(
       builder: (context, state) {
         return Row(
           spacing: 16,

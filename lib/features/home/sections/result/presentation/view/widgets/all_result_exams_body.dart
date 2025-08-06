@@ -1,4 +1,3 @@
-import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/constant/text_constant.dart';
 
 import 'package:exam_app/features/home/sections/result/presentation/view/widgets/section_all_exams_results.dart';

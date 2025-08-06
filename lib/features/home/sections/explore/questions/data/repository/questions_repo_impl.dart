@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/constant/constant.dart';
@@ -6,6 +5,7 @@ import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/core/local_data/hive/result_exam_local.dart';
 import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/data_source/questions_data_source.dart';
+import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/answer_submit_request_model.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/exam_submit_request_model.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
@@ -53,13 +53,17 @@ class QuestionsRepoImpl implements QuestionsRepo {
 
   @override
   Future<Either<ResultEntity, Failure>> checkQuestionsOnExam({
-    required ExamSubmitRequestModel question,
+    required Map<String, AnswerSubmitRequestModel> question,
   }) async {
     try {
       final String token = await getToken(tokenKey: Constant.userToken);
+      final examSubmitRequestModel = ExamSubmitRequestModel(
+        answers: mapToListAnswerSubmitRequestModel(question: question),
+        time: 0,
+      );
       final response = await questionsDataSource.checkQuestionsOnExam(
         token: token,
-        question: question,
+        question: examSubmitRequestModel,
       );
       return left(response);
     } catch (e) {
@@ -80,5 +84,20 @@ class QuestionsRepoImpl implements QuestionsRepo {
     } catch (e) {
       return right(ServerFailure(errorMessage: e.toString()));
     }
+  }
+
+  List<AnswerSubmitRequestModel> mapToListAnswerSubmitRequestModel({
+    required Map<String, AnswerSubmitRequestModel> question,
+  }) {
+    final examSubmitRequestModel = ExamSubmitRequestModel(
+      answers: question.entries.map((entry) {
+        return AnswerSubmitRequestModel(
+          questionId: entry.key,
+          correct: entry.value.correct,
+        );
+      }).toList(),
+      time: 0,
+    );
+    return examSubmitRequestModel.answers;
   }
 }

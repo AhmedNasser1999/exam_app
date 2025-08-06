@@ -3,7 +3,7 @@ import 'package:exam_app/features/home/sections/explore/questions/domain/entitie
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/custom_quiz_exam_header.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/question_page_view.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/quiz_exam_button.dart';
-import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/question_cubit/question_cubit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,7 @@ class ExamQuestionsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cubit = context.read<ExamQuestionCubit>();
+    final cubit = context.read<QuestionCubit>();
     return Column(
       children: [
         const CustomQuizExamHeader(),

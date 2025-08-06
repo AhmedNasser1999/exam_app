@@ -1,7 +1,7 @@
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/answer_submit_request_model.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/answer_entity.dart';
-import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/exam_quiz/exam_question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/question_cubit/question_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,8 +18,8 @@ class CustomQuestionsItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cubit = context.read<ExamQuestionCubit>();
-    return BlocBuilder<ExamQuestionCubit, ExamQuestionState>(
+    final cubit = context.read<QuestionCubit>();
+    return BlocBuilder<QuestionCubit, QuestionState>(
       builder: (context, state) {
         return GestureDetector(
           onTap: onTap,
