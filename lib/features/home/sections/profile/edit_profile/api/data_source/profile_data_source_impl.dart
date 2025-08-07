@@ -4,7 +4,7 @@ import 'package:exam_app/features/home/sections/profile/edit_profile/data/models
 import 'package:exam_app/features/home/sections/profile/edit_profile/data/models/profile_response_model.dart';
 import 'package:injectable/injectable.dart';
 
-@lazySingleton
+@LazySingleton(as: ProfileDataSource)
 class ProfileDataSourceImpl implements ProfileDataSource {
   ProfileApiClient profileApiClient;
 

@@ -1,8 +1,9 @@
 import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
-import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/data/models/profile_request_model.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/edit_profile_use_case.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/get_user_info_use_case.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/logout_use_case.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view_model/profile_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,18 +16,19 @@ class ProfileCubit extends Cubit<ProfileState> {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController passwordController = TextEditingController();
+  final EditProfileUseCase _editProfileUseCase;
+  final LogoutUseCase _logoutUseCase;
+  final GetUserInfoUseCase _getUserInfoUseCase;
 
-  final UserTokenStorage userTokenStorage = getIt<UserTokenStorage>();
-
-  EditProfileUseCase editProfileUseCase;
-
-  ProfileCubit(this.editProfileUseCase) : super(const ProfileState());
+  ProfileCubit(
+    this._editProfileUseCase,
+    this._getUserInfoUseCase,
+    this._logoutUseCase,
+  ) : super(ProfileInitial());
 
   Future<void> editProfile() async {
-    emit(
-      state.copyWith(isLoading: true, errorMessage: null, successMessage: null),
-    );
+    emit(ProfileUpdateLoading());
     final profileRequest = ProfileRequestModel(
       username: userNameController.text,
       firstName: firstNameController.text,
@@ -34,52 +36,27 @@ class ProfileCubit extends Cubit<ProfileState> {
       email: emailController.text,
       phone: phoneController.text,
     );
-
-    print('Request Object: $profileRequest');
-    print('Serialized Request: ${profileRequest.toJson()}');
-
-    final profile = await editProfileUseCase.execute(profileRequest);
-
+    final profile = await _editProfileUseCase.call(profileRequest);
     profile.fold(
       (failure) {
-        emit(
-          state.copyWith(
-            isLoading: false,
-            errorMessage: failure.errorMessage,
-            successMessage: null,
-          ),
-        );
+        emit(ProfileUpdateFailure(errorMassage: failure.errorMessage));
       },
       (success) {
-        emit(
-          state.copyWith(
-            isLoading: false,
-            successMessage: 'Your profile has been updated successfully.',
-            errorMessage: null,
-          ),
-        );
+        emit(ProfileUpdateSuccess());
       },
     );
   }
-
-  void formValidateOnEditProfile() {
+  void formValidateOnEditProfile(GlobalKey<FormState> formKey) {
     if (formKey.currentState!.validate()) {
       editProfile();
     }
   }
-
   Future<void> getProfileRemoteData() async {
-    final profileResponse = await editProfileUseCase.executeGetProgileData();
-
+    emit(ProfileLoading());
+    final profileResponse = await _getUserInfoUseCase.call();
     profileResponse.fold(
       (failure) {
-        emit(
-          state.copyWith(
-            isLoading: false,
-            errorMessage: failure.errorMessage,
-            successMessage: null,
-          ),
-        );
+        emit(ProfileFailure(errorMassage: failure.errorMessage));
       },
       (profileData) {
         final username = profileData.username ?? '';
@@ -93,25 +70,24 @@ class ProfileCubit extends Cubit<ProfileState> {
         lastNameController.text = lastName;
         emailController.text = email;
         phoneController.text = phone;
-        emit(
-          state.copyWith(
-            isLoading: false,
-            successMessage: null,
-            errorMessage: null,
-            username: username,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            phone: phone,
-          ),
-        );
+        passwordController.text = "0000000";
+        emit(ProfileSuccess());
       },
     );
   }
 
-  logout(context) async {
-    Navigator.pushReplacementNamed(context, SignInView.routeName);
+  logout() async {
+    await _logoutUseCase.call();
+  }
 
-    await userTokenStorage.removeToken();
+  @override
+  Future<void> close() {
+    userNameController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    passwordController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    return super.close();
   }
 }

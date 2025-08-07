@@ -14,9 +14,9 @@ class ListAllExamItems extends StatelessWidget {
         examItemModel: ExamItemModel(
           title: examInfoModel[index].examName,
           time: examInfoModel[index].time.toString(),
-          numQuestion: examInfoModel[index].numberOfQuestion.toString(),
+          numQuestion: examInfoModel[index].listQuestion.length.toString(),
           examInfo:
-              "${examInfoModel[index].correct} corrected answers in ${examInfoModel[index].numberOfQuestion} min.",
+              "${examInfoModel[index].correct} corrected answers in ${examInfoModel[index].time} min.",
           onTap: () {
             Navigator.pushNamed(
               context,

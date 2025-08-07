@@ -4,21 +4,16 @@ import 'package:exam_app/features/home/sections/profile/edit_profile/data/models
 import 'package:exam_app/features/home/sections/profile/edit_profile/data/repository/profile_repo_impl.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/entities/profile_entity.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/entities/response_entity.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/domain/repository/profile_repo.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class EditProfileUseCase {
-  ProfileRepoImpl profileRepoImpl;
-
-  EditProfileUseCase(this.profileRepoImpl);
-
-  Future<Either<Failure, ResponseEntity>> execute(
+  final ProfileRepo _profileRepo;
+  EditProfileUseCase(this._profileRepo);
+  Future<Either<Failure, ResponseEntity>> call(
     ProfileRequestModel request,
   ) async {
-    return await profileRepoImpl.editProfile(request);
-  }
-
-  Future<Either<Failure, ProfileEntity>> executeGetProgileData() async {
-    return await profileRepoImpl.getProfileData();
+    return await _profileRepo.editProfile(request);
   }
 }

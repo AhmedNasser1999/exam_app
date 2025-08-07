@@ -1,46 +1,22 @@
-class ProfileState {
-  final bool isLoading;
-  final String? successMessage;
-  final String? errorMessage;
+sealed class ProfileState {}
 
-  final String username;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phone;
+class ProfileInitial extends ProfileState {}
 
-  const ProfileState({
-    this.isLoading = false,
-    this.successMessage,
-    this.errorMessage,
-    this.username = '',
-    this.firstName = '',
-    this.lastName = '',
-    this.email = '',
-    this.phone = '',
-  });
+class ProfileSuccess extends ProfileState {}
 
-  ProfileState copyWith({
-    bool? isLoading,
-    String? successMessage,
-    String? errorMessage,
-    String? username,
-    String? firstName,
-    String? lastName,
-    String? email,
-    String? phone,
-  }) {
-    return ProfileState(
-      isLoading: isLoading ?? this.isLoading,
-      successMessage: successMessage,
-      errorMessage: errorMessage,
-      username: username ?? this.username,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      email: email ?? this.email,
-      phone: phone ?? this.phone,
-    );
-  }
+class ProfileFailure extends ProfileState {
+  final String errorMassage;
 
-  factory ProfileState.initial() => const ProfileState();
+  ProfileFailure({required this.errorMassage});
 }
+
+class ProfileLoading extends ProfileState {}
+class ProfileUpdateSuccess extends ProfileState {}
+
+class ProfileUpdateFailure extends ProfileState {
+  final String errorMassage;
+
+  ProfileUpdateFailure({required this.errorMassage});
+}
+
+class ProfileUpdateLoading extends ProfileState {}

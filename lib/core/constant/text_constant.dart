@@ -47,7 +47,7 @@ abstract class TextConstant {
   static const String survey = 'Survey';
   static const String search = 'Search';
   static const String start = 'Start';
-  static const String startAgein = 'Start Agein';
+  static const String startAgain = 'Start Again';
   static const String browseBySubject = 'Browse by subject';
 
   static const String examScoreTitle = "Exam Score";
@@ -64,6 +64,8 @@ abstract class TextConstant {
   static const String editProfile = 'Edit Profile';
   static const String change = 'Change';
   static const String update = 'Update';
+  static const String exams = 'Exams';
+  static const String exam = 'Exam';
 
   static const String passwordChangeSuccess =
       'Your password has been changed successfully.';

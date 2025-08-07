@@ -10,4 +10,5 @@ abstract class ProfileRepo {
   );
 
   Future<Either<Failure, ProfileEntity>> getProfileData();
+  Future<void> logout();
 }

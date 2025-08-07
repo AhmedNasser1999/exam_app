@@ -18,6 +18,7 @@ import 'package:exam_app/features/home/sections/explore/questions/presentation/v
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/timer_cubit/timer_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/domain/entities/subject_entity.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_cubit.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view_model/profile_cubit.dart';
 import 'package:exam_app/features/home/sections/result/presentation/view/result_exam_view.dart';
 import 'package:exam_app/features/home/sections/result/presentation/view_model/cubit/all_result_cubit.dart';
 import 'package:exam_app/features/home/sections/profile/change_password/presentation/view_model/change_password_cubit.dart';
@@ -46,6 +47,7 @@ abstract class OnGenerateRoute {
             providers: [
               BlocProvider(create: (context) => getIt<HomeCubit>()),
               BlocProvider(create: (context) => getIt<AllResultCubit>()),
+              BlocProvider(create: (context)=> getIt<ProfileCubit>()),
               BlocProvider(
                 create: (context) => getIt<SubjectsCubit>()..fetchSubjects(),
               ),
