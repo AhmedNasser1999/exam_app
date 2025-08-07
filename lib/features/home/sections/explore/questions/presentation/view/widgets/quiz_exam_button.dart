@@ -1,6 +1,7 @@
 import 'package:exam_app/core/custom_widgets_model/button_model.dart';
 import 'package:exam_app/core/widgets/custom_button.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/question_cubit/question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/timer_cubit/timer_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,6 +12,7 @@ class QuizExamButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cubit = context.read<QuestionCubit>();
+    final _timerCubit = context.read<TimerCubit>();
     return BlocBuilder<QuestionCubit, QuestionState>(
       builder: (context, state) {
         return Row(
@@ -32,7 +34,12 @@ class QuizExamButton extends StatelessWidget {
                   text: cubit.currentPage == cubit.allQuestion.length - 1
                       ? "Finish"
                       : "Next",
-                  onPressed: () => cubit.nextQuestion(),
+                  onPressed: () {
+                    if (cubit.currentPage == cubit.allQuestion.length - 1) {
+                      _timerCubit.timerFinish();
+                    }
+                    cubit.nextQuestion();
+                  },
                 ),
               ),
             ),

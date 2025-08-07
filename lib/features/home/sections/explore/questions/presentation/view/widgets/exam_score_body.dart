@@ -9,8 +9,8 @@ import 'package:exam_app/features/home/sections/explore/questions/presentation/v
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/custom_result_score.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/question_cubit/question_cubit.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/result_cubit/result_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/timer_cubit/timer_cubit.dart';
 import 'package:exam_app/features/home/sections/result/presentation/view/result_exam_view.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +21,7 @@ class ExamScoreBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final resultCubit = context.read<ResultCubit>();
+    final timerCubit = context.read<TimerCubit>();
     final questionCubit = context.read<QuestionCubit>();
     return BlocBuilder<ResultCubit, ResultState>(
       builder: (context, state) {
@@ -107,6 +108,7 @@ class ExamScoreBody extends StatelessWidget {
                 buttonModel: ButtonModel(
                   text: TextConstant.startAgain,
                   onPressed: () {
+                    timerCubit.startTimer(time: examInfo.duration);
                     questionCubit.startExamAgain(exam: examInfo);
                   },
                   backgroundColor: theme.colorScheme.onSecondary,

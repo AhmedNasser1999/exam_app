@@ -82,6 +82,12 @@ class QuestionCubit extends Cubit<QuestionState> {
   }
 
   @override
+  void onChange(Change<QuestionState> change) {
+    super.onChange(change);
+    print('State changed from ${change.currentState} to ${change.nextState}');
+  }
+
+  @override
   Future<void> close() {
     pageController.dispose();
     return super.close();
