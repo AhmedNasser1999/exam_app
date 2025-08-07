@@ -20,6 +20,8 @@ import 'package:exam_app/features/home/sections/explore/subjects/domain/entities
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_cubit.dart';
 import 'package:exam_app/features/home/sections/result/presentation/view/result_exam_view.dart';
 import 'package:exam_app/features/home/sections/result/presentation/view_model/cubit/all_result_cubit.dart';
+import 'package:exam_app/features/home/sections/profile/change_password/presentation/view_model/change_password_cubit.dart';
+import 'package:exam_app/features/home/sections/profile/change_password/presentation/views/change_password_screen.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
 import 'package:exam_app/features/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +39,7 @@ abstract class OnGenerateRoute {
             child: const SplashView(),
           ),
         );
+
       case RouteName.homeView:
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
@@ -50,6 +53,7 @@ abstract class OnGenerateRoute {
             child: const HomeView(),
           ),
         );
+
       case RouteName.forgetPassword:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -73,6 +77,7 @@ abstract class OnGenerateRoute {
             child: const SignUpView(),
           ),
         );
+
       case RouteName.allExamView:
         final subjectId = setting.arguments as String;
         return MaterialPageRoute(
@@ -83,6 +88,7 @@ abstract class OnGenerateRoute {
             child: const AllExamView(),
           ),
         );
+
       case RouteName.quizExamView:
         final ExamEntity examInfo = setting.arguments as ExamEntity;
         return MaterialPageRoute(
@@ -103,6 +109,14 @@ abstract class OnGenerateRoute {
         return MaterialPageRoute(
           builder: (context) =>
               ResultExamView(allQuestion: allQuestion.listQuestion),
+        );
+
+      case RouteName.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<ChangePasswordCubit>(),
+            child: const ChangePasswordScreen(),
+          ),
         );
 
       default:

@@ -15,4 +15,7 @@ abstract class ProfileApiClient {
 
   @PUT(ApiConstants.editProfile)
   Future<ProfileResponseModel> editProfile(@Body() ProfileRequestModel profile);
+
+  @GET(ApiConstants.profileData)
+  Future<ProfileResponseModel> getProfileData();
 }

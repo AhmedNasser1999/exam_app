@@ -3,13 +3,17 @@ part 'change_password_request.g.dart';
 
 @JsonSerializable()
 class ChangePasswordRequest {
-  String oldPassword;
-  String password;
-  String rePassword;
+  final String oldPassword;
+  final String password;
+  final String rePassword;
 
-  ChangePasswordRequest(this.oldPassword, this.password, this.rePassword);
+  ChangePasswordRequest({
+    required this.oldPassword,
+    required this.password,
+    required this.rePassword,
+  });
 
-  factory ChangePasswordRequest.fromJson(json) =>
+  factory ChangePasswordRequest.fromJson(Map<String, dynamic> json) =>
       _$ChangePasswordRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$ChangePasswordRequestToJson(this);

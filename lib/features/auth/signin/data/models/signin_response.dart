@@ -5,6 +5,7 @@ part 'signin_response.g.dart';
 
 @JsonSerializable()
 class SigninResponse extends UserEntities {
+  @override
   final String token;
 
   SigninResponse({required this.token}) : super(token: token);
