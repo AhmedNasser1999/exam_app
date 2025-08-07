@@ -3,4 +3,6 @@ import 'package:exam_app/features/home/sections/profile/edit_profile/data/models
 
 abstract class ProfileDataSource {
   Future<ProfileResponseModel> editProfile(ProfileRequestModel request);
+
+  Future<ProfileResponseModel> getProfileData();
 }

@@ -1,7 +1,6 @@
 import 'package:exam_app/core/config/di.dart';
 import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
-import 'package:exam_app/features/home/sections/profile/edit_profile/data/data_source/profile_local_data_source.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/data/models/profile_request_model.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/edit_profile_use_case.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view_model/profile_state.dart';
@@ -17,7 +16,6 @@ class ProfileCubit extends Cubit<ProfileState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final localDataSource = ProfileLocalDataSource();
 
   final UserTokenStorage userTokenStorage = getIt<UserTokenStorage>();
 
@@ -70,29 +68,44 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> getProfileLocalData() async {
-    final profile = await ProfileLocalDataSource.loadProfileFromPrefs();
+  Future<void> getProfileRemoteData() async {
+    final profileResponse = await editProfileUseCase.executeGetProgileData();
 
-    final username = profile.username ?? '';
-    final firstName = profile.firstName ?? '';
-    final lastName = profile.lastName ?? '';
-    final email = profile.email ?? '';
-    final phone = profile.phone ?? '';
+    profileResponse.fold(
+      (failure) {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            errorMessage: failure.errorMessage,
+            successMessage: null,
+          ),
+        );
+      },
+      (profileData) {
+        final username = profileData.username ?? '';
+        final firstName = profileData.firstName ?? '';
+        final lastName = profileData.lastName ?? '';
+        final email = profileData.email ?? '';
+        final phone = profileData.phone ?? '';
 
-    userNameController.text = username;
-    firstNameController.text = firstName;
-    lastNameController.text = lastName;
-    emailController.text = email;
-    phoneController.text = phone;
-
-    emit(
-      state.copyWith(
-        username: username,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phone: phone,
-      ),
+        userNameController.text = username;
+        firstNameController.text = firstName;
+        lastNameController.text = lastName;
+        emailController.text = email;
+        phoneController.text = phone;
+        emit(
+          state.copyWith(
+            isLoading: false,
+            successMessage: null,
+            errorMessage: null,
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone,
+          ),
+        );
+      },
     );
   }
 

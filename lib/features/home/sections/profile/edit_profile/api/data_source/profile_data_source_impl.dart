@@ -7,9 +7,16 @@ import 'package:injectable/injectable.dart';
 @lazySingleton
 class ProfileDataSourceImpl implements ProfileDataSource {
   ProfileApiClient profileApiClient;
+
   ProfileDataSourceImpl({required this.profileApiClient});
+
   @override
   Future<ProfileResponseModel> editProfile(ProfileRequestModel request) async {
     return await profileApiClient.editProfile(request);
+  }
+
+  @override
+  Future<ProfileResponseModel> getProfileData() async {
+    return await profileApiClient.getProfileData();
   }
 }

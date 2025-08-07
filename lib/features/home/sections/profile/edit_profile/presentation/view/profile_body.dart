@@ -19,7 +19,8 @@ class ProfileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return BlocProvider(
-      create: (context) => getIt<ProfileCubit>()..getProfileLocalData(),
+      create: (context) => getIt<ProfileCubit>()..getProfileRemoteData(),
+
       child: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state.successMessage != null &&
@@ -58,7 +59,10 @@ class ProfileBody extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(TextConstant.editProfile, style: theme.textTheme.titleLarge),
+                      Text(
+                        TextConstant.editProfile,
+                        style: theme.textTheme.titleLarge,
+                      ),
                       IconButton(
                         onPressed: () async {
                           await cubit.logout(context);
@@ -93,7 +97,7 @@ class ProfileBody extends StatelessWidget {
                           child: CustomTextFormField(
                             textFieldModel: TextFieldModel(
                               controller: cubit.firstNameController,
-                              label:TextConstant.firstNameLabel,
+                              label: TextConstant.firstNameLabel,
                               hintText: TextConstant.firstNameHint,
                             ),
                           ),
@@ -131,7 +135,7 @@ class ProfileBody extends StatelessWidget {
                           );
                         },
                         child: const Text(
-                         TextConstant.change,
+                          TextConstant.change,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
