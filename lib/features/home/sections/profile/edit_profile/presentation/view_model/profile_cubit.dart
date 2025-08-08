@@ -1,5 +1,3 @@
-import 'package:exam_app/core/config/di.dart';
-import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/data/models/profile_request_model.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/edit_profile_use_case.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/get_user_info_use_case.dart';
@@ -46,11 +44,13 @@ class ProfileCubit extends Cubit<ProfileState> {
       },
     );
   }
+
   void formValidateOnEditProfile(GlobalKey<FormState> formKey) {
     if (formKey.currentState!.validate()) {
       editProfile();
     }
   }
+
   Future<void> getProfileRemoteData() async {
     emit(ProfileLoading());
     final profileResponse = await _getUserInfoUseCase.call();
