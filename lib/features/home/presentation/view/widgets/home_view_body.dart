@@ -33,16 +33,3 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     );
   }
 }
-
-
-
-// to logout
-        // Center(
-        //   child: CustomTextButton(
-        //     textButton: "Logout",
-        //     onPressed: () async {
-        //       await UserCashToken.removeToken();
-        //       Navigator.pushReplacementNamed(context, SignInView.routeName);
-        //     },
-        //   ),
-        // ),
