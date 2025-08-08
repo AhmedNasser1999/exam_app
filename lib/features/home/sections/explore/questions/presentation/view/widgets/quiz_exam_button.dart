@@ -12,7 +12,7 @@ class QuizExamButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cubit = context.read<QuestionCubit>();
-    final _timerCubit = context.read<TimerCubit>();
+    final timerCubit = context.read<TimerCubit>();
     return BlocBuilder<QuestionCubit, QuestionState>(
       builder: (context, state) {
         return Row(
@@ -36,7 +36,7 @@ class QuizExamButton extends StatelessWidget {
                       : "Next",
                   onPressed: () {
                     if (cubit.currentPage == cubit.allQuestion.length - 1) {
-                      _timerCubit.timerFinish();
+                      timerCubit.timerFinish();
                     }
                     cubit.nextQuestion();
                   },

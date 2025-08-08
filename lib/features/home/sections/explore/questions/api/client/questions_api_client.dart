@@ -4,7 +4,6 @@ import 'package:exam_app/features/home/sections/explore/questions/data/models/qu
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/exam_result_response_model.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/exam_submit_request_model.dart';
 import 'package:injectable/injectable.dart';
-import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 part 'questions_api_client.g.dart';
 

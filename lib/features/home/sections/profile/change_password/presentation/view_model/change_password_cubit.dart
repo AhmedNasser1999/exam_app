@@ -25,8 +25,6 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
       password: newPassword.text,
       rePassword: rePassword.text,
     );
-    print('Request Object: $request');
-    print('Serialized Request: ${request.toJson()}');
 
     final message = await changePasswordUseCase.execute(request);
 

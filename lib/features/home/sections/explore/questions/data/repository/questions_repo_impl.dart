@@ -58,7 +58,7 @@ class QuestionsRepoImpl implements QuestionsRepo {
     try {
       final String token = await getToken(tokenKey: Constant.userToken);
       final examSubmitRequestModel = ExamSubmitRequestModel(
-        answers: mapToListAnswerSubmitRequestModel(question: question),
+        answers: _mapToListAnswerSubmitRequestModel(question: question),
         time: 0,
       );
       final response = await questionsDataSource.checkQuestionsOnExam(
@@ -79,14 +79,17 @@ class QuestionsRepoImpl implements QuestionsRepo {
     required ExamInfoEntity examInfo,
   }) async {
     try {
-      await resultExamLocal.saveExamResult(examInfo: examInfo);
+      bool hasToken = await userTokenStorage.hasToken();
+      if (hasToken) {
+        await resultExamLocal.saveExamResult(examInfo: examInfo);
+      }
       return left(null);
     } catch (e) {
       return right(ServerFailure(errorMessage: e.toString()));
     }
   }
 
-  List<AnswerSubmitRequestModel> mapToListAnswerSubmitRequestModel({
+  List<AnswerSubmitRequestModel> _mapToListAnswerSubmitRequestModel({
     required Map<String, AnswerSubmitRequestModel> question,
   }) {
     final examSubmitRequestModel = ExamSubmitRequestModel(

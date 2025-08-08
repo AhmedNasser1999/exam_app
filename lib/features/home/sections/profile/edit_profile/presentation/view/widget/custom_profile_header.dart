@@ -16,8 +16,8 @@ class CustomProfileHeader extends StatelessWidget {
       children: [
         Text(TextConstant.editProfile, style: theme.textTheme.titleLarge),
         IconButton(
-          onPressed: () async {
-            await cubit.logout();
+          onPressed: () {
+            cubit.logout();
             Navigator.pushReplacementNamed(context, SignInView.routeName);
           },
           icon: const Icon(Icons.logout),

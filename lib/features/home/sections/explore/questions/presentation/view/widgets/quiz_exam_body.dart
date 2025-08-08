@@ -1,5 +1,5 @@
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
-import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/builder_quizExam_body.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/builder_quiz_exam_body.dart';
 
 import 'package:flutter/material.dart';
 
