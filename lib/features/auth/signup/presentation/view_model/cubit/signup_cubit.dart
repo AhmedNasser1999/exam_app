@@ -44,13 +44,6 @@ class SignupCubit extends Cubit<SignupState> {
           phone: phoneController.text,
         ),
       );
-      print('userNameController: ${userNameController.text}');
-      print('firstNameController: ${firstNameController.text}');
-      print('lastNameController: ${lastNameController.text}');
-      print('emailController: ${emailController.text}');
-      print('passwordController: ${passwordController.text}');
-      print('confirmPasswordController: ${confirmPasswordController.text}');
-      print('phoneController: ${phoneController.text}');
     }
     return;
   }

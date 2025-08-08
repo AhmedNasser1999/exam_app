@@ -1,3 +1,4 @@
+import 'package:exam_app/core/constant/text_constant.dart';
 import 'package:exam_app/core/custom_widgets_model/exam_item_model.dart';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/exams/presentation/view_model/cubit/fetch_exam_all_by_id_cubit.dart';
@@ -17,7 +18,7 @@ class ListExamItems extends StatelessWidget {
       spacing: 24,
       children: [
         Text(
-          "Exams",
+          TextConstant.exams,
           style: theme.textTheme.titleMedium!.copyWith(
             fontWeight: FontWeight.w500,
           ),
@@ -30,9 +31,7 @@ class ListExamItems extends StatelessWidget {
               time: listOfAllExam[index].duration.toString(),
               numQuestion: listOfAllExam[index].numberOfQuestions.toString(),
               examInfo: "",
-              onTap: () {
-                cubit.startExam(examEntity: listOfAllExam[index]);
-              },
+              onTap: () => cubit.startExam(examEntity: listOfAllExam[index]),
             ),
           ),
           separatorBuilder: (context, index) => const SizedBox(height: 16),
