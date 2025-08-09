@@ -85,4 +85,6 @@ abstract class TextConstant {
       'Password must be at least 8 characters long';
   static const String pleaseConfermPassword = 'Please confirm your password';
   static const String passwordNotMatch = 'Passwords do not match';
+  static const String noResultsAvailable =
+      'No results available, complete the exam first.';
 }
