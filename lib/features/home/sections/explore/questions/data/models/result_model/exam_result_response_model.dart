@@ -9,6 +9,7 @@ class ExamResultResponseModel extends ResultEntity {
   final String message;
   final int correct;
   final int wrong;
+  @override
   final String total;
 
   @JsonKey(name: 'WrongQuestions')

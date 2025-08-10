@@ -11,6 +11,7 @@ class ProfileFailure extends ProfileState {
 }
 
 class ProfileLoading extends ProfileState {}
+
 class ProfileUpdateSuccess extends ProfileState {}
 
 class ProfileUpdateFailure extends ProfileState {

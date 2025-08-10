@@ -5,6 +5,7 @@ part 'answer_entity.g.dart';
 class AnswerEntity extends HiveObject {
   @HiveField(0)
   final String answer;
+  @override
   @HiveField(1)
   final String key;
   @HiveField(2)

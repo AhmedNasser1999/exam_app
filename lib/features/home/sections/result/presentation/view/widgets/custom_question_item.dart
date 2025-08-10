@@ -23,7 +23,6 @@ class CustomQuestionItem extends StatelessWidget {
                 answerEntity: ResultAnswerEntity(
                   answer: questionsEntity.answer[index].answer,
                   key: questionsEntity.answer[index].key,
-
                   correctAnswer: questionsEntity.correctAnswerKey,
                   isSelected: questionsEntity.answer[index].isSelected,
                 ),
