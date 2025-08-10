@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:exam_app/core/constant/constant.dart';
 import 'package:exam_app/core/local_data/hive/result_exam_local.dart';
@@ -22,7 +21,6 @@ class ResultExamLocalImpl extends ResultExamLocal {
 
   @override
   void deleteAllResult() {
-    log("delete all result");
     box.clear();
   }
 }

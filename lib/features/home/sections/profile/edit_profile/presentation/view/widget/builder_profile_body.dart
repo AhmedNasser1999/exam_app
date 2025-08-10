@@ -2,7 +2,6 @@ import 'package:exam_app/core/constant/app_assets.dart';
 import 'package:exam_app/core/constant/text_constant.dart';
 import 'package:exam_app/core/custom_widgets_model/button_model.dart';
 import 'package:exam_app/core/widgets/custom_button.dart';
-import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view/widget/custom_profile_header.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view/widget/section_text_filed.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view_model/profile_cubit.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view_model/profile_state.dart';
@@ -32,35 +31,31 @@ class _BuilderProfileBodyState extends State<BuilderProfileBody> {
             key: key,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const CustomProfileHeader(),
-                    const SizedBox(height: 25.0),
-                    SizedBox(
-                      height: 81,
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Image.asset(
-                          AppAssets.imagesProfile,
-                          fit: BoxFit.cover,
-                        ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 81,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Image.asset(
+                        AppAssets.imagesProfile,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(height: 25.0),
-                    const SectionTextFiled(),
-                    const SizedBox(height: 25.0),
-                    CustomButton(
-                      buttonModel: ButtonModel(
-                        text: TextConstant.update,
-                        onPressed: () {
-                          cubit.formValidateOnEditProfile(key);
-                        },
-                        borderRadius: 30.0,
-                      ),
+                  ),
+                  const SizedBox(height: 25.0),
+                  const SectionTextFiled(),
+                  const SizedBox(height: 25.0),
+                  CustomButton(
+                    buttonModel: ButtonModel(
+                      text: TextConstant.update,
+                      onPressed: () {
+                        cubit.formValidateOnEditProfile(key);
+                      },
+                      borderRadius: 30.0,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );

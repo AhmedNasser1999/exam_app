@@ -11,18 +11,21 @@ class CustomProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     final cubit = context.read<ProfileCubit>();
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(TextConstant.editProfile, style: theme.textTheme.titleLarge),
-        IconButton(
-          onPressed: () {
-            cubit.logout();
-            Navigator.pushReplacementNamed(context, SignInView.routeName);
-          },
-          icon: const Icon(Icons.logout),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(TextConstant.editProfile, style: theme.textTheme.titleLarge),
+          IconButton(
+            onPressed: () {
+              cubit.logout();
+              Navigator.pushReplacementNamed(context, SignInView.routeName);
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
+      ),
     );
   }
 }
