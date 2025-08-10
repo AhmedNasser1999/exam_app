@@ -10,10 +10,16 @@ class SplashRepoImpl extends SplashRepo {
   SplashRepoImpl(this._splashLocalDataSource, this._resultExamLocal);
   @override
   Future<bool> userHasToken() async {
-    final bool userToken = await _splashLocalDataSource.getUserToken();
+    final bool userToken = await _splashLocalDataSource.getRememberMe();
     if (!userToken) {
       _resultExamLocal.deleteAllResult();
     }
     return userToken;
+  }
+
+  @override
+  Future<void> deleteToken() {
+    // TODO: implement deleteToken
+    throw UnimplementedError();
   }
 }

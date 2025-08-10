@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:exam_app/core/error/failure.dart';
+import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
 import 'package:exam_app/features/auth/signin/data/data_source/signin_remote.dart';
-import 'package:exam_app/features/auth/signin/data/data_source/store_user_token.dart';
 import 'package:exam_app/features/auth/signin/data/models/signin_request.dart';
 import 'package:exam_app/features/auth/signin/domain/entities/user_entities.dart';
 import 'package:exam_app/features/auth/signin/domain/repository/signin_repository.dart';
@@ -11,7 +11,7 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(as: SigninRepository)
 class SigninRepositoryImpl extends SigninRepository {
   final SigninRemote signinRemote;
-  final StoreUserToken storeUserToken;
+  final UserTokenStorage storeUserToken;
   SigninRepositoryImpl({
     required this.signinRemote,
     required this.storeUserToken,
@@ -37,8 +37,9 @@ class SigninRepositoryImpl extends SigninRepository {
     required SigninRequest request,
     required UserEntities response,
   }) async {
-    if (request.isRememberMe) {
-      await storeUserToken.saveToken(token: response.token);
-    }
+    await storeUserToken.saveRememberMe(
+      rememberMe: request.isRememberMe.toString(),
+    );
+    await storeUserToken.saveToken(token: response.token);
   }
 }

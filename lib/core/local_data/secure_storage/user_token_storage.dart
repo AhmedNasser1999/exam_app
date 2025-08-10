@@ -6,4 +6,6 @@ abstract class UserTokenStorage {
   Future<void> removeToken();
 
   Future<String> getToken({required String tokenKey});
+  Future<void> saveRememberMe({required String rememberMe});
+  Future<bool> getRememberMe();
 }

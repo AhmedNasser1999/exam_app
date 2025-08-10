@@ -33,4 +33,16 @@ class UserTokenStorageImpl implements UserTokenStorage {
       return token;
     }
   }
+
+  @override
+  Future<bool> getRememberMe() async {
+    final String? value = await secureStorage.read(key: Constant.isRememberMe);
+    final bool isRememberMe = value == "true" ? true : false;
+    return isRememberMe;
+  }
+
+  @override
+  Future<void> saveRememberMe({required String rememberMe}) async {
+    await secureStorage.write(key: Constant.isRememberMe, value: rememberMe);
+  }
 }

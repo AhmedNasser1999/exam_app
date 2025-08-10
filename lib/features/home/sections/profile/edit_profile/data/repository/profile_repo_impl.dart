@@ -66,6 +66,6 @@ class ProfileRepoImpl implements ProfileRepo {
   @override
   Future<void> logout() async {
     _resultExamLocal.deleteAllResult();
-    await _userTokenStorage.removeToken();
+    await _userTokenStorage.saveRememberMe(rememberMe: "false");
   }
 }

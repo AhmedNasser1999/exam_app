@@ -1,3 +1,4 @@
 abstract class SplashLocalDataSource {
-  Future<bool> getUserToken();
+  Future<bool> getRememberMe();
+  Future<void> deleteToken();
 }
