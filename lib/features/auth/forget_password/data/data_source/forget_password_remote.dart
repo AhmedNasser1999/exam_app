@@ -11,7 +11,7 @@ abstract class ForgetPasswordRemote {
   });
 
   Future<VerifyResetCode> verifyResetCode({
-   required  VerifyResetCodeRequest request,
+    required VerifyResetCodeRequest request,
   });
 
   Future<UserResetPasswordToken> resetPassword({

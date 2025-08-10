@@ -1,5 +1,3 @@
-
-
 import 'package:exam_app/features/auth/signin/data/models/signin_request.dart';
 
 import 'package:exam_app/features/auth/signin/domain/use_cases/signin_usecase.dart';
@@ -28,7 +26,6 @@ class SignInCubit extends Cubit<SignInState> {
 
     userToken.fold(
       (l) async {
-    
         emit(SignInSuccess());
       },
       (r) {
@@ -36,7 +33,6 @@ class SignInCubit extends Cubit<SignInState> {
       },
     );
   }
-
 
   void rememberMe() {
     isRememberMe = isRememberMe == false ? true : false;

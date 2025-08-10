@@ -14,12 +14,16 @@ abstract class AppTheme {
         elevation: 0,
         titleSpacing: 0,
       ),
-
+      navigationBarTheme: NavigationBarThemeData(
+        height: 60,
+        indicatorColor: AppColors.blue[10],
+        backgroundColor: AppColors.lightBlue,
+      ),
       textTheme: TextTheme(
         bodyLarge: TextStyle(fontSize: 16, color: colorScheme.secondary),
         bodyMedium: TextStyle(fontSize: 14, color: colorScheme.secondary),
         bodySmall: TextStyle(fontSize: 12, color: colorScheme.secondary),
-        titleLarge: TextStyle(fontSize: 20, color: colorScheme.secondary),
+        titleLarge: TextStyle(fontSize: 20, color: colorScheme.secondary , fontWeight: FontWeight.w600),
         titleMedium: TextStyle(fontSize: 18, color: colorScheme.secondary),
         titleSmall: TextStyle(
           fontSize: 16,
@@ -65,6 +69,6 @@ abstract class AppTheme {
       surface: AppColors.white,
       onSurface: AppColors.blue,
     ),
-    textFieldBorderColor: AppColors.gray,
+    textFieldBorderColor: AppColors.grey,
   );
 }

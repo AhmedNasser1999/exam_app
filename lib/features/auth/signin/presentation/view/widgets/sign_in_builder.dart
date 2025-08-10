@@ -7,7 +7,6 @@ import 'package:exam_app/core/widgets/custom_text_button.dart';
 import 'package:exam_app/core/widgets/custom_text_form_filed.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/views/forget_password_view.dart';
 import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_cubit.dart';
-import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_state.dart';
 import 'package:exam_app/features/auth/signin/presentation/view/widgets/custom_remember_me_widget.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +35,6 @@ class _SignInBuilderState extends State<SignInBuilder> {
             children: [
               Text(TextConstant.loginText, style: theme.textTheme.titleLarge),
               const SizedBox(height: 24.0),
-
               CustomTextFormField(
                 textFieldModel: TextFieldModel(
                   controller: cubit.emailController,

@@ -6,11 +6,29 @@ import 'package:exam_app/features/auth/signin/presentation/cubit/sign_in_cubit.d
 import 'package:exam_app/features/auth/signin/presentation/view/sign_in_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view/sign_up_view.dart';
 import 'package:exam_app/features/auth/signup/presentation/view_model/cubit/signup_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/all_exam_view.dart';
+import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view/quiz_exam_view.dart';
 import 'package:exam_app/features/home/presentation/view/home_view.dart';
+import 'package:exam_app/features/home/presentation/view_model/home_screen/home_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view_model/cubit/fetch_exam_all_by_id_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/question_cubit/question_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/result_cubit/result_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/questions/presentation/view_model/timer_cubit/timer_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/domain/entities/subject_entity.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_cubit.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/presentation/view_model/profile_cubit.dart';
+import 'package:exam_app/features/home/sections/result/presentation/view/result_exam_view.dart';
+import 'package:exam_app/features/home/sections/result/presentation/view_model/cubit/all_result_cubit.dart';
+import 'package:exam_app/features/home/sections/profile/change_password/presentation/view_model/change_password_cubit.dart';
+import 'package:exam_app/features/home/sections/profile/change_password/presentation/views/change_password_screen.dart';
 import 'package:exam_app/features/splash/presentation/view/splash_view.dart';
 import 'package:exam_app/features/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+late final SubjectEntity subjectEntity;
 
 abstract class OnGenerateRoute {
   static Route onGenerateRoute(RouteSettings setting) {
@@ -22,8 +40,22 @@ abstract class OnGenerateRoute {
             child: const SplashView(),
           ),
         );
+
       case RouteName.homeView:
-        return MaterialPageRoute(builder: (context) => const HomeView());
+        return MaterialPageRoute(
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<HomeCubit>()),
+              BlocProvider(create: (context) => getIt<AllResultCubit>()),
+              BlocProvider(create: (context)=> getIt<ProfileCubit>()),
+              BlocProvider(
+                create: (context) => getIt<SubjectsCubit>()..fetchSubjects(),
+              ),
+            ],
+            child: const HomeView(),
+          ),
+        );
+
       case RouteName.forgetPassword:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -31,6 +63,7 @@ abstract class OnGenerateRoute {
             child: ForgetPasswordView(),
           ),
         );
+
       case RouteName.sigInName:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -38,13 +71,56 @@ abstract class OnGenerateRoute {
             child: const SignInView(),
           ),
         );
-      case RouteName.sigUpName:
+
+      case RouteName.signUpName:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => getIt.get<SignupCubit>(),
             child: const SignUpView(),
           ),
         );
+
+      case RouteName.allExamView:
+        final subjectId = setting.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) =>
+                getIt<FetchExamAllByIdCubit>()
+                  ..getAllExamsOnSubject(subjectId: subjectId),
+            child: const AllExamView(),
+          ),
+        );
+
+      case RouteName.quizExamView:
+        final ExamEntity examInfo = setting.arguments as ExamEntity;
+        return MaterialPageRoute(
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    getIt<QuestionCubit>()..getAllQuestions(exam: examInfo),
+              ),
+              BlocProvider(create: (context) => getIt<TimerCubit>()),
+              BlocProvider(create: (context) => getIt<ResultCubit>()),
+            ],
+            child: QuizExamView(examInfoEntity: examInfo),
+          ),
+        );
+      case RouteName.resultView:
+        final allQuestion = setting.arguments as ExamInfoEntity;
+        return MaterialPageRoute(
+          builder: (context) =>
+              ResultExamView(allQuestion: allQuestion.listQuestion),
+        );
+
+      case RouteName.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<ChangePasswordCubit>(),
+            child: const ChangePasswordScreen(),
+          ),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) =>
