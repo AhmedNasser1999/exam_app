@@ -8,7 +8,12 @@ class SplashLocalDataSourceImpl extends SplashLocalDataSource {
 
   SplashLocalDataSourceImpl({required this.userTokenStorage});
   @override
-  Future<bool> getUserToken() async {
-    return await userTokenStorage.hasToken();
+  Future<bool> getRememberMe() async {
+    return await userTokenStorage.getRememberMe();
+  }
+
+  @override
+  Future<void> deleteToken() async {
+    await userTokenStorage.removeToken();
   }
 }

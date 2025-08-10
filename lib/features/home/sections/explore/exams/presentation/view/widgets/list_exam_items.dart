@@ -1,0 +1,44 @@
+import 'package:exam_app/core/constant/text_constant.dart';
+import 'package:exam_app/core/custom_widgets_model/exam_item_model.dart';
+import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view_model/cubit/fetch_exam_all_by_id_cubit.dart';
+import 'package:exam_app/features/home/sections/explore/exams/presentation/view/widgets/custom_exam_item.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class ListExamItems extends StatelessWidget {
+  const ListExamItems({super.key, required this.listOfAllExam});
+  final List<ExamEntity> listOfAllExam;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final cubit = context.read<FetchExamAllByIdCubit>();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 24,
+      children: [
+        Text(
+          TextConstant.exams,
+          style: theme.textTheme.titleMedium!.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) => CustomExamItem(
+            examItemModel: ExamItemModel(
+              title: listOfAllExam[index].title,
+              time: listOfAllExam[index].duration.toString(),
+              numQuestion: listOfAllExam[index].numberOfQuestions.toString(),
+              examInfo: "",
+              onTap: () => cubit.startExam(examEntity: listOfAllExam[index]),
+            ),
+          ),
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
+          itemCount: listOfAllExam.length,
+          shrinkWrap: true,
+        ),
+      ],
+    );
+  }
+}

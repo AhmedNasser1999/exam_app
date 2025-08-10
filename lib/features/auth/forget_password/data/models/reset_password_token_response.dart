@@ -5,7 +5,7 @@ part 'reset_password_token_response.g.dart';
 @JsonSerializable()
 class ResetPasswordTokenResponse extends UserResetPasswordToken {
   String message;
-
+  @override
   String token;
 
   ResetPasswordTokenResponse({required this.message, required this.token})
