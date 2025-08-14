@@ -24,17 +24,17 @@ abstract class DioModule {
         },
       ),
     );
-    dio.interceptors.add(
-      LogInterceptor(
-        request: true,
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: false,
-        responseBody: true,
-        error: true,
-        logPrint: (object) => Logger().i(object),
-      ),
-    );
+    // dio.interceptors.add(
+    //   LogInterceptor(
+    //     request: true,
+    //     requestHeader: true,
+    //     requestBody: true,
+    //     responseHeader: false,
+    //     responseBody: true,
+    //     error: true,
+    //     logPrint: (object) => Logger().i(object),
+    //   ),
+    // );
     return dio;
   }
 }

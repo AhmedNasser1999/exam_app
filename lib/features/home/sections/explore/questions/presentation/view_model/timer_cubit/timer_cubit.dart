@@ -27,11 +27,17 @@ class TimerCubit extends Cubit<TimerState> {
     });
   }
 
+  timerCancel() {
+    _examFinish = true;
+    _timer?.cancel();
+  }
+
   timerFinish() {
     _examFinish = true;
     _timer?.cancel();
     emit(TimerFinish());
   }
+
   @override
   Future<void> close() {
     _timer?.cancel();

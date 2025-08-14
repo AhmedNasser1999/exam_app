@@ -36,7 +36,7 @@ class QuizExamButton extends StatelessWidget {
                       : "Next",
                   onPressed: () {
                     if (cubit.currentPage == cubit.allQuestion.length - 1) {
-                      timerCubit.timerFinish();
+                      timerCubit.timerCancel();
                     }
                     cubit.nextQuestion();
                   },

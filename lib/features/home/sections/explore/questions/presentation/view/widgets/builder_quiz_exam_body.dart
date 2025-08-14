@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/presentation/view/widgets/exam_questions_body.dart';
@@ -17,11 +19,12 @@ class BuilderQuizExamBody extends StatelessWidget {
     final timerCubit = context.read<TimerCubit>();
     final questionCubit = context.read<QuestionCubit>();
     final resultCubit = context.read<ResultCubit>();
-
+    int number = 0;
     return BlocConsumer<QuestionCubit, QuestionState>(
       listener: (context, state) {
         if (state is QuestionFinishExam) {
           resultCubit.checkQuestionResult(questionCubit.question);
+          log("${number++}");
           resultCubit.saveQuestionsResult(
             examInfo: ExamInfoEntity(
               time: examEntity.duration,

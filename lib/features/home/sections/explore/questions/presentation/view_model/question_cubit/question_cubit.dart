@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/answer_submit_request_model.dart';
@@ -31,6 +33,7 @@ class QuestionCubit extends Cubit<QuestionState> {
   }
 
   examFinish() {
+    log("time finish ");
     emit(QuestionFinishExam());
   }
 
@@ -56,6 +59,7 @@ class QuestionCubit extends Cubit<QuestionState> {
     final isLastQuestion = currentPage >= allQuestion.length - 1;
 
     if (isLastQuestion) {
+      log("finish question");
       emit(QuestionFinishExam());
       return;
     }
