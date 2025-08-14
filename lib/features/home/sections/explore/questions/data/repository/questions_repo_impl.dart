@@ -1,5 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/core/constant/constant.dart';
 import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/core/local_data/hive/result_exam_local.dart';
@@ -25,7 +25,7 @@ class QuestionsRepoImpl implements QuestionsRepo {
   });
 
   @override
-  Future<Either<List<QuestionsEntity>, Failure>> getAllQuestionsOnExam({
+  Future<ApiResult<List<QuestionsEntity>>> getAllQuestionsOnExam({
     required String examId,
   }) async {
     try {
@@ -36,12 +36,16 @@ class QuestionsRepoImpl implements QuestionsRepo {
         examId: examId,
         token: token,
       );
-      return left(response.questions);
+      return SuccessApiResult<List<QuestionsEntity>>(data: response.questions);
     } catch (e) {
       if (e is DioException) {
-        return right(ServerFailure.fromDio(e));
+        return FailureApiResult<List<QuestionsEntity>>(
+          error: ServerFailure.fromDio(e),
+        );
       }
-      return right(ServerFailure(errorMessage: e.toString()));
+      return FailureApiResult<List<QuestionsEntity>>(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 
@@ -52,7 +56,7 @@ class QuestionsRepoImpl implements QuestionsRepo {
   }
 
   @override
-  Future<Either<ResultEntity, Failure>> checkQuestionsOnExam({
+  Future<ApiResult<ResultEntity>> checkQuestionsOnExam({
     required Map<String, AnswerSubmitRequestModel> question,
   }) async {
     try {
@@ -65,17 +69,21 @@ class QuestionsRepoImpl implements QuestionsRepo {
         token: token,
         question: examSubmitRequestModel,
       );
-      return left(response);
+      return SuccessApiResult<ResultEntity>(data: response);
     } catch (e) {
       if (e is DioException) {
-        return right(ServerFailure.fromDio(e));
+        return FailureApiResult<ResultEntity>(
+          error: ServerFailure.fromDio(e),
+        );
       }
-      return right(ServerFailure(errorMessage: e.toString()));
+      return FailureApiResult<ResultEntity>(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 
   @override
-  Future<Either<void, Failure>> saveExamResult({
+  Future<ApiResult<void>> saveExamResult({
     required ExamInfoEntity examInfo,
   }) async {
     try {
@@ -83,9 +91,11 @@ class QuestionsRepoImpl implements QuestionsRepo {
       if (hasToken) {
         await resultExamLocal.saveExamResult(examInfo: examInfo);
       }
-      return left(null);
+      return SuccessApiResult<void>(data: null);
     } catch (e) {
-      return right(ServerFailure(errorMessage: e.toString()));
+      return FailureApiResult<void>(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 

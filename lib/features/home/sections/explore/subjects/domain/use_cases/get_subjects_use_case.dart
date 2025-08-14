@@ -1,5 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:exam_app/core/error/failure.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/domain/entities/subject_entity.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/domain/repository/subject_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -10,7 +9,7 @@ class GetSubjectsUseCase {
 
   GetSubjectsUseCase({required this.subjectRepoImpl});
 
-  Future<Either<Failure, List<SubjectEntity>>> execute() async {
+  Future<ApiResult<List<SubjectEntity>>> call() async {
     return await subjectRepoImpl.fetchSubjects();
   }
 }

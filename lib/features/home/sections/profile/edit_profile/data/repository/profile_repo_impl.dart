@@ -1,5 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/core/local_data/hive/result_exam_local.dart';
 import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
@@ -20,7 +20,7 @@ class ProfileRepoImpl implements ProfileRepo {
     this._resultExamLocal,
   );
   @override
-  Future<Either<Failure, ResponseEntity>> editProfile(request) async {
+  Future<ApiResult<ResponseEntity>> editProfile(request) async {
     try {
       final profile = await _profileDataSource.editProfile(request);
 
@@ -32,17 +32,21 @@ class ProfileRepoImpl implements ProfileRepo {
         phone: profile.user!.phone ?? '',
       );
 
-      return Right(responseEntity);
+      return SuccessApiResult<ResponseEntity>(data: responseEntity);
     } catch (e) {
       if (e is DioException) {
-        return Left(ServerFailure.fromDio(e));
+        return FailureApiResult<ResponseEntity>(
+          error: ServerFailure.fromDio(e),
+        );
       }
-      return Left(ServerFailure(errorMessage: e.toString()));
+      return FailureApiResult<ResponseEntity>(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 
   @override
-  Future<Either<Failure, ProfileEntity>> getProfileData() async {
+  Future<ApiResult<ProfileEntity>> getProfileData() async {
     try {
       final profileData = await _profileDataSource.getProfileData();
 
@@ -54,12 +58,14 @@ class ProfileRepoImpl implements ProfileRepo {
         phone: profileData.user!.phone ?? '',
       );
 
-      return Right(profileEntity);
+      return SuccessApiResult<ProfileEntity>(data: profileEntity);
     } catch (e) {
       if (e is DioException) {
-        return Left(ServerFailure.fromDio(e));
+        return FailureApiResult<ProfileEntity>(error: ServerFailure.fromDio(e));
       }
-      return Left(ServerFailure(errorMessage: e.toString()));
+      return FailureApiResult<ProfileEntity>(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 

@@ -1,6 +1,7 @@
-import 'package:exam_app/core/config/di.dart';
-import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/data/models/profile_request_model.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/domain/entities/profile_entity.dart';
+import 'package:exam_app/features/home/sections/profile/edit_profile/domain/entities/response_entity.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/edit_profile_use_case.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/get_user_info_use_case.dart';
 import 'package:exam_app/features/home/sections/profile/edit_profile/domain/use_cases/logout_use_case.dart';
@@ -36,15 +37,14 @@ class ProfileCubit extends Cubit<ProfileState> {
       email: emailController.text,
       phone: phoneController.text,
     );
-    final profile = await _editProfileUseCase.call(profileRequest);
-    profile.fold(
-      (failure) {
-        emit(ProfileUpdateFailure(errorMassage: failure.errorMessage));
-      },
-      (success) {
+    final response = await _editProfileUseCase.call(profileRequest);
+    switch (response) {
+      case SuccessApiResult<ResponseEntity>():
         emit(ProfileUpdateSuccess());
-      },
-    );
+
+      case FailureApiResult<ResponseEntity>():
+        emit(ProfileUpdateFailure(errorMassage: response.error.errorMessage));
+    }
   }
 
   void formValidateOnEditProfile(GlobalKey<FormState> formKey) {
@@ -55,27 +55,28 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> getProfileRemoteData() async {
     emit(ProfileLoading());
-    final profileResponse = await _getUserInfoUseCase.call();
-    profileResponse.fold(
-      (failure) {
-        emit(ProfileFailure(errorMassage: failure.errorMessage));
-      },
-      (profileData) {
-        final username = profileData.username ?? '';
-        final firstName = profileData.firstName ?? '';
-        final lastName = profileData.lastName ?? '';
-        final email = profileData.email ?? '';
-        final phone = profileData.phone ?? '';
+    final response = await _getUserInfoUseCase.call();
+    switch (response) {
+      case SuccessApiResult<ProfileEntity>():
+        {
+          final username = response.data.username ?? '';
+          final firstName = response.data.firstName ?? '';
+          final lastName = response.data.lastName ?? '';
+          final email = response.data.email ?? '';
+          final phone = response.data.phone ?? '';
 
-        userNameController.text = username;
-        firstNameController.text = firstName;
-        lastNameController.text = lastName;
-        emailController.text = email;
-        phoneController.text = phone;
-        passwordController.text = "0000000";
-        emit(ProfileSuccess());
-      },
-    );
+          userNameController.text = username;
+          firstNameController.text = firstName;
+          lastNameController.text = lastName;
+          emailController.text = email;
+          phoneController.text = phone;
+          passwordController.text = "0000000";
+          emit(ProfileSuccess());
+        }
+      case FailureApiResult<ProfileEntity>():
+        emit(ProfileFailure(errorMassage: response.error.errorMessage));
+    }
+
   }
 
   logout() async {

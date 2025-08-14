@@ -1,6 +1,5 @@
-import 'package:dartz/dartz.dart';
-import 'package:exam_app/core/error/failure.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 
 abstract class UseCasePram<Type, Pram> {
-  Future<Either<Type, Failure>> call(pram);
+  Future<ApiResult<Type>> call(pram);
 }

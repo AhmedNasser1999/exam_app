@@ -1,4 +1,6 @@
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/features/home/sections/profile/change_password/data/models/change_password_request.dart';
+import 'package:exam_app/features/home/sections/profile/change_password/domain/entities/change_password_entity.dart';
 import 'package:exam_app/features/home/sections/profile/change_password/domain/use_cases/change_password_use_case.dart';
 import 'package:exam_app/features/home/sections/profile/change_password/presentation/view_model/change_password_state.dart';
 import 'package:flutter/material.dart';
@@ -26,19 +28,9 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
       rePassword: rePassword.text,
     );
 
-    final message = await changePasswordUseCase.execute(request);
-
-    message.fold(
-      (failure) {
-        emit(
-          state.copyWith(
-            isLoading: false,
-            errorMessage: 'An error occurred while changing the password',
-            successMessage: null,
-          ),
-        );
-      },
-      (success) {
+    final response = await changePasswordUseCase.call(request);
+    switch (response) {
+      case SuccessApiResult<ChangePasswordEntity>():
         emit(
           state.copyWith(
             isLoading: false,
@@ -46,8 +38,15 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
             errorMessage: null,
           ),
         );
-      },
-    );
+      case FailureApiResult<ChangePasswordEntity>():
+        emit(
+          state.copyWith(
+            isLoading: false,
+            errorMessage: 'An error occurred while changing the password',
+            successMessage: null,
+          ),
+        );
+    }
   }
 
   void formValidateOnChangePassword() {

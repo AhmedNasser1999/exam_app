@@ -1,3 +1,4 @@
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/features/home/sections/explore/exams/domain/entities/exam_entity.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/answer_submit_request_model.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/questions_entity.dart';
@@ -20,15 +21,13 @@ class QuestionCubit extends Cubit<QuestionState> {
   getAllQuestions({required ExamEntity exam}) async {
     emit(QuestionLoading());
     final response = await _getAllQuestionsUseCase.call(exam.id);
-    response.fold(
-      (l) {
-        allQuestion = l;
+    switch (response) {
+      case SuccessApiResult<List<QuestionsEntity>>():
+        allQuestion = response.data;
         emit(QuestionSuccess());
-      },
-      (r) {
-        emit(QuestionFailure(errorMessage: r.errorMessage));
-      },
-    );
+      case FailureApiResult<List<QuestionsEntity>>():
+        emit(QuestionFailure(errorMessage: response.error.errorMessage));
+    }
   }
 
   examFinish() {

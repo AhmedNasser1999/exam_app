@@ -1,4 +1,6 @@
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/features/auth/signup/api/model/signup_request/signup_request_model.dart';
+import 'package:exam_app/features/auth/signup/domain/entities/signup_entities.dart';
 import 'package:exam_app/features/auth/signup/domain/use_case/use_case_signup.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,15 +22,14 @@ class SignupCubit extends Cubit<SignupState> {
   final TextEditingController phoneController = TextEditingController();
   signup({required SignupRequestModel signupReq}) async {
     emit(SignupLoading());
-    var request = await useCaseSignup.call(signupReq);
-    request.fold(
-      (success) {
+    var response = await useCaseSignup.call(signupReq);
+
+    switch (response) {
+      case SuccessApiResult<SignupEntities>():
         emit(SignupSuccess());
-      },
-      (failure) {
-        emit(SignupFailure(errorMessage: failure.errorMessage));
-      },
-    );
+      case FailureApiResult<SignupEntities>():
+        emit(SignupFailure(errorMessage: response.error.errorMessage));
+    }
   }
 
   validate({required GlobalKey<FormState> formKey}) async {

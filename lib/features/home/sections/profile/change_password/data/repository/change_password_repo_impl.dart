@@ -1,4 +1,5 @@
-import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/features/home/sections/profile/change_password/api/data_sourcce/change_password_data_source_impl.dart';
 import 'package:exam_app/features/home/sections/profile/change_password/domain/entities/change_password_entity.dart';
@@ -11,14 +12,23 @@ class ChangePasswordRepoImpl implements ChangePasswordRepo {
 
   ChangePasswordRepoImpl(this.changePasswordDataSourceImpl);
   @override
-  Future<Either<Failure, ChangePasswordEntity>> changePassword(request) async {
+  Future<ApiResult<ChangePasswordEntity>> changePassword(request) async {
     try {
       final response = await changePasswordDataSourceImpl.changePassword(
         request,
       );
-      return Right(ChangePasswordEntity(token: response.token));
+      return SuccessApiResult<ChangePasswordEntity>(
+        data: ChangePasswordEntity(token: response.token),
+      );
     } catch (e) {
-      return Left(ServerFailure(errorMessage: e.toString()));
+      if (e is DioException) {
+        return FailureApiResult<ChangePasswordEntity>(
+          error: ServerFailure.fromDio(e),
+        );
+      }
+      return FailureApiResult<ChangePasswordEntity>(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 }

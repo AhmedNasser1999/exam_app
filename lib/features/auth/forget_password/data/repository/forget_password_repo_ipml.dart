@@ -1,5 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/features/auth/forget_password/data/data_source/forget_password_remote.dart';
 import 'package:exam_app/features/auth/forget_password/data/models/forget_password_request.dart';
@@ -18,7 +18,7 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
   ForgetPasswordRepoImpl(this.forgetPasswordRemote);
   //  submit Reset Email
   @override
-  Future<Either<ForgetPasswordSuccess, Failure>> submitResetEmail({
+  Future<ApiResult<ForgetPasswordSuccess>> submitResetEmail({
     required ForgetPasswordRequest request,
   }) async {
     try {
@@ -26,18 +26,22 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
         request: request,
       );
 
-      return left(response);
+      return SuccessApiResult<ForgetPasswordSuccess>(data: response);
     } catch (e) {
       if (e is DioException) {
-        return right(ServerFailure.fromDio(e));
+        return FailureApiResult<ForgetPasswordSuccess>(
+          error: ServerFailure.fromDio(e),
+        );
       }
-      return right(ServerFailure(errorMessage: e.toString()));
+      return FailureApiResult<ForgetPasswordSuccess>(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 
   //verify Reset Code
   @override
-  Future<Either<VerifyResetCode, Failure>> verifyResetCode({
+  Future<ApiResult<VerifyResetCode>> verifyResetCode({
     required VerifyResetCodeRequest request,
   }) async {
     try {
@@ -45,30 +49,38 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
         request: request,
       );
 
-      return left(response);
+      return SuccessApiResult<VerifyResetCode>(data: response);
     } catch (e) {
       if (e is DioException) {
-        return right(ServerFailure.fromDio(e));
+        return FailureApiResult<VerifyResetCode>(
+          error: ServerFailure.fromDio(e),
+        );
       }
-      return right(ServerFailure(errorMessage: e.toString()));
+      return FailureApiResult<VerifyResetCode>(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 
   //verify Reset password
   @override
-  Future<Either<UserResetPasswordToken, Failure>> resetPassword({
+  Future<ApiResult<UserResetPasswordToken>> resetPassword({
     required ResetPasswordTokenRequest request,
   }) async {
     try {
       final response = await forgetPasswordRemote.resetPassword(
         request: request,
       );
-      return left(response);
+      return SuccessApiResult<UserResetPasswordToken>(data: response);
     } catch (e) {
       if (e is DioException) {
-        return right(ServerFailure.fromDio(e));
+        return FailureApiResult<UserResetPasswordToken>(
+          error: ServerFailure.fromDio(e),
+        );
       }
-      return right(ServerFailure(errorMessage: e.toString()));
+      return FailureApiResult(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 }

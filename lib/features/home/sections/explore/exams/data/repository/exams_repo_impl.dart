@@ -1,4 +1,5 @@
-import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/core/constant/constant.dart';
 import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/core/local_data/secure_storage/user_token_storage.dart';
@@ -13,7 +14,7 @@ class ExamsRepoImpl implements ExamRepository {
   final UserTokenStorage userTokenStorage;
   ExamsRepoImpl({required this.examDataSource, required this.userTokenStorage});
   @override
-  Future<Either<Failure, List<ExamEntity>>> getAllExamsOnSubject(
+  Future<ApiResult<List<ExamEntity>>> getAllExamsOnSubject(
     String subjectId,
   ) async {
     try {
@@ -23,9 +24,16 @@ class ExamsRepoImpl implements ExamRepository {
         token: token,
       );
 
-      return Right(allExam.exams);
+      return SuccessApiResult<List<ExamEntity>>(data: allExam.exams);
     } catch (e) {
-      return Left(ServerFailure(errorMessage: e.toString()));
+      if (e is DioException) {
+        return FailureApiResult<List<ExamEntity>>(
+          error: ServerFailure.fromDio(e),
+        );
+      }
+      return FailureApiResult(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 

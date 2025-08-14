@@ -1,5 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:exam_app/core/error/failure.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/core/use_case/use_case_pram.dart';
 import 'package:exam_app/features/home/sections/explore/questions/data/models/result_model/answer_submit_request_model.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/result_entity.dart';
@@ -13,7 +12,7 @@ class CheckQuestionsOnExamUseCase
   CheckQuestionsOnExamUseCase({required this.questionsRepo});
 
   @override
-  Future<Either<ResultEntity, Failure>> call(pram) async {
+  Future<ApiResult<ResultEntity>> call(pram) async {
     return await questionsRepo.checkQuestionsOnExam(question: pram);
   }
 }

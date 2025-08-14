@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/core/error/failure.dart';
 import 'package:exam_app/features/home/sections/explore/questions/domain/entities/exam_info_entity.dart';
 import 'package:exam_app/features/home/sections/result/data/data_source/result_data_source_local.dart';
@@ -11,12 +11,14 @@ class ResultRepoImpl extends ResultRepo {
 
   ResultRepoImpl({required this.resultDataSourceLocal});
   @override
-  Future<Either<List<ExamInfoEntity>, Failure>> getAllResult() async {
+  Future<ApiResult<List<ExamInfoEntity>>> getAllResult() async {
     try {
       final allResult = await resultDataSourceLocal.getAllResultExam();
-      return left(allResult);
+      return SuccessApiResult<List<ExamInfoEntity>>(data: allResult);
     } on Exception catch (e) {
-      return right(ServerFailure(errorMessage: e.toString()));
+      return FailureApiResult<List<ExamInfoEntity>>(
+        error: ServerFailure(errorMessage: e.toString()),
+      );
     }
   }
 }

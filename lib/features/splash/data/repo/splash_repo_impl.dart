@@ -17,9 +17,4 @@ class SplashRepoImpl extends SplashRepo {
     return userToken;
   }
 
-  @override
-  Future<void> deleteToken() {
-    // TODO: implement deleteToken
-    throw UnimplementedError();
-  }
 }

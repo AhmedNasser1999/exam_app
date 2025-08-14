@@ -1,6 +1,8 @@
+import 'package:exam_app/core/api_result/api_result.dart';
 import 'package:exam_app/features/auth/signin/data/models/signin_request.dart';
+import 'package:exam_app/features/auth/signin/domain/entities/user_entities.dart';
 
-import 'package:exam_app/features/auth/signin/domain/use_cases/signin_usecase.dart';
+import 'package:exam_app/features/auth/signin/domain/use_cases/signin_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -23,15 +25,12 @@ class SignInCubit extends Cubit<SignInState> {
         isRememberMe: isRememberMe,
       ),
     );
-
-    userToken.fold(
-      (l) async {
+    switch (userToken) {
+      case SuccessApiResult<UserEntities>():
         emit(SignInSuccess());
-      },
-      (r) {
-        emit(SignInFailure(r.errorMessage));
-      },
-    );
+      case FailureApiResult<UserEntities>():
+        emit(SignInFailure(userToken.error.errorMessage));
+    }
   }
 
   void rememberMe() {

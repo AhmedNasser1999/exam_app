@@ -1,3 +1,5 @@
+import 'package:exam_app/core/api_result/api_result.dart';
+import 'package:exam_app/features/home/sections/explore/subjects/domain/entities/subject_entity.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/domain/use_cases/get_subjects_use_case.dart';
 import 'package:exam_app/features/home/sections/explore/subjects/presentation/view_model/subjects/subjects_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,17 +14,12 @@ class SubjectsCubit extends Cubit<SubjectsState> {
   Future<void> fetchSubjects() async {
     emit(state.copyWith(isLoading: true));
 
-    final result = await getSubjectsUseCase.execute();
-
-    result.fold(
-      (failure) {
-        emit(
-          state.copyWith(isLoading: false, errorMessage: failure.errorMessage),
-        );
-      },
-      (subjectList) {
-        emit(state.copyWith(isLoading: false, subjects: subjectList));
-      },
-    );
+    final response = await getSubjectsUseCase.call();
+    switch (response) {
+      case SuccessApiResult<List<SubjectEntity>>():
+        emit(state.copyWith(isLoading: false, subjects: response.data));
+      case FailureApiResult<List<SubjectEntity>>():
+        emit(state.copyWith(isLoading: false, errorMessage: response.error.errorMessage));
+    }
   }
 }
