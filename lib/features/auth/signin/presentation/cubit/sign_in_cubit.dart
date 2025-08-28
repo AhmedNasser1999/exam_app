@@ -16,14 +16,15 @@ class SignInCubit extends Cubit<SignInState> {
   bool isRememberMe = false;
   SignInCubit({required this.signInUseCase}) : super(SignInInitial());
 
-  Future<void> signIn() async {
+  Future<void> signIn(SigninRequest request) async {
     emit(SignInLoading());
     final userToken = await signInUseCase.call(
-      SigninRequest(
-        email: emailController.text,
-        password: passwordController.text,
-        isRememberMe: isRememberMe,
-      ),
+      // SigninRequest(
+      //   email: emailController.text,
+      //   password: passwordController.text,
+      //   isRememberMe: isRememberMe,
+      // ),
+      request,
     );
     switch (userToken) {
       case SuccessApiResult<UserEntities>():
@@ -40,7 +41,7 @@ class SignInCubit extends Cubit<SignInState> {
 
   formValidateSignIn({required GlobalKey<FormState> formKey}) {
     if (formKey.currentState!.validate()) {
-      signIn();
+      // signIn(FixtureAuth);
     }
   }
 
