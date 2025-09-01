@@ -1,0 +1,21 @@
+name: Flutter Unit Test Action
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v5
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.32.7
+      - run: flutter --version
+      - name: Install packages
+        run: flutter pub get
+      - name: Run test
+        run: flutter test test
