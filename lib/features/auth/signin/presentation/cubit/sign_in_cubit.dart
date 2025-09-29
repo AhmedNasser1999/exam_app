@@ -13,7 +13,6 @@ class SignInCubit extends Cubit<SignInState> {
   final TextEditingController passwordController = TextEditingController();
   bool isRememberMe = false;
   SignInCubit({required this.signInUseCase}) : super(SignInInitial());
-
   Future<void> signIn() async {
     emit(SignInLoading());
     final userToken = await signInUseCase.call(
