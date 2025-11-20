@@ -1,21 +1,75 @@
-# exam_app
+# 📘 Elevate Online Exams – Flutter Application
 
-A new Flutter project.
+A modern and user-friendly Flutter application designed to streamline online examinations for students, teachers, and educational institutions.  
+The app provides secure authentication, timed exams, detailed results, and a smooth experience powered by a clean architecture and scalable codebase.
 
+---
 
-## Screenshots
+## 🚀 Features Overview
+
+### 🔐 Authentication
+- Login & Register  
+- Forget Password  
+- Edit Profile  
+- Change Password  
+- Full form validation & error handling  
+
+### 🏠 Home
+- Explore available surveys/exams  
+- View previous exam results  
+- Manage personal profile  
+
+### 🔎 Search
+- Search subjects by keyword  
+
+### 📝 Exams
+- View exam instructions before starting  
+- Timed exams with auto-submit  
+- Multiple question types  
+- Confirm dialog before submitting  
+- Track remaining time  
+
+### 📊 Results
+- Detailed result breakdown  
+- Grades, duration, and exam status  
+- Correct vs wrong answers  
+
+### 👤 Profile
+- Update name, email, and personal info  
+- Change password  
+
+---
+
+## 🛠️ Tech Stack & Tools
+
+### ⚙️ Technical Overview
+- **Framework:** Flutter  
+- **Architecture:** Clean Architecture (Data – Domain – Presentation – API)  
+- **Pattern:** MVVM  
+- **State Management:** Cubit  
+- **Database:** Hive + Shared Preferences  
+- **Networking:** REST API (Dio Module)  
+- **Local Storage:** Hive, Secure Storage  
+
+### 📐 Tools & Technologies
+- Version Control: Git & GitHub  
+- UI/UX Design: Figma  
+- API Testing: Postman  
+- IDE: Android Studio / VS Code  
+
+---
+
+## 🖼️ Screenshots
 
 | Screenshot | Screenshot | Screenshot | Screenshot |
 |---|---|---|---|
-| ![Screenshot 1](screenshots/1.png) | ![Screenshot 2](screenshots/2.png) | ![Screenshot 3](screenshots/3.png) | ![Screenshot 4](screenshots/4.png) |
-| ![Screenshot 5](screenshots/5.png) | ![Screenshot 6](screenshots/6.png) | ![Screenshot 7](screenshots/7.png) | ![Screenshot 8](screenshots/8.png) |
-| ![Screenshot 9](screenshots/9.png) | ![Screenshot 10](screenshots/10.png) | ![Screenshot 11](screenshots/11.png) | ![Screenshot 12](screenshots/12.png) |
+| ![](screenshots/1.png) | ![](screenshots/2.png) | ![](screenshots/3.png) | ![](screenshots/4.png) |
+| ![](screenshots/5.png) | ![](screenshots/6.png) | ![](screenshots/7.png) | ![](screenshots/8.png) |
+| ![](screenshots/9.png) | ![](screenshots/10.png) | ![](screenshots/11.png) | ![](screenshots/12.png) |
 
-## App Structure
+---
 
-The `lib` directory contains the main source code for the application, organized into `core` and `features` modules.
-
-```
+## 🏗️ Project Structure
 lib/
 ├── core/
 │   ├── base_state/
@@ -44,28 +98,36 @@ lib/
 │       ├── external/
 │       └── presentation/
 └── main.dart
-```
 
-### Core Module (`lib/core`)
+## 🧩 Core Module (`lib/core`)
+
 This module contains foundational components and utilities used across the application:
-- `base_state/`: Base classes for state management.
-- `config/`: Configuration files, including dependency injection setup (`di.dart`).
-- `constant/`: Application-wide constants such as API endpoints, assets paths, and text strings.
-- `custom_widgets_model/`: Models for custom widgets.
-- `error/`: Error handling classes, like `failure.dart`.
-- `helper_function/`: Utility functions, e.g., `format_time.dart` and `validation.dart`.
-- `local_data/`: Local data storage solutions, including `hive/` and `secure_storage/`.
-- `module/`: Modules for third-party integrations or specific functionalities, like `dio_module.dart` for HTTP requests.
-- `route/`: Routing definitions and generation logic.
-- `theme/`: Application theming, including color palettes (`app_colors.dart`) and theme data (`app_theme.dart`).
-- `use_case/`: Abstract use case definitions.
-- `widgets/`: Reusable custom widgets.
 
-### Features Module (`lib/features`)
-This module organizes the application's functionality into distinct features:
-- `auth/`: Handles user authentication, including sub-modules for `forget_password`, `signin`, and `signup`.
-- `home/`: Contains components related to the main home screen, separated into `presentation/` and `sections/`.
-- `splash/`: Manages the splash screen, with layers for `data/`, `domain/`, `external/`, and `presentation/`.
+- `base_state/`: Base classes for state management  
+- `config/`: Dependency injection setup (`di.dart`)  
+- `constant/`: App constants, API routes, assets  
+- `custom_widgets_model/`: Data models for widgets  
+- `error/`: Error & failure handling  
+- `helper_function/`: Formatting, validation, utilities  
+- `local_data/`: Hive & secure storage implementations  
+- `module/`: Third-party modules (e.g. Dio)  
+- `route/`: Routing and navigation logic  
+- `theme/`: App themes and colors  
+- `use_case/`: Abstract domain use cases  
+- `widgets/`: Shared custom widgets  
 
-### `main.dart`
-The entry point of the Flutter application, responsible for initializing the app and setting up the widget tree.
+---
+
+## 🔗 Features Module (`lib/features`)
+
+- `auth/`: Login, signUp, forget password flows  
+- `home/`: Dashboard, surveys, results  
+- `splash/`: App initialization layers (data, domain, presentation)  
+
+---
+
+## ▶️ Getting Started
+
+```bash
+flutter pub get
+flutter run
